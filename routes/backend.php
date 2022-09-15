@@ -65,4 +65,13 @@ Route::namespace('Backend')->name('backend.')->group(function () {
         Route::get('password', 'password')->name('password');
         Route::post('password', 'updatePassword')->name('password');
     });
+    // 行业管理
+    Route::prefix('industry')->controller('IndustryController')->name('industry.')->group(function () {
+        Route::get('list', 'list')->name('list');
+        Route::get('create', 'create')->name('create');
+        Route::post('store', 'store')->name('store');
+        Route::get('edit', 'edit')->name('edit');
+        Route::post('update', 'update')->name('update');
+        Route::get('destroy', 'destroy')->name('destroy');
+    });
 });
