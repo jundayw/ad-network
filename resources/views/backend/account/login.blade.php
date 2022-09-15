@@ -25,7 +25,7 @@
                         <div class="col-xs-12">
                             <div class="input-group">
                                 <input class="form-control" type="text" name="captcha" value="6868" placeholder="请输入验证码" autocomplete="off">
-                                <img class="model_img" src="{{ route('backend.captcha', ['login']) }}" alt="验证码" title="点击刷新" rel-action="captcha">
+                                <img class="model_img" src="{{ route('utils.captcha', ['login']) }}" alt="验证码" title="点击刷新" rel-action="captcha">
                             </div>
                         </div>
                     </div>

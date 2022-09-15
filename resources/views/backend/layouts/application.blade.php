@@ -52,7 +52,7 @@
     <script src="{{ H('plugins/components/datetimepicker/bootstrap-datetimepicker.min.js') }}"></script>
     <script src="{{ H('plugins/components/datetimepicker/locales/bootstrap-datetimepicker.zh-CN.js') }}"></script>
     <script src="{{ H('plugins/components/district/district.js') }}"></script>
-{{--<script src="{{ H('plugins/components/district/district4.js') }}"></script>--}}
+    <script src="{{ H('plugins/components/district/district4.js') }}"></script>
 @stack('scripts')
     <script src="{{ H('dist/js/utils.js', true) }}"></script>
     <script src="{{ H('dist/js/common.js', true) }}"></script>

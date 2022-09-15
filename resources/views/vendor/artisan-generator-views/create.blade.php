@@ -123,7 +123,7 @@
                                                 type="file"
                                                 rel-action="file"
                                                 rel-target="[name=image]"
-                                                rel-url="{{ route('backend.upload.images') }}"
+                                                rel-url="{{ route('utils.upload.images') }}"
                                                 class="hidden">
                                     </div>
                                 </div>
