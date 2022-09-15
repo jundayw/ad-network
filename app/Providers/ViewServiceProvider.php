@@ -16,7 +16,7 @@ class ViewServiceProvider extends ServiceProvider
     public function register(): void
     {
         // 侧边视图合成器
-        View::composer('backend/layouts/main', NavigationComposer::class);
+        View::composer('*/layouts/main', NavigationComposer::class);
     }
 
     /**

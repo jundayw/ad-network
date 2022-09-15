@@ -41,6 +41,16 @@ class RouteServiceProvider extends ServiceProvider
                 ->middleware('web')
                 ->group(base_path('routes/backend.php'));
 
+            Route::domain(config('domains.advertisement.domain'))
+                ->namespace($this->namespace)
+                ->middleware('web')
+                ->group(base_path('routes/advertisement.php'));
+
+            Route::domain(config('domains.publishment.domain'))
+                ->namespace($this->namespace)
+                ->middleware('web')
+                ->group(base_path('routes/publishment.php'));
+
             // Route::middleware('api')
             //     ->prefix('api')
             //     ->group(base_path('routes/api.php'));

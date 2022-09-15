@@ -44,6 +44,14 @@ return [
             'driver' => 'cache',
             'provider' => 'managers',
         ],
+        'advertiser' => [
+            'driver' => 'session',
+            'provider' => 'advertisers',
+        ],
+        'publisher' => [
+            'driver' => 'session',
+            'provider' => 'publishers',
+        ],
     ],
 
     /*
@@ -71,6 +79,14 @@ return [
         'managers' => [
             'driver' => 'eloquent',
             'model' => App\Models\Manager::class,
+        ],
+        'advertisers' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Advertiser::class,
+        ],
+        'publishers' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Publisher::class,
         ],
 
         // 'users' => [

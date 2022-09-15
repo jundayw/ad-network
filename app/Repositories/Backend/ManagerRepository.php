@@ -50,6 +50,7 @@ class ManagerRepository extends Repository
             ->with([
                 'module',
             ])
+            ->where('module_namespace', 'BACKEND')
             ->oldest('module_id')
             ->oldest('state')
             ->latest('sorting')
@@ -69,6 +70,7 @@ class ManagerRepository extends Repository
             ->with([
                 'module',
             ])
+            ->where('module_namespace', 'BACKEND')
             ->where('state', 'NORMAL')
             ->oldest('module_id')
             ->oldest('state')
@@ -125,6 +127,7 @@ class ManagerRepository extends Repository
             ->with([
                 'module',
             ])
+            ->where('module_namespace', 'BACKEND')
             ->where('state', 'NORMAL')
             ->oldest('module_id')
             ->oldest('state')

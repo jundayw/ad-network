@@ -1,0 +1,1 @@
+@extends('publishment.layouts.application')
