@@ -1,0 +1,20 @@
+<?php
+
+namespace DummyNamespace;
+
+use Illuminate\Contracts\Support\Responsable;
+
+class DummyClass implements Responsable
+{
+    protected $response;
+
+    public function __construct($response)
+    {
+        $this->response = $response;
+    }
+
+    public function toResponse($request)
+    {
+        return $this->response;
+    }
+}
