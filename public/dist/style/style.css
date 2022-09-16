@@ -51,7 +51,7 @@
     border-color: #e4e7ea !important;
 }
 
-:focus {
+.select2-search__field:focus {
     outline: none;
     border-color: #999 !important;
 }
