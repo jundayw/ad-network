@@ -1,4 +1,4 @@
-@extends('backend.layouts.main')
+@extends('publishment.layouts.main')
 
 @section('content')
     <div class="row">
@@ -113,7 +113,7 @@
                         </div>
                     </div>
                     <div class="panel-footer clearfix">
-                        {{ $data->appends($request->query())->links('backend.layouts.page') }}
+                        {{ $data->appends($request->query())->links('publishment.layouts.page') }}
                     </div>
                 </div>
             </div>

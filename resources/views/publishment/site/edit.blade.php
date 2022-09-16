@@ -1,4 +1,4 @@
-@extends('backend.layouts.main')
+@extends('publishment.layouts.main')
 
 @section('content')
     <div class="row">
