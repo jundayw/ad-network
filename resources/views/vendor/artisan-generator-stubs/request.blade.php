@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Backend;
+namespace DummyNamespace;
 
 use App\Http\Requests\FormRequest;
 
