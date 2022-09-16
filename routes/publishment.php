@@ -39,4 +39,13 @@ Route::namespace('Publishment')->name('publishment.')->group(function () {
         Route::post('update', 'update')->name('update');
         Route::get('destroy', 'destroy')->name('destroy');
     });
+    // 频道管理
+    Route::prefix('channel')->controller('ChannelController')->name('channel.')->group(function () {
+        Route::get('list', 'list')->name('list');
+        Route::get('create', 'create')->name('create');
+        Route::post('store', 'store')->name('store');
+        Route::get('edit', 'edit')->name('edit');
+        Route::post('update', 'update')->name('update');
+        Route::get('destroy', 'destroy')->name('destroy');
+    });
 });
