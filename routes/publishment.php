@@ -27,4 +27,16 @@ Route::namespace('Publishment')->name('publishment.')->group(function () {
         Route::get('password', 'password')->name('password');
         Route::post('password', 'password')->name('password');
     });
+    // 站点管理
+    Route::prefix('site')->controller('SiteController')->name('site.')->group(function () {
+        Route::get('list', 'list')->name('list');
+        Route::get('create', 'create')->name('create');
+        Route::post('store', 'store')->name('store');
+        Route::get('verify', 'verify')->name('verify');
+        Route::post('verification', 'verification')->name('verification');
+        Route::get('download', 'download')->name('download');
+        Route::get('edit', 'edit')->name('edit');
+        Route::post('update', 'update')->name('update');
+        Route::get('destroy', 'destroy')->name('destroy');
+    });
 });
