@@ -90,44 +90,46 @@
                                     </thead>
                                     <tbody>
                                     @foreach($data as $items)
-                                        <tr>
-                                            <td class="text-center">{{ $items->id }}</td>
-                                            <td class="text-right">{{ $items->title }}</td>
-                                            <td class="text-left">--</td>
-                                            <td class="text-center">--</td>
-                                            <td class="text-left">--</td>
-                                            <td class="text-left">--</td>
-                                            <td class="text-center">--</td>
-                                            <td class="text-center">{{ $items->state }}</td>
-                                            <td class="text-center text-nowrap">
-                                                @policy('backend.size.edit')
-                                                <a href="{{ $items->edit }}" data-toggle="tooltip" data-original-title="编辑">编辑</a>
-                                                @endpolicy
-                                                @policy('backend.size.destroy')
-                                                <a href="{{ $items->destroy }}" rel-action="confirm" rel-certain="删除" rel-msg="确定执行删除操作" data-toggle="tooltip" data-original-title="删除">删除</a>
-                                                @endpolicy
-                                            </td>
-                                        </tr>
-                                        @foreach($items->size as $item)
+                                        @if(count($items->size))
                                             <tr>
-                                                <td class="text-center">{{ $item->id }}</td>
-                                                <td class="text-right">--</td>
-                                                <td class="text-left">{{ $item->title }}</td>
-                                                <td class="text-center">{{ $item->width }}x{{ $item->height }}</td>
-                                                <td class="text-left">{{ $item->devices }}</td>
-                                                <td class="text-left">{{ $item->types }}</td>
-                                                <td class="text-center">{{ $item->sorting }}</td>
-                                                <td class="text-center">{{ $item->state }}</td>
+                                                <td class="text-center">{{ $items->id }}</td>
+                                                <td class="text-right">{{ $items->title }}</td>
+                                                <td class="text-left">--</td>
+                                                <td class="text-center">--</td>
+                                                <td class="text-left">--</td>
+                                                <td class="text-left">--</td>
+                                                <td class="text-center">--</td>
+                                                <td class="text-center">{{ $items->state }}</td>
                                                 <td class="text-center text-nowrap">
                                                     @policy('backend.size.edit')
-                                                    <a href="{{ $item->edit }}" data-toggle="tooltip" data-original-title="编辑">编辑</a>
+                                                    <a href="{{ $items->edit }}" data-toggle="tooltip" data-original-title="编辑">编辑</a>
                                                     @endpolicy
                                                     @policy('backend.size.destroy')
-                                                    <a href="{{ $item->destroy }}" rel-action="confirm" rel-certain="删除" rel-msg="确定执行删除操作" data-toggle="tooltip" data-original-title="删除">删除</a>
+                                                    <a href="{{ $items->destroy }}" rel-action="confirm" rel-certain="删除" rel-msg="确定执行删除操作" data-toggle="tooltip" data-original-title="删除">删除</a>
                                                     @endpolicy
                                                 </td>
                                             </tr>
-                                        @endforeach
+                                            @foreach($items->size as $item)
+                                                <tr>
+                                                    <td class="text-center">{{ $item->id }}</td>
+                                                    <td class="text-right">--</td>
+                                                    <td class="text-left">{{ $item->title }}</td>
+                                                    <td class="text-center">{{ $item->width }}x{{ $item->height }}</td>
+                                                    <td class="text-left">{{ $item->devices }}</td>
+                                                    <td class="text-left">{{ $item->types }}</td>
+                                                    <td class="text-center">{{ $item->sorting }}</td>
+                                                    <td class="text-center">{{ $item->state }}</td>
+                                                    <td class="text-center text-nowrap">
+                                                        @policy('backend.size.edit')
+                                                        <a href="{{ $item->edit }}" data-toggle="tooltip" data-original-title="编辑">编辑</a>
+                                                        @endpolicy
+                                                        @policy('backend.size.destroy')
+                                                        <a href="{{ $item->destroy }}" rel-action="confirm" rel-certain="删除" rel-msg="确定执行删除操作" data-toggle="tooltip" data-original-title="删除">删除</a>
+                                                        @endpolicy
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        @endif
                                     @endforeach
                                     </tbody>
                                 @else
