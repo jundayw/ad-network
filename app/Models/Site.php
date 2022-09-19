@@ -54,4 +54,9 @@ class Site extends Model
     {
         return $this->belongsTo(Industry::class)->withDefault();
     }
+
+    public function channel()
+    {
+        return $this->hasMany(Channel::class);
+    }
 }
