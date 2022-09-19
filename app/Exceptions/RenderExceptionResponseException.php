@@ -24,10 +24,10 @@ class RenderExceptionResponseException extends RuntimeException implements Respo
             return Render::error($this->error, $this->url, $this->errors)->response();
         }
 
-        return view($this->getViewName(config('view.dispatch.exception')))
-            ->withMessage($this->error)
-            ->withUrl($this->url)
-            ->with($this->errors);
+        return response()->view($this->getViewName(config('view.dispatch.exception')), array_merge([
+            'message' => $this->error,
+            'url' => $this->url,
+        ], $this->errors));
     }
 
     protected function getViewName(string $view): string
@@ -35,8 +35,6 @@ class RenderExceptionResponseException extends RuntimeException implements Respo
         if ($this->view) {
             return $this->view;
         }
-        // 全局模板
-        $view = config($view);
         // 获取当前模块
         $namespace     = app('request')->route()->getAction('namespace');
         $namespace     = strtolower(last(explode('\\', $namespace)));

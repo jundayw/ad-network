@@ -24,10 +24,10 @@ class RenderErrorResponseException extends RuntimeException implements Responsab
             return Render::error($this->error, $this->url, $this->errors)->response();
         }
 
-        return view($this->getViewName(config('view.dispatch.error')))
-            ->withMessage($this->error)
-            ->withUrl($this->url)
-            ->with($this->errors);
+        return response()->view($this->getViewName(config('view.dispatch.error')), array_merge([
+            'message' => $this->error,
+            'url' => $this->url,
+        ], $this->errors));
     }
 
     protected function getViewName(string $view): string
@@ -35,8 +35,6 @@ class RenderErrorResponseException extends RuntimeException implements Responsab
         if ($this->view) {
             return $this->view;
         }
-        // 全局模板
-        $view = config($view);
         // 获取当前模块
         $namespace     = app('request')->route()->getAction('namespace');
         $namespace     = strtolower(last(explode('\\', $namespace)));
