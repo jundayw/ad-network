@@ -57,6 +57,7 @@ class AdsenseRepository extends Repository
             ->when($request->get('state'), function ($query) use ($request) {
                 $query->where('state', $request->get('state'));
             })
+            ->publishment($request)
             ->oldest('state')
             ->latest($this->adsense->getKeyName());
 
@@ -68,8 +69,8 @@ class AdsenseRepository extends Repository
             $items->type    = $items->getType($items->type);
             $items->vacant  = $items->getVacant($items->vacant);
             $items->state   = $items->getState($items->state);
-            $items->edit    = route('publishment.adsense.edit', [$items->getKeyName() => $items->getKey()]);
-            $items->destroy = route('publishment.adsense.destroy', [$items->getKeyName() => $items->getKey()]);
+            $items->edit    = url()->signedRoute('publishment.adsense.edit', [$items->getKeyName() => $items->getKey()]);
+            $items->destroy = url()->signedRoute('publishment.adsense.destroy', [$items->getKeyName() => $items->getKey()]);
             return $items;
         });
 
@@ -92,8 +93,7 @@ class AdsenseRepository extends Repository
             'channel' => function ($query) {
                 $query->latest('id');
             },
-        ])->where([
-            'publishment_id' => $request->user()->getAttribute('publishment_id'),
+        ])->publishment($request)->where([
             'state' => 'NORMAL',
         ])->latest('id')->get();
     }
@@ -130,9 +130,8 @@ class AdsenseRepository extends Repository
     {
         $channel = $this->channel->with([
             'site',
-        ])->where([
+        ])->publishment($request)->where([
             'id' => $request->get('channel'),
-            'publishment_id' => $request->user()->getAttribute('publishment_id'),
             'state' => 'NORMAL',
         ])->first();
 
@@ -177,7 +176,7 @@ class AdsenseRepository extends Repository
         $data = $this->adsense->with([
             'channel',
             'size',
-        ])->find($request->get($this->adsense->getKeyName()));
+        ])->publishment($request)->find($request->get($this->adsense->getKeyName()));
 
         if (is_null($data)) {
             throw new RenderErrorResponseException('暂无记录');
@@ -196,7 +195,7 @@ class AdsenseRepository extends Repository
 
     public function update(Request $request): bool
     {
-        $adsense = $this->adsense->find($request->get($this->adsense->getKeyName()));
+        $adsense = $this->adsense->publishment($request)->find($request->get($this->adsense->getKeyName()));
 
         if (is_null($adsense)) {
             throw new RenderErrorResponseException('参数有误');
@@ -225,6 +224,6 @@ class AdsenseRepository extends Repository
 
     public function destroy(Request $request): bool
     {
-        return !($this->adsense->destroy($request->get($this->adsense->getKeyName())) === 0);
+        return !($this->adsense->publishment($request)->destroy($request->get($this->adsense->getKeyName())) === 0);
     }
 }

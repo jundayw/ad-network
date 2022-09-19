@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Http\Request;
 
 class Site extends Model
 {
@@ -50,6 +52,11 @@ class Site extends Model
             'txt' => '文件验证',
             'html' => 'HTML标签验证',
         ], $value, $default);
+    }
+
+    public function scopePublishment(Builder $builder, Request $request): Builder
+    {
+        return $builder->where('publishment_id', $request->user()->getAttribute('publishment_id'));
     }
 
     public function industry(): BelongsTo

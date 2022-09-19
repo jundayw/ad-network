@@ -77,7 +77,7 @@
                                     <tbody>
                                     @foreach($data as $items)
                                         <tr>
-                                            <td class="text-center">{{ $items->id }}</td>
+                                            <td class="text-center">{{ $loop->iteration }}</td>
                                             <td>{{ $items->title }}</td>
                                             <td>{{ $items->site->title }}</td>
                                             <td>{{ $items->site->protocol }}{{ $items->site->domain }}</td>

@@ -37,6 +37,7 @@ class SiteRepository extends Repository
             ->when($request->get('state'), function ($query) use ($request) {
                 $query->where('state', $request->get('state'));
             })
+            ->publishment($request)
             ->oldest('state')
             ->latest($this->site->getKeyName());
 
@@ -44,8 +45,8 @@ class SiteRepository extends Repository
 
         $data->transform(function ($items) {
             $items->state   = $items->getState($items->state);
-            $items->edit    = route('publishment.site.edit', [$items->getKeyName() => $items->getKey()]);
-            $items->destroy = route('publishment.site.destroy', [$items->getKeyName() => $items->getKey()]);
+            $items->edit    = url()->signedRoute('publishment.site.edit', [$items->getKeyName() => $items->getKey()]);
+            $items->destroy = url()->signedRoute('publishment.site.destroy', [$items->getKeyName() => $items->getKey()]);
             return $items;
         });
 
@@ -127,9 +128,8 @@ class SiteRepository extends Repository
         }
 
         $count = $this->site->where([
-            ['publishment_id', $request->user()->getAttribute('publishment_id')],
             ['domain', $collect->get('domain')],
-        ])->first();
+        ])->publishment($request)->first();
 
         if (!is_null($count)) {
             throw new RenderErrorResponseException('已存在');
@@ -154,7 +154,7 @@ class SiteRepository extends Repository
 
     public function edit(Request $request): array
     {
-        $data = $this->site->find($request->get($this->site->getKeyName()));
+        $data = $this->site->publishment($request)->find($request->get($this->site->getKeyName()));
 
         if (is_null($data)) {
             throw new RenderErrorResponseException('暂无记录');
@@ -171,7 +171,7 @@ class SiteRepository extends Repository
 
     public function update(Request $request): bool
     {
-        $site = $this->site->find($request->get($this->site->getKeyName()));
+        $site = $this->site->publishment($request)->find($request->get($this->site->getKeyName()));
 
         if (is_null($site)) {
             throw new RenderErrorResponseException('参数有误');
@@ -188,6 +188,6 @@ class SiteRepository extends Repository
 
     public function destroy(Request $request): bool
     {
-        return !($this->site->destroy($request->get($this->site->getKeyName())) === 0);
+        return !($this->site->publishment($request)->destroy($request->get($this->site->getKeyName())) === 0);
     }
 }

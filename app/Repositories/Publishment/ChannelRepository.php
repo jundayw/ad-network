@@ -35,6 +35,7 @@ class ChannelRepository extends Repository
             ->when($request->get('state'), function ($query) use ($request) {
                 $query->where('state', $request->get('state'));
             })
+            ->publishment($request)
             ->oldest('state')
             ->latest('site_id')
             ->latest($this->channel->getKeyName());
@@ -43,28 +44,28 @@ class ChannelRepository extends Repository
 
         $data->transform(function ($items) {
             $items->state   = $items->getState($items->state);
-            $items->edit    = route('publishment.channel.edit', [$items->getKeyName() => $items->getKey()]);
-            $items->destroy = route('publishment.channel.destroy', [$items->getKeyName() => $items->getKey()]);
+            $items->edit    = url()->signedRoute('publishment.channel.edit', [$items->getKeyName() => $items->getKey()]);
+            $items->destroy = url()->signedRoute('publishment.channel.destroy', [$items->getKeyName() => $items->getKey()]);
             return $items;
         });
 
         $filter = [
-            'site' => $this->getSite(),
+            'site' => $this->getSite($request),
             'state' => $this->channel->getState(),
         ];
 
         return compact('filter', 'data');
     }
 
-    private function getSite()
+    private function getSite(Request $request)
     {
-        return $this->site->where('state', 'NORMAL')->get();
+        return $this->site->publishment($request)->where('state', 'NORMAL')->get();
     }
 
     public function create(Request $request): array
     {
         $filter = [
-            'site' => $this->getSite(),
+            'site' => $this->getSite($request),
             'state' => $this->channel->getState(),
         ];
 
@@ -90,7 +91,7 @@ class ChannelRepository extends Repository
 
     public function edit(Request $request): array
     {
-        $data = $this->channel->find($request->get($this->channel->getKeyName()));
+        $data = $this->channel->publishment($request)->find($request->get($this->channel->getKeyName()));
 
         if (is_null($data)) {
             throw new RenderErrorResponseException('暂无记录');
@@ -105,7 +106,7 @@ class ChannelRepository extends Repository
 
     public function update(Request $request): bool
     {
-        $channel = $this->channel->find($request->get($this->channel->getKeyName()));
+        $channel = $this->channel->publishment($request)->find($request->get($this->channel->getKeyName()));
 
         if (is_null($channel)) {
             throw new RenderErrorResponseException('参数有误');
@@ -119,6 +120,6 @@ class ChannelRepository extends Repository
 
     public function destroy(Request $request): bool
     {
-        return !($this->channel->destroy($request->get($this->channel->getKeyName())) === 0);
+        return !($this->channel->publishment($request)->destroy($request->get($this->channel->getKeyName())) === 0);
     }
 }
