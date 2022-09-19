@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Adsense extends Model
@@ -99,17 +100,17 @@ class Adsense extends Model
         );
     }
 
-    public function site()
+    public function site(): BelongsTo
     {
         return $this->belongsTo(Site::class)->withDefault();
     }
 
-    public function channel()
+    public function channel(): BelongsTo
     {
         return $this->belongsTo(Channel::class)->withDefault();
     }
 
-    public function size()
+    public function size(): BelongsTo
     {
         return $this->belongsTo(Size::class)->withDefault();
     }

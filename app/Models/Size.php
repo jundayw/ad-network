@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Size extends Model
@@ -62,7 +63,7 @@ class Size extends Model
         );
     }
 
-    public function size()
+    public function size(): HasMany
     {
         return $this->hasMany(static::class, 'pid', 'id');
     }

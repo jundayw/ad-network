@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Channel extends Model
@@ -27,7 +28,7 @@ class Channel extends Model
         );
     }
 
-    public function site()
+    public function site(): BelongsTo
     {
         return $this->belongsTo(Site::class)->withDefault();
     }
