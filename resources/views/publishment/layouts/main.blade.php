@@ -44,6 +44,12 @@
                                     修改密码
                                 </a>
                             </li>
+                            <li>
+                                <a href="{{ route('publishment.profile.info') }}">
+                                    <i class="fa fa-lock"></i>
+                                    账户认证
+                                </a>
+                            </li>
                             <li role="separator" class="divider"></li>
                             <li>
                                 <a href="{{ route('publishment.logout') }}" rel-action="confirm" rel-certain="安全退出" rel-msg="确定退出系统">

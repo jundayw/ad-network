@@ -39,6 +39,11 @@ class Publisher extends Authenticate implements PolicyContract
         return $this->belongsTo(Role::class, 'role_id', 'id');
     }
 
+    public function publishment(): BelongsTo
+    {
+        return $this->belongsTo(Publishment::class)->withDefault();
+    }
+
     /**
      * @param string $ability
      * @param mixed $arguments
