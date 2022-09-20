@@ -3,6 +3,7 @@
 namespace App\Repositories\Advertisement;
 
 use App\Exceptions\RenderErrorResponseException;
+use App\Models\Advertisement;
 use App\Models\Advertiser;
 use App\Repositories\Repository;
 use Illuminate\Http\Request;
@@ -10,7 +11,8 @@ use Illuminate\Http\Request;
 class ProfileRepository extends Repository
 {
     public function __construct(
-        private readonly Advertiser $advertisement,
+        private readonly Advertiser $advertiser,
+        private readonly Advertisement $advertisement,
     )
     {
         //
@@ -18,7 +20,7 @@ class ProfileRepository extends Repository
 
     public function password(Request $request): array
     {
-        $data = $this->advertisement->find($request->get($this->advertisement->getKeyName()));
+        $data = $this->advertiser->find($request->get($this->advertiser->getKeyName()));
 
         if (is_null($data)) {
             throw new RenderErrorResponseException('暂无记录');
@@ -34,7 +36,7 @@ class ProfileRepository extends Repository
         $usersalt = generate_string();
         $userpass = password($request->get('password'), $usersalt);
 
-        $data = $this->advertisement->find($request->user()->getKey());
+        $data = $this->advertiser->find($request->user()->getKey());
 
         if (is_null($data)) {
             throw new RenderErrorResponseException('参数有误');
@@ -43,6 +45,26 @@ class ProfileRepository extends Repository
         return $data->update([
             'userpass' => $userpass,
             'usersalt' => $usersalt,
+        ]);
+    }
+
+    public function updateInfo(Request $request)
+    {
+        $data = $this->advertisement->find($request->user()->getAttribute('advertisement_id'));
+
+        if (is_null($data)) {
+            throw new RenderErrorResponseException('参数有误');
+        }
+
+        session()->remove('audit');
+
+        return $data->update([
+            'name' => $request->get('name'),
+            'licence' => $request->get('licence'),
+            'licence_image' => $request->get('licence_image'),
+            'corporation' => $request->get('corporation'),
+            'mobile' => $request->get('mobile'),
+            'audit' => 'WAIT',
         ]);
     }
 }

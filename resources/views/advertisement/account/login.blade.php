@@ -37,6 +37,13 @@
                             </button>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <a href="{{ route('advertisement.signup') }}" class="text-dark pull-right">
+                                注册
+                            </a>
+                        </div>
+                    </div>
                     @if($request->get('code'))
                         <div class="form-group m-b-0">
                             <div class="col-sm-12 text-center">

@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Advertisement;
 
 use App\Http\Requests\Advertisement\AccountLoginRequest;
+use App\Http\Requests\Advertisement\AccountMailRequest;
+use App\Http\Requests\Advertisement\AccountRegisterRequest;
 use App\Http\Responses\RedirectResponse;
+use App\Http\Responses\RenderResponse;
 use App\Http\Responses\ViewResponse;
 use App\Repositories\Advertisement\AccountRepository;
 use Illuminate\Http\Request;
@@ -52,5 +55,31 @@ class AccountController extends UnCommonController
     {
         $this->repository->logout($request);
         return new RedirectResponse('安全退出', route('advertisement.login', ['code' => '100']));
+    }
+
+    /**
+     * @action 账户注册
+     */
+    public function signup(Request $request): ViewResponse
+    {
+        return new ViewResponse($this->repository->signup($request));
+    }
+
+    /**
+     * @action 账户注册
+     */
+    public function register(AccountRegisterRequest $request): RedirectResponse
+    {
+        $this->repository->register($request);
+        return new RedirectResponse('注册成功', route('advertisement.login', ['code' => '200']));
+    }
+
+    /**
+     * @action 邮件发送
+     */
+    public function mail(AccountMailRequest $request): RenderResponse
+    {
+        $this->repository->mail($request);
+        return new RenderResponse('发送成功');
     }
 }

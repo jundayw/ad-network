@@ -39,6 +39,11 @@ class Advertiser extends Authenticate implements PolicyContract
         return $this->belongsTo(Role::class, 'role_id', 'id');
     }
 
+    public function advertisement(): BelongsTo
+    {
+        return $this->belongsTo(Advertisement::class)->withDefault();
+    }
+
     /**
      * @param string $ability
      * @param mixed $arguments

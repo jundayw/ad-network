@@ -16,6 +16,9 @@ Route::namespace('Advertisement')->name('advertisement.')->group(function () {
         Route::get('login', 'login')->name('login');
         Route::post('verify', 'verify')->name('verify');
         Route::get('logout', 'logout')->name('logout');
+        Route::get('signup', 'signup')->name('signup');
+        Route::post('register', 'register')->name('register');
+        Route::post('mail', 'mail')->name('mail');
     });
     // 我的桌面
     Route::controller('IndexController')->group(function () {
@@ -26,5 +29,7 @@ Route::namespace('Advertisement')->name('advertisement.')->group(function () {
     Route::prefix('profile')->controller('ProfileController')->name('profile.')->group(function () {
         Route::get('password', 'password')->name('password');
         Route::post('password', 'password')->name('password');
+        Route::get('info', 'info')->name('info');
+        Route::post('info', 'info')->name('info');
     });
 });
