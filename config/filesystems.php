@@ -47,7 +47,7 @@ return [
         'upload' => [
             'driver' => 'local',
             'root' => public_path('upload'),
-            'url' => '/upload',
+            'url' => env('STATIC_DOMAIN', '/upload'),
             'visibility' => 'public',
             'throw' => false,
         ],
