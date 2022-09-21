@@ -32,4 +32,31 @@ Route::namespace('Advertisement')->name('advertisement.')->group(function () {
         Route::get('info', 'info')->name('info');
         Route::post('info', 'info')->name('info');
     });
+    // 广告计划
+    Route::prefix('program')->controller('ProgramController')->name('program.')->group(function () {
+        Route::get('list', 'list')->name('list');
+        Route::get('create', 'create')->name('create');
+        Route::post('store', 'store')->name('store');
+        Route::get('edit', 'edit')->name('edit')->middleware('signed');
+        Route::post('update', 'update')->name('update');
+        Route::get('destroy', 'destroy')->name('destroy')->middleware('signed');
+    });
+    // 广告单元
+    Route::prefix('element')->controller('ElementController')->name('element.')->group(function () {
+        Route::get('list', 'list')->name('list');
+        Route::get('create', 'create')->name('create');
+        Route::post('store', 'store')->name('store');
+        Route::get('edit', 'edit')->name('edit')->middleware('signed');
+        Route::post('update', 'update')->name('update');
+        Route::get('destroy', 'destroy')->name('destroy')->middleware('signed');
+    });
+    // 广告创意
+    Route::prefix('creative')->controller('CreativeController')->name('creative.')->group(function () {
+        Route::get('list', 'list')->name('list');
+        Route::get('create', 'create')->name('create');
+        Route::post('store', 'store')->name('store');
+        Route::get('edit', 'edit')->name('edit')->middleware('signed');
+        Route::post('update', 'update')->name('update');
+        Route::get('destroy', 'destroy')->name('destroy')->middleware('signed');
+    });
 });
