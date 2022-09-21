@@ -67,14 +67,14 @@
             <div class="sidebar-nav navbar-collapse slimscrollsidebar">
                 <ul class="nav" id="side-menu">
                     @foreach($navigations as $navigation)
-                        <li>
+                        <li class="{{ $navigation->active ? 'active' : '' }}">
                             <a href="javascript:void(0);" class="waves-effect">
                                 <i data-icon="{{ $navigation->getAttribute('id') }}" class="{{ $navigation->getAttribute('icon') }} fa-fw"></i>
                                 <span class="hide-menu">{{ $navigation->getAttribute('title') }}<span class="fa arrow"></span></span>
                             </a>
                             <ul class="nav nav-second-level">
                                 @foreach($navigation->policies as $policy)
-                                    <li><a href="{{ route($policy->getAttribute('url')) }}">{{ $policy->getAttribute('title') }}</a></li>
+                                    <li><a href="{{ route($policy->getAttribute('url')) }}" class="{{ $policy->active ? 'active' : '' }}">{{ $policy->getAttribute('title') }}</a></li>
                                 @endforeach
                             </ul>
                         </li>

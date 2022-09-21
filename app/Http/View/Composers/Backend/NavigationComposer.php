@@ -59,9 +59,17 @@ class NavigationComposer
             })->filter(function ($policies) use ($policy) {
                 return $policies->getAttribute('pid') == $policy->getRelation('policy')->getAttribute('id');
             })->map(function ($policies) {
+                $as = explode('.', $this->request->route()->getAction('as'));
+                array_pop($as);
+                $policies->active = str_starts_with($policies->url, implode('.', $as));
                 return $policies->withoutRelations();
             });
             return $policy->getRelation('policy')->setRelation('policies', $policies);
-        })->unique('id');
+        })->unique('id')->map(function ($policy) {
+            $policy->active = $policy->policies->contains(function ($value, $key) {
+                return $value->active;
+            });
+            return $policy;
+        });
     }
 }

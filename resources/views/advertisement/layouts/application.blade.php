@@ -49,7 +49,7 @@
     <script src="{{ H('plugins/components/select2/dist/js/select2.min.js') }}"></script>
     <!-- datetimepicker  -->
     <link href="{{ H('plugins/components/datetimepicker/bootstrap-datetimepicker.min.css') }}" rel="stylesheet">
-    <script src="{{ H('plugins/components/datetimepicker/bootstrap-datetimepicker.min.js') }}"></script>
+    <script src="{{ H('plugins/components/datetimepicker/bootstrap-datetimepicker.js') }}"></script>
     <script src="{{ H('plugins/components/datetimepicker/locales/bootstrap-datetimepicker.zh-CN.js') }}"></script>
     <script src="{{ H('plugins/components/district/district.js') }}"></script>
     <script src="{{ H('plugins/components/district/district4.js') }}"></script>
