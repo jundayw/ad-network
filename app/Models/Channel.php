@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Http\Request;
 
@@ -38,5 +39,10 @@ class Channel extends Model
     public function site(): BelongsTo
     {
         return $this->belongsTo(Site::class)->withDefault();
+    }
+
+    public function adsense(): HasMany
+    {
+        return $this->hasMany(Adsense::class);
     }
 }

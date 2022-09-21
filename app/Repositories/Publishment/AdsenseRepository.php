@@ -224,6 +224,10 @@ class AdsenseRepository extends Repository
 
     public function destroy(Request $request): bool
     {
-        return !($this->adsense->publishment($request)->destroy($request->get($this->adsense->getKeyName())) === 0);
+        $adsense = $this->adsense->publishment($request)->find($request->get($this->adsense->getKeyName()));
+        if (is_null($adsense)) {
+            return false;
+        }
+        return $adsense->delete();
     }
 }

@@ -120,6 +120,16 @@ class ChannelRepository extends Repository
 
     public function destroy(Request $request): bool
     {
-        return !($this->channel->publishment($request)->destroy($request->get($this->channel->getKeyName())) === 0);
+        $channel = $this->channel->publishment($request)->withCount('adsense')->find($request->get($this->channel->getKeyName()));
+
+        if (is_null($channel)) {
+            return false;
+        }
+
+        if ($channel->adsense_count) {
+            throw new RenderErrorResponseException("该频道下含有 {$channel->adsense_count} 条广告位，请先删除");
+        }
+
+        return $channel->delete();
     }
 }

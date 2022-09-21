@@ -188,6 +188,16 @@ class SiteRepository extends Repository
 
     public function destroy(Request $request): bool
     {
-        return !($this->site->publishment($request)->destroy($request->get($this->site->getKeyName())) === 0);
+        $site = $this->site->publishment($request)->withCount('channel')->find($request->get($this->site->getKeyName()));
+
+        if (is_null($site)) {
+            return false;
+        }
+
+        if ($site->channel_count) {
+            throw new RenderErrorResponseException("该站点下含有 {$site->channel_count} 条频道，请先删除");
+        }
+
+        return $site->delete();
     }
 }
