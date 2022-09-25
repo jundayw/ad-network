@@ -71,4 +71,9 @@ class Element extends Model
     {
         return $this->hasMany(Creative::class);
     }
+
+    public function advertisements(): BelongsTo
+    {
+        return $this->belongsTo(Advertisement::class)->withDefault();
+    }
 }

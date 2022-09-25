@@ -66,6 +66,31 @@ class Adsense extends Model
         );
     }
 
+    public function getCharging(?string $value = null, ?string $default = '--'): string|array
+    {
+        return $this->getEnumeration([
+            'DEFAULT' => '智能',
+            // 'CPC' => '按点击计费',
+            // 'CPM' => '按IP地址计费',
+            // 'CPV' => '按页面访问计费',
+            // 'CPA' => '按行为计费',
+            // 'CPS' => '按销售金额计费',
+            'CPC' => 'CPC',
+            'CPM' => 'CPM',
+            'CPV' => 'CPV',
+            'CPA' => 'CPA',
+            'CPS' => 'CPS',
+        ], $value, $default);
+    }
+
+    protected function charging(): Attribute
+    {
+        return new Attribute(
+            get: fn($value, $attributes) => strtolower($value),
+            set: fn($value, $attributes) => strtoupper($value),
+        );
+    }
+
     // 空闲设置{EXCHANGE:显示换量广告}{DEFAULT:显示默认广告}{UNION:显示联盟广告}{FIXED:固定占位符}{HIDDEN:隐藏广告位}
     public function getVacant(?string $value = null, ?string $default = '--'): string|array
     {

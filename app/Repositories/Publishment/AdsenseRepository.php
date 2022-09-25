@@ -51,6 +51,9 @@ class AdsenseRepository extends Repository
             ->when($request->get('type'), function ($query) use ($request) {
                 $query->where('type', $request->get('type'));
             })
+            ->when($request->get('charging'), function ($query) use ($request) {
+                $query->where('charging', $request->get('charging'));
+            })
             ->when($request->get('vacant'), function ($query) use ($request) {
                 $query->where('vacant', $request->get('vacant'));
             })
@@ -64,13 +67,14 @@ class AdsenseRepository extends Repository
         $data = $data->Paginate($request->get('per', $this->adsense->getPerPage()), ['*'], 'page', $request->get('page', 1));
 
         $data->transform(function ($items) {
-            $items->origin  = $items->getOrigin($items->origin);
-            $items->device  = $items->getDevice($items->device);
-            $items->type    = $items->getType($items->type);
-            $items->vacant  = $items->getVacant($items->vacant);
-            $items->state   = $items->getState($items->state);
-            $items->edit    = url()->signedRoute('publishment.adsense.edit', [$items->getKeyName() => $items->getKey()]);
-            $items->destroy = url()->signedRoute('publishment.adsense.destroy', [$items->getKeyName() => $items->getKey()]);
+            $items->origin   = $items->getOrigin($items->origin);
+            $items->device   = $items->getDevice($items->device);
+            $items->type     = $items->getType($items->type);
+            $items->charging = $items->getCharging($items->charging);
+            $items->vacant   = $items->getVacant($items->vacant);
+            $items->state    = $items->getState($items->state);
+            $items->edit     = url()->signedRoute('publishment.adsense.edit', [$items->getKeyName() => $items->getKey()]);
+            $items->destroy  = url()->signedRoute('publishment.adsense.destroy', [$items->getKeyName() => $items->getKey()]);
             return $items;
         });
 
@@ -80,6 +84,7 @@ class AdsenseRepository extends Repository
             'origin' => $this->adsense->getOrigin(),
             'device' => $this->adsense->getDevice(),
             'type' => $this->adsense->getType(),
+            'charging' => $this->adsense->getCharging(),
             'vacant' => $this->adsense->getVacant(),
             'state' => $this->adsense->getState(),
         ];
@@ -120,6 +125,7 @@ class AdsenseRepository extends Repository
             'origin' => $this->adsense->getOrigin(),
             'device' => $this->adsense->getDevice(),
             'type' => $this->adsense->getType(),
+            'charging' => $this->adsense->getCharging(),
             'vacant' => $this->adsense->getVacant(),
             'state' => $this->adsense->getState(),
         ];
@@ -149,6 +155,7 @@ class AdsenseRepository extends Repository
             'origin' => $request->get('origin'),
             'device' => $request->get('device'),
             'type' => $request->get('type'),
+            'charging' => $request->get('charging'),
             'vacant' => $request->get('vacant'),
             'state' => $request->get('state'),
         ];
@@ -186,6 +193,7 @@ class AdsenseRepository extends Repository
             'origin' => $this->adsense->getOrigin(),
             'device' => $this->adsense->getDevice(),
             'type' => $this->adsense->getType(),
+            'charging' => $this->adsense->getCharging(),
             'vacant' => $this->adsense->getVacant(),
             'state' => $this->adsense->getState(),
         ];
@@ -206,6 +214,7 @@ class AdsenseRepository extends Repository
             'origin' => $request->get('origin'),
             'device' => $request->get('device'),
             'type' => $request->get('type'),
+            'charging' => $request->get('charging'),
             'vacant' => $request->get('vacant'),
             'state' => $request->get('state'),
         ];

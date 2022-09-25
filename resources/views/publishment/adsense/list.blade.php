@@ -90,6 +90,15 @@
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <label class="col-md-1 control-label col-form-label">计费方式</label>
+                                <div class="col-md-2">
+                                    <select class="form-control" name="charging" rel-action="select">
+                                        <option value="">不限</option>
+                                        @foreach($filter['charging'] as $key => $charging)
+                                            <option value="{{ $key }}" @selected($key == $request->get('charging'))>{{ $charging }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                                 <label class="col-md-1 control-label col-form-label">状态</label>
                                 <div class="col-md-2">
                                     <select class="form-control" name="state" rel-action="select">
@@ -142,6 +151,7 @@
                                         <th class="text-center" colspan="2">广告尺寸</th>
                                         <th class="text-center">类型</th>
                                         <th class="text-center">设备</th>
+                                        <th class="text-center">计费方式</th>
                                         <th class="text-center">展现类型</th>
                                         <th class="text-center">空闲设置</th>
                                         <th class="text-center">状态</th>
@@ -160,6 +170,7 @@
                                             <td class="text-center">{{ $items->origin }}</td>
                                             <td class="text-center">{{ $items->device }}</td>
                                             <td class="text-center">{{ $items->type }}</td>
+                                            <td class="text-center">{{ $items->charging }}</td>
                                             <td class="text-center">{{ $items->vacant }}</td>
                                             <td class="text-center">{{ $items->state }}</td>
                                             <td class="text-center text-nowrap">

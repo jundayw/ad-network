@@ -75,6 +75,19 @@
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <label class="col-md-2 control-label col-form-label">计费方式</label>
+                                <div class="col-md-10">
+                                    @foreach($filter['charging'] as $key => $charging)
+                                        <div class="form-check">
+                                            <label class="radio-inline">
+                                                <input type="radio" name="charging" value="{{ $key }}" @checked($loop->first)>
+                                                {{ $charging }}
+                                            </label>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label class="col-md-2 control-label col-form-label">广告尺寸</label>
                                 <div class="col-md-10">
                                     <select class="form-control" name="size" rel-action="select">

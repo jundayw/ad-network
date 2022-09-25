@@ -4,8 +4,10 @@
     <script>
         $(function () {
             $('[name=vacant]').change(function () {
-                $('[rel-vacant]').addClass('hidden');
-                $('[rel-vacant=' + $(this).val() + ']').removeClass('hidden');
+                if ($(this).is(':checked')) {
+                    $('[rel-vacant]').addClass('hidden');
+                    $('[rel-vacant=' + $(this).val() + ']').removeClass('hidden');
+                }
             }).trigger('change');
         });
     </script>
@@ -44,6 +46,19 @@
                                             </label>
                                         @endforeach
                                     </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-2 control-label col-form-label">计费方式</label>
+                                <div class="col-md-10">
+                                    @foreach($filter['charging'] as $key => $charging)
+                                        <div class="form-check">
+                                            <label class="radio-inline">
+                                                <input type="radio" name="charging" value="{{ $key }}" @checked($key == $data->charging)>
+                                                {{ $charging }}
+                                            </label>
+                                        </div>
+                                    @endforeach
                                 </div>
                             </div>
                             <div class="form-group row">
