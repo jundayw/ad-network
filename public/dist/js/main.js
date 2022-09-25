@@ -2,6 +2,9 @@ $(function () {
     $('[rel-action=select]').each(function () {
         $(this).select2();
     });
+    $('[rel-action=viewer]').each(function () {
+        $(this).viewer($(this).data());
+    });
     $('[rel-action=datetimepicker]').each(function () {
         $(this).datetimepicker({
             language: 'zh-CN',

@@ -62,4 +62,13 @@ Route::namespace('Publishment')->name('publishment.')->group(function () {
         Route::post('update', 'update')->name('update');
         Route::get('destroy', 'destroy')->name('destroy')->middleware('signed');
     });
+    // 广告物料
+    Route::prefix('material')->controller('MaterialController')->name('material.')->group(function () {
+        Route::get('list', 'list')->name('list');
+        Route::get('create', 'create')->name('create');
+        Route::post('store', 'store')->name('store');
+        Route::get('edit', 'edit')->name('edit')->middleware('signed');
+        Route::post('update', 'update')->name('update');
+        Route::get('destroy', 'destroy')->name('destroy')->middleware('signed');
+    });
 });

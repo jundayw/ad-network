@@ -47,6 +47,9 @@
     <!-- select2 -->
     <link href="{{ H('plugins/components/select2/dist/css/select2.min.css') }}" rel="stylesheet">
     <script src="{{ H('plugins/components/select2/dist/js/select2.min.js') }}"></script>
+    <!-- viewer -->
+    <link href="{{ H('plugins/components/viewer/jquery.viewer.min.css') }}" rel="stylesheet">
+    <script src="{{ H('plugins/components/viewer/jquery.viewer.min.js') }}"></script>
     <!-- datetimepicker  -->
     <link href="{{ H('plugins/components/datetimepicker/bootstrap-datetimepicker.min.css') }}" rel="stylesheet">
     <script src="{{ H('plugins/components/datetimepicker/bootstrap-datetimepicker.min.js') }}"></script>
