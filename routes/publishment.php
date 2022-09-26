@@ -72,4 +72,15 @@ Route::namespace('Publishment')->name('publishment.')->group(function () {
         Route::post('update', 'update')->name('update');
         Route::get('destroy', 'destroy')->name('destroy')->middleware('signed');
     });
+    // 账户管理
+    Route::prefix('publisher')->controller('PublisherController')->name('publisher.')->group(function () {
+        Route::get('list', 'list')->name('list');
+        Route::get('create', 'create')->name('create');
+        Route::post('store', 'store')->name('store');
+        Route::get('edit', 'edit')->name('edit')->middleware('signed');
+        Route::post('update', 'update')->name('update');
+        Route::get('destroy', 'destroy')->name('destroy')->middleware('signed');
+        Route::get('password', 'password')->name('password')->middleware('signed');
+        Route::post('password', 'updatePassword')->name('updatePassword');
+    });
 });

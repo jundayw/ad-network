@@ -196,7 +196,7 @@
                         </div>
                     </div>
                     <div class="panel-footer clearfix">
-                        {{ $data->appends($request->query())->links('backend.layouts.page') }}
+                        {{ $data->appends($request->query())->links('publishment.layouts.page') }}
                     </div>
                 </div>
             </div>

@@ -8,32 +8,31 @@
                     搜索：{{ $share->get('action') }}
                 </div>
                 <div class="panel-wrapper">
-                    <form action="{{ route('publishment.material.list') }}" class="form-horizontal" method="get">
+                    <form action="{{ route('publishment.publisher.list') }}" class="form-horizontal" method="get">
                         <div class="panel-body p-b-0">
                             <div class="form-group row">
-                                <label class="col-md-1 control-label col-form-label">名称</label>
+                                <label class="col-md-1 control-label col-form-label">用户名</label>
                                 <div class="col-md-2">
-                                    <input class="form-control" type="text" name="title" value="{{ $request->get('title') }}" placeholder="请输入名称" autocomplete="off">
+                                    <input class="form-control" type="text" name="username" value="{{ $request->get('username') }}" placeholder="请输入用户名" autocomplete="off">
                                 </div>
-                                <label class="col-md-1 control-label col-form-label">广告尺寸</label>
+                                <label class="col-md-1 control-label col-form-label">昵称</label>
                                 <div class="col-md-2">
-                                    <select class="form-control" name="size" rel-action="select">
-                                        <option value="">不限</option>
-                                        @foreach($filter['size'] as $key => $size)
-                                            <optgroup label="{{ $size->title }}">
-                                                @foreach($size['size'] as $key => $size)
-                                                    <option value="{{ $size->id }}" @selected($size->id == $request->get('size'))>{{ $size->title }} - {{ $size->width }}x{{ $size->height }}</option>
-                                                @endforeach
-                                            </optgroup>
-                                        @endforeach
-                                    </select>
+                                    <input class="form-control" type="text" name="usernick" value="{{ $request->get('usernick') }}" placeholder="请输入昵称" autocomplete="off">
                                 </div>
-                                <label class="col-md-1 control-label col-form-label">设备</label>
+                                <label class="col-md-1 control-label col-form-label">邮箱</label>
                                 <div class="col-md-2">
-                                    <select class="form-control" name="device" rel-action="select">
+                                    <input class="form-control" type="text" name="mail" value="{{ $request->get('mail') }}" placeholder="请输入邮箱" autocomplete="off">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-1 control-label col-form-label">角色</label>
+                                <div class="col-md-2">
+                                    <select class="form-control" name="role" rel-action="select">
                                         <option value="">不限</option>
-                                        @foreach($filter['device'] as $key => $device)
-                                            <option value="{{ $key }}" @selected($key == $request->get('device'))>{{ $device }}</option>
+                                        @foreach($filter['roles'] as $key => $role)
+                                            <option value="{{ $role->getKey() }}" @selected($role->getKey() == $request->get('role'))>
+                                                {{ $role->module->title }} / {{ $role->title }}
+                                            </option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -51,7 +50,7 @@
                         <div class="panel-footer">
                             <div class="offset-md-1">
                                 <button type="submit" class="btn btn-default btn-outline">查询</button>
-                                <a class="btn btn-default btn-outline" href="{{ route('publishment.material.list') }}">重置</a>
+                                <a class="btn btn-default btn-outline" href="{{ route('publishment.publisher.list') }}">重置</a>
                             </div>
                         </div>
                     </form>
@@ -66,8 +65,8 @@
                     {{ $share->get('action') }}
                     <div class="panel-action">
                         <div class="btn-group">
-                            @policy('publishment.material.create')
-                            <a class="btn btn-default btn-outline" href="{{ route('publishment.material.create') }}">
+                            @policy('publishment.publisher.create')
+                            <a class="btn btn-default btn-outline" href="{{ route('publishment.publisher.create') }}">
                                 <i class="fa fa-file-text m-r-5"></i>
                                 <span>新增</span>
                             </a>
@@ -83,32 +82,39 @@
                                     <thead>
                                     <tr>
                                         <th class="text-center">编号</th>
-                                        <th class="text-center">名称</th>
-                                        <th class="text-center" colspan="3">广告</th>
-                                        <th class="text-center">设备</th>
+                                        <th class="text-center">角色</th>
+                                        <th class="text-center">用户名</th>
+                                        <th class="text-center">昵称</th>
+                                        <th class="text-center">邮箱</th>
+                                        <th class="text-center">登录地址</th>
+                                        <th class="text-center">登录时间</th>
+                                        <th class="text-center">注册地址</th>
+                                        <th class="text-center">注册时间</th>
                                         <th class="text-center">状态</th>
                                         <th class="text-center text-nowrap">操作</th>
                                     </tr>
                                     </thead>
-                                    <tbody rel-action="viewer">
+                                    <tbody>
                                     @foreach($data as $items)
                                         <tr>
                                             <td class="text-center">{{ $items->id }}</td>
-                                            <td>{{ $items->title }}</td>
-                                            <td>{{ $items->size->width }}x{{ $items->size->height }}</td>
-                                            <td>{{ $items->size->title }}</td>
-                                            <td width="120">
-                                                <a href="javascript:void(0);">
-                                                    <img src="{{ $items->image }}" style="max-height: 18px;">
-                                                </a>
-                                            </td>
-                                            <td class="text-center">{{ $items->device }}</td>
+                                            <td>{{ $items->role_title }}</td>
+                                            <td>{{ $items->username }}</td>
+                                            <td>{{ $items->usernick }}</td>
+                                            <td>{{ $items->mail ?? '--' }}</td>
+                                            <td class="text-center">{{ $items->last_ip ?? '--' }}</td>
+                                            <td class="text-center">{{ $items->last_time ?? '--' }}</td>
+                                            <td class="text-center">{{ $items->register_ip ?? '--' }}</td>
+                                            <td class="text-center">{{ $items->register_time ?? '--' }}</td>
                                             <td class="text-center">{{ $items->state }}</td>
                                             <td class="text-center text-nowrap">
-                                                @policy('publishment.material.edit')
+                                                @policy('publishment.publisher.password')
+                                                <a href="{{ $items->password }}" data-toggle="tooltip" data-original-title="重置密码">重置密码</a>
+                                                @endpolicy
+                                                @policy('publishment.publisher.edit')
                                                 <a href="{{ $items->edit }}" data-toggle="tooltip" data-original-title="编辑">编辑</a>
                                                 @endpolicy
-                                                @policy('publishment.material.destroy')
+                                                @policy('publishment.publisher.destroy')
                                                 <a href="{{ $items->destroy }}" rel-action="confirm" rel-certain="删除" rel-msg="确定执行删除操作" data-toggle="tooltip" data-original-title="删除">删除</a>
                                                 @endpolicy
                                             </td>
