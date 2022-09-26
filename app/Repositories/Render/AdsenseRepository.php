@@ -79,7 +79,7 @@ class AdsenseRepository extends Repository
         $data['ne']     = sprintf('u_%s', password($client, $slot));
 
         if ($adsense->getAttribute('type') == 'couplet') {
-            $data['data-ad-couplet-top']   = $request->get('data-ad-couplet-top', 0);
+            $data['data-ad-couplet-top']   = $request->get('data-ad-couplet-top', 100);
             $data['data-ad-couplet-right'] = $request->get('data-ad-couplet-right', 0);
             $data['data-ad-couplet-left']  = $request->get('data-ad-couplet-left', 0);
         }

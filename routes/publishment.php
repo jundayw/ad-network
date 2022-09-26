@@ -61,6 +61,7 @@ Route::namespace('Publishment')->name('publishment.')->group(function () {
         Route::get('edit', 'edit')->name('edit')->middleware('signed');
         Route::post('update', 'update')->name('update');
         Route::get('destroy', 'destroy')->name('destroy')->middleware('signed');
+        Route::get('code', 'code')->name('code')->middleware('signed');
     });
     // 广告物料
     Route::prefix('material')->controller('MaterialController')->name('material.')->group(function () {

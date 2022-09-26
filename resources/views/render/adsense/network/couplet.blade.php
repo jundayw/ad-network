@@ -21,12 +21,12 @@
     }
 
     iframe[name={{ $data['ne'] }}]:first-of-type {
-        top: {{ $request->get('data-ad-couplet-top',0) }}px;
+        top: {{ $request->get('data-ad-couplet-top',100) }}px;
         left: {{ $request->get('data-ad-couplet-left',0) }}px;
     }
 
     iframe[name={{ $data['ne'] }}]:last-of-type {
-        top: {{ $request->get('data-ad-couplet-top',0) }}px;
+        top: {{ $request->get('data-ad-couplet-top',100) }}px;
         right: {{ $request->get('data-ad-couplet-right',0) }}px;
     }
 </style>

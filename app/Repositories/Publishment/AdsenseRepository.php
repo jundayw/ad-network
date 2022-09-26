@@ -75,6 +75,7 @@ class AdsenseRepository extends Repository
             $items->charging = $items->getCharging($items->charging);
             $items->vacant   = $items->getVacant($items->vacant);
             $items->state    = $items->getState($items->state);
+            $items->code     = url()->signedRoute('publishment.adsense.code', [$items->getKeyName() => $items->getKey()]);
             $items->edit     = url()->signedRoute('publishment.adsense.edit', [$items->getKeyName() => $items->getKey()]);
             $items->destroy  = url()->signedRoute('publishment.adsense.destroy', [$items->getKeyName() => $items->getKey()]);
             return $items;
@@ -250,6 +251,25 @@ class AdsenseRepository extends Repository
         }
 
         return $adsense->update($data);
+    }
+
+    public function code(Request $request)
+    {
+        $adsense = $this->adsense->with([
+            'size',
+        ])->publishment($request)->find($request->get($this->adsense->getKeyName()));
+
+        if (is_null($adsense)) {
+            throw new RenderErrorResponseException('参数有误');
+        }
+
+        $url = sprintf('<script src="%s://%s/adsbyadnetwork.js?client=%s" async="async" defer="defer"></script>',
+            $request->getScheme(),
+            config('domains.render.domain'),
+            $adsense->getAttribute('publishment_id')
+        );
+
+        return compact('adsense', 'url');
     }
 
     public function destroy(Request $request): bool

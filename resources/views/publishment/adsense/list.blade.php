@@ -155,7 +155,7 @@
                                         <th class="text-center">展现类型</th>
                                         <th class="text-center">空闲设置</th>
                                         <th class="text-center">状态</th>
-                                        <th class="text-center text-nowrap">操作</th>
+                                        <th class="text-center text-nowrap" colspan="2">操作</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -173,6 +173,9 @@
                                             <td class="text-center">{{ $items->charging }}</td>
                                             <td class="text-center">{{ $items->vacant }}</td>
                                             <td class="text-center">{{ $items->state }}</td>
+                                            <td class="text-center">
+                                                <a href="{{ $items->code }}" rel-action="dialog" rel-width="860" rel-height="656" title="获取代码">获取代码</a>
+                                            </td>
                                             <td class="text-center text-nowrap">
                                                 @policy('publishment.adsense.edit')
                                                 <a href="{{ $items->edit }}" data-toggle="tooltip" data-original-title="编辑">编辑</a>

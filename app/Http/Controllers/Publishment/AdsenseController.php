@@ -63,6 +63,17 @@ class AdsenseController extends AuthController
     }
 
     /**
+     * @action 获取代码
+     *
+     * @param Request $request
+     * @return ViewResponse
+     */
+    public function code(Request $request): ViewResponse
+    {
+        return new ViewResponse($this->repository->code($request));
+    }
+
+    /**
      * @action 删除广告位
      */
     public function destroy(Request $request): RenderResponse
