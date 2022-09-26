@@ -64,7 +64,7 @@
                             <div class="form-group row">
                                 <label class="col-md-2 control-label col-form-label">广告尺寸</label>
                                 <div class="col-md-10">
-                                    <p class="form-control-static">{{ $data->size->title }}</p>
+                                    <p class="form-control-static">{{ $data->size->title }} - {{ $data->size->width }}x{{ $data->size->height }}</p>
                                 </div>
                             </div>
                             <div class="form-group row">

@@ -74,6 +74,6 @@ class Element extends Model
 
     public function advertisements(): BelongsTo
     {
-        return $this->belongsTo(Advertisement::class)->withDefault();
+        return $this->belongsTo(Advertisement::class, 'advertisement_id')->withDefault();
     }
 }

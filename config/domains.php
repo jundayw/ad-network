@@ -10,4 +10,7 @@ return [
     'publishment' => [
         'domain' => env('DOMAIN_PUBLISHMENT', 'publishment.test'),
     ],
+    'render' => [
+        'domain' => env('DOMAIN_RENDER', 'render.test'),
+    ],
 ];
