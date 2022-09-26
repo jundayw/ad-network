@@ -1,5 +1,18 @@
 @extends('advertisement.layouts.main')
 
+@push('plugins')
+    <script>
+        $(function () {
+            $('[preview]').each(function () {
+                $(this).find('img').attr('src') ? $(this).removeClass('hidden') : $(this).addClass('hidden');
+            });
+            $('[name=licence_image]').bind('file:upload.success', function (event, data, files) {
+                $($(this).data('target')).removeClass('hidden').find('img').attr('src', files.shift());
+            })
+        });
+    </script>
+@endpush
+
 @section('content')
     @if($data->advertisement->audit == 'init')
         <div class="alert alert-warning alert-dismissable">
@@ -70,11 +83,19 @@
                                     <input class="form-control" type="text" name="licence" value="{{ $data->advertisement->licence }}" placeholder="请输入{{ $data->advertisement->type == 'company' ? '营业执照编号' : '身份证编号' }}" autocomplete="off">
                                 </div>
                             </div>
-                            <div class="form-group row" rel-vacant="default">
+                            <div class="form-group row" rel-action="viewer" preview>
+                                <label class="col-md-2 control-label col-form-label">图片预览</label>
+                                <div class="col-md-10">
+                                    <a href="javascript:void(0);">
+                                        <img src="{{ $data->advertisement->licence_image }}" style="max-height:200px;" class="img-responsive thumbnail m-r-15">
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label class="col-md-2 control-label col-form-label">{{ $data->advertisement->type == 'company' ? '营业执照附件' : '身份证附件' }}</label>
                                 <div class="col-md-10">
                                     <div class="input-group">
-                                        <input class="form-control" type="text" name="licence_image" value="{{ $data->advertisement->licence_image }}" placeholder="请上传图片" autocomplete="off">
+                                        <input class="form-control" type="text" name="licence_image" value="{{ $data->advertisement->licence_image }}" data-target="[preview]" placeholder="请上传图片" autocomplete="off">
                                         <label for="licence_image" class="input-group-addon">上传</label>
                                         <input
                                                 id="licence_image"

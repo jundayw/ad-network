@@ -3,6 +3,19 @@
 @push('plugins')
     <script>
         $(function () {
+            $('[preview]').each(function () {
+                $(this).find('img').attr('src') ? $(this).removeClass('hidden') : $(this).addClass('hidden');
+            });
+            $('[name=image]').bind('file:upload.success', function (event, data, files) {
+                $($(this).data('target')).removeClass('hidden').find('img').attr('src', files.shift());
+            })
+        });
+    </script>
+@endpush
+
+@push('plugins')
+    <script>
+        $(function () {
             $('[name=vacant]').change(function () {
                 if ($(this).is(':checked')) {
                     $('[rel-vacant]').addClass('hidden');
@@ -116,11 +129,19 @@
                                     <input class="form-control" type="text" name="locator" value="{{ $data->locator }}" placeholder="请输入广告地址" autocomplete="off">
                                 </div>
                             </div>
+                            <div class="form-group row" rel-action="viewer" preview>
+                                <label class="col-md-2 control-label col-form-label">图片预览</label>
+                                <div class="col-md-10">
+                                    <a href="javascript:void(0);">
+                                        <img src="{{ $data->image }}" style="max-height:200px;" class="img-responsive thumbnail m-r-15">
+                                    </a>
+                                </div>
+                            </div>
                             <div class="form-group row" rel-vacant="default">
                                 <label class="col-md-2 control-label col-form-label">图片地址</label>
                                 <div class="col-md-10">
                                     <div class="input-group">
-                                        <input class="form-control" type="text" name="image" value="{{ $data->image }}" placeholder="请上传图片地址" autocomplete="off">
+                                        <input class="form-control" type="text" name="image" value="{{ $data->image }}" data-target="[preview]" placeholder="请上传图片地址" autocomplete="off">
                                         <label for="image" class="input-group-addon">上传</label>
                                         <input
                                                 id="image"
