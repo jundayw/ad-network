@@ -46,9 +46,9 @@
                                 <label class="col-md-2 control-label col-form-label">广告尺寸</label>
                                 <div class="col-md-10">
                                     <select class="form-control" name="size" rel-action="select">
-                                        @foreach($filter['size'] as $key => $size)
-                                            <optgroup label="{{ $size->title }}">
-                                                @foreach($size['size'] as $key => $size)
+                                        @foreach($filter['device'] as $key => $device)
+                                            <optgroup label="{{ $device }}">
+                                                @foreach($filter['size'][$key] as $key => $size)
                                                     <option value="{{ $size->id }}">{{ $size->title }} - {{ $size->width }}x{{ $size->height }}</option>
                                                 @endforeach
                                             </optgroup>

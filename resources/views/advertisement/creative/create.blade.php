@@ -30,20 +30,6 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-md-2 control-label col-form-label">广告尺寸</label>
-                                <div class="col-md-10">
-                                    <select class="form-control" name="size" rel-action="select">
-                                        @foreach($filter['size'] as $key => $size)
-                                            <optgroup label="{{ $size->title }}">
-                                                @foreach($size['size'] as $key => $size)
-                                                    <option value="{{ $size->id }}">{{ $size->title }} - {{ $size->width }}x{{ $size->height }}</option>
-                                                @endforeach
-                                            </optgroup>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group row">
                                 <label class="col-md-2 control-label col-form-label">广告单元</label>
                                 <div class="col-md-10">
                                     <select class="form-control" name="element" rel-action="select">
@@ -51,6 +37,20 @@
                                             <optgroup label="{{ $element->title }}">
                                                 @foreach($element['element'] as $key => $element)
                                                     <option value="{{ $element->id }}">{{ $element->title }}</option>
+                                                @endforeach
+                                            </optgroup>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-2 control-label col-form-label">广告尺寸</label>
+                                <div class="col-md-10">
+                                    <select class="form-control" name="size" rel-action="select">
+                                        @foreach($filter['device'] as $key => $device)
+                                            <optgroup label="{{ $device }}">
+                                                @foreach($filter['size'][$key] as $key => $size)
+                                                    <option value="{{ $size->id }}">{{ $size->title }} - {{ $size->width }}x{{ $size->height }}</option>
                                                 @endforeach
                                             </optgroup>
                                         @endforeach

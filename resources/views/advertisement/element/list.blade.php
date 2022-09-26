@@ -101,7 +101,8 @@
                                     <thead>
                                     <tr>
                                         <th class="text-center">编号</th>
-                                        <th class="text-center">所属广告计划</th>
+                                        <th class="text-center">广告计划</th>
+                                        <th class="text-center">投放设备</th>
                                         <th class="text-center">名称</th>
                                         <th class="text-center" colspan="2">投放日期</th>
                                         <th class="text-center" colspan="2">投放时段</th>
@@ -116,6 +117,7 @@
                                         <tr>
                                             <td class="text-center">{{ $loop->iteration }}</td>
                                             <td>{{ $items->program->title }}</td>
+                                            <td class="text-center">{{ $items->program->getDevice($items->program->device) }}</td>
                                             <td>{{ $items->title }}</td>
                                             <td class="text-center">{{ $items->release_begin }}</td>
                                             <td class="text-center">{{ $items->release_finish }}</td>

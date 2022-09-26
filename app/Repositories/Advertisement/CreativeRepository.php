@@ -84,7 +84,8 @@ class CreativeRepository extends Repository
     public function create(Request $request): array
     {
         $filter = [
-            'size' => $this->getSize(),
+            'size' => $this->size->where('pid', '<>', 0)->get()->groupBy('device'),
+            'device' => $this->size->getDevice(),
             'element' => $this->getProgram($request),
             'state' => $this->creative->getState(),
         ];

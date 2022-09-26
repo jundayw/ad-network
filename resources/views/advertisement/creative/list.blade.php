@@ -100,22 +100,29 @@
                                         <th class="text-center">编号</th>
                                         <th class="text-center">名称</th>
                                         <th class="text-center">广告计划</th>
+                                        <th class="text-center">投放设备</th>
                                         <th class="text-center">广告单元</th>
-                                        <th class="text-center" colspan="2">广告尺寸</th>
+                                        <th class="text-center" colspan="3">广告尺寸</th>
                                         <th class="text-center">修改时间</th>
                                         <th class="text-center">状态</th>
                                         <th class="text-center text-nowrap">操作</th>
                                     </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody rel-action="viewer">
                                     @foreach($data as $items)
                                         <tr>
                                             <td class="text-center">{{ $loop->iteration }}</td>
                                             <td>{{ $items->title }}</td>
                                             <td class="text-center">{{ $items->program->title }}</td>
+                                            <td class="text-center">{{ $items->program->getDevice($items->program->device) }}</td>
                                             <td class="text-center">{{ $items->element->title }}</td>
                                             <td class="text-center">{{ $items->size->title }}</td>
                                             <td class="text-center">{{ $items->size->width }}x{{ $items->size->height }}</td>
+                                            <td width="120">
+                                                <a href="javascript:void(0);">
+                                                    <img src="{{ $items->image }}" style="max-height: 18px;">
+                                                </a>
+                                            </td>
                                             <td class="text-center">{{ $items->update_time }}</td>
                                             <td class="text-center">{{ $items->state }}</td>
                                             <td class="text-center text-nowrap">

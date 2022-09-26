@@ -76,7 +76,7 @@ class MaterialRepository extends Repository
     public function create(Request $request): array
     {
         $filter = [
-            'size' => $this->getSize(),
+            'size' => $this->size->where('pid', '<>', 0)->get()->groupBy('device'),
             'device' => $this->material->getDevice(),
             'state' => $this->material->getState(),
         ];

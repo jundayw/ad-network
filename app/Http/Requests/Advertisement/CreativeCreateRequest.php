@@ -15,8 +15,8 @@ class CreativeCreateRequest extends FormRequest
     {
         return [
             'title' => ['required'],
-            'size' => ['required', 'gte:1'],
             'element' => ['required', 'gte:1'],
+            'size' => ['required', 'gte:1'],
             'location' => ['required'],
             'image' => ['required'],
         ];
@@ -31,8 +31,8 @@ class CreativeCreateRequest extends FormRequest
     {
         return [
             'title' => '名称',
-            'size' => '广告尺寸',
             'element' => '广告单元',
+            'size' => '广告尺寸',
             'location' => '链接地址',
             'image' => '图片地址',
         ];
