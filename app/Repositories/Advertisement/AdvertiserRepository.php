@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Repositories\Publishment;
+namespace App\Repositories\Advertisement;
 
 use App\Exceptions\RenderErrorResponseException;
-use App\Models\Publisher;
+use App\Models\Advertiser;
 use App\Models\Role;
 use App\Repositories\Repository;
 use Illuminate\Http\Request;
 
-class PublisherRepository extends Repository
+class AdvertiserRepository extends Repository
 {
     public function __construct(
-        private readonly Publisher $publisher,
-        private readonly Role $role,
+        private readonly Advertiser $advertiser,
+        private readonly Role $role
     )
     {
         //
@@ -20,7 +20,7 @@ class PublisherRepository extends Repository
 
     public function list(Request $request): array
     {
-        $data = $this->publisher
+        $data = $this->advertiser
             ->when($request->get('title'), function ($query) use ($request) {
                 $query->where('title', 'LIKE', "%{$request->get('title')}%");
             })
@@ -33,23 +33,23 @@ class PublisherRepository extends Repository
             ->when($request->get('state'), function ($query) use ($request) {
                 $query->where('state', $request->get('state'));
             })
-            ->publishments($request)
+            ->advertisements($request)
             ->oldest('state')
-            ->latest($this->publisher->getKeyName());
+            ->latest($this->advertiser->getKeyName());
 
-        $data = $data->Paginate($request->get('per', $this->publisher->getPerPage()), ['*'], 'page', $request->get('page', 1));
+        $data = $data->Paginate($request->get('per', $this->advertiser->getPerPage()), ['*'], 'page', $request->get('page', 1));
 
         $data->transform(function ($items) {
             $items->state    = $items->getState($items->state);
-            $items->password = url()->signedRoute('publishment.publisher.password', [$items->getKeyName() => $items->getKey()]);
-            $items->edit     = url()->signedRoute('publishment.publisher.edit', [$items->getKeyName() => $items->getKey()]);
-            $items->destroy  = url()->signedRoute('publishment.publisher.destroy', [$items->getKeyName() => $items->getKey()]);
+            $items->password = url()->signedRoute('advertisement.advertiser.password', [$items->getKeyName() => $items->getKey()]);
+            $items->edit     = url()->signedRoute('advertisement.advertiser.edit', [$items->getKeyName() => $items->getKey()]);
+            $items->destroy  = url()->signedRoute('advertisement.advertiser.destroy', [$items->getKeyName() => $items->getKey()]);
             return $items;
         });
 
         $filter = [
             'roles' => $this->getRoles(),
-            'state' => $this->publisher->getState(),
+            'state' => $this->advertiser->getState(),
         ];
 
         return compact('filter', 'data');
@@ -68,13 +68,13 @@ class PublisherRepository extends Repository
     {
         $filter = [
             'roles' => $this->getRoles(),
-            'state' => $this->publisher->getState(),
+            'state' => $this->advertiser->getState(),
         ];
 
         return compact('filter');
     }
 
-    public function store(Request $request): Publisher
+    public function store(Request $request): Advertiser
     {
         $role = $this->role->find($request->get('role'));
 
@@ -85,8 +85,8 @@ class PublisherRepository extends Repository
         $usersalt = generate_string();
         $userpass = password($request->get('password'), $usersalt);
 
-        $data = $this->publisher->create([
-            'publishment_id' => $request->user()->getAttribute('publishment_id'),
+        $data = $this->advertiser->create([
+            'advertisement_id' => $request->user()->getAttribute('advertisement_id'),
             'role_id' => $role->id,
             'role_title' => $role->title,
             'usernick' => $request->get('usernick'),
@@ -107,7 +107,7 @@ class PublisherRepository extends Repository
 
     public function edit(Request $request): array
     {
-        $data = $this->publisher->publishments($request)->find($request->get($this->publisher->getKeyName()));
+        $data = $this->advertiser->advertisements($request)->find($request->get($this->advertiser->getKeyName()));
 
         if (is_null($data)) {
             throw new RenderErrorResponseException('暂无记录');
@@ -115,7 +115,7 @@ class PublisherRepository extends Repository
 
         $filter = [
             'roles' => $this->getRoles(),
-            'state' => $this->publisher->getState(),
+            'state' => $this->advertiser->getState(),
         ];
 
         return compact('filter', 'data');
@@ -123,9 +123,9 @@ class PublisherRepository extends Repository
 
     public function update(Request $request): bool
     {
-        $publisher = $this->publisher->publishments($request)->find($request->get($this->publisher->getKeyName()));
+        $advertiser = $this->advertiser->advertisements($request)->find($request->get($this->advertiser->getKeyName()));
 
-        if (is_null($publisher)) {
+        if (is_null($advertiser)) {
             throw new RenderErrorResponseException('参数有误');
         }
 
@@ -135,7 +135,7 @@ class PublisherRepository extends Repository
             throw new RenderErrorResponseException('角色参数有误');
         }
 
-        return $publisher->update([
+        return $advertiser->update([
             'role_id' => $role->id,
             'role_title' => $role->title,
             'usernick' => $request->get('usernick'),
@@ -146,16 +146,16 @@ class PublisherRepository extends Repository
 
     public function destroy(Request $request): bool
     {
-        $publisher = $this->publisher->publishments($request)->find($request->get($this->publisher->getKeyName()));
-        if (is_null($publisher)) {
+        $advertiser = $this->advertiser->advertisements($request)->find($request->get($this->advertiser->getKeyName()));
+        if (is_null($advertiser)) {
             return false;
         }
-        return $publisher->delete();
+        return $advertiser->delete();
     }
 
     public function password(Request $request): array
     {
-        $data = $this->publisher->publishments($request)->find($request->get($this->publisher->getKeyName()));
+        $data = $this->advertiser->advertisements($request)->find($request->get($this->advertiser->getKeyName()));
 
         if (is_null($data)) {
             throw new RenderErrorResponseException('暂无记录');
@@ -171,7 +171,7 @@ class PublisherRepository extends Repository
         $usersalt = generate_string();
         $userpass = password($request->get('password'), $usersalt);
 
-        $data = $this->publisher->publishments($request)->find($request->get($this->publisher->getKeyName()));
+        $data = $this->advertiser->advertisements($request)->find($request->get($this->advertiser->getKeyName()));
 
         if (is_null($data)) {
             throw new RenderErrorResponseException('参数有误');
