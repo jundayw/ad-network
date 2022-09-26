@@ -5,6 +5,7 @@ namespace App\Repositories\Publishment;
 use App\Exceptions\RenderErrorResponseException;
 use App\Models\Adsense;
 use App\Models\Channel;
+use App\Models\Material;
 use App\Models\Site;
 use App\Models\Size;
 use App\Repositories\Repository;
@@ -17,6 +18,7 @@ class AdsenseRepository extends Repository
         private readonly Site $site,
         private readonly Size $size,
         private readonly Channel $channel,
+        private readonly Material $material,
     )
     {
         //
@@ -132,8 +134,23 @@ class AdsenseRepository extends Repository
         return compact('filter');
     }
 
+    private function hasMaterial(Request $request)
+    {
+        $material = $this->material->publishment($request)->where([
+            'size_id' => $request->get('size'),
+            'device' => $request->get('device'),
+        ])->first();
+        if (is_null($material)) {
+            throw new RenderErrorResponseException('换量广告栏目下未匹配该尺寸及设备的广告物料');
+        }
+    }
+
     public function store(Request $request): Adsense
     {
+        if ($request->get('vacant') == 'exchange') {
+            $this->hasMaterial($request);
+        }
+
         $channel = $this->channel->with([
             'site',
         ])->publishment($request)->where([
@@ -203,6 +220,10 @@ class AdsenseRepository extends Repository
 
     public function update(Request $request): bool
     {
+        if ($request->get('vacant') == 'exchange') {
+            $this->hasMaterial($request);
+        }
+
         $adsense = $this->adsense->publishment($request)->find($request->get($this->adsense->getKeyName()));
 
         if (is_null($adsense)) {
