@@ -74,6 +74,6 @@ class NavigationComposer
                 return $value->active;
             });
             return $policy;
-        });
+        })->sortByDesc('sorting');
     }
 }
