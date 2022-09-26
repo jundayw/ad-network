@@ -5,6 +5,7 @@ namespace App\Repositories\Publishment;
 use App\Exceptions\RenderErrorResponseException;
 use App\Models\Publisher;
 use App\Models\Publishment;
+use App\Models\Role;
 use App\Repositories\Repository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -14,7 +15,8 @@ class AccountRepository extends Repository
 {
     public function __construct(
         private readonly Publisher $publisher,
-        private readonly Publishment $publishment
+        private readonly Publishment $publishment,
+        private readonly Role $role,
     )
     {
         //
@@ -69,6 +71,12 @@ class AccountRepository extends Repository
             throw new RenderErrorResponseException('邮箱验证码无效');
         }
 
+        $role = $this->role->find(config('adnetwork.role.publishment'));
+
+        if (is_null($role)) {
+            throw new RenderErrorResponseException('默认角色组异常');
+        }
+
         DB::beginTransaction();
         $publishment = $this->publishment->create([
             'type' => $request->get('type'),
@@ -86,8 +94,8 @@ class AccountRepository extends Repository
 
         $publisher = $this->publisher->create([
             'publishment_id' => $publishment->getKey(),
-            'role_id' => 4,
-            'role_title' => '@todo',
+            'role_id' => $role->getAttribute('id'),
+            'role_title' => $role->getAttribute('title'),
             'usernick' => $request->get('username'),
             'username' => $request->get('username'),
             'userpass' => $userpass,

@@ -5,6 +5,7 @@ namespace App\Repositories\Advertisement;
 use App\Exceptions\RenderErrorResponseException;
 use App\Models\Advertisement;
 use App\Models\Advertiser;
+use App\Models\Role;
 use App\Repositories\Repository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -15,6 +16,7 @@ class AccountRepository extends Repository
     public function __construct(
         private readonly Advertiser $advertiser,
         private readonly Advertisement $advertisement,
+        private readonly Role $role,
     )
     {
         //
@@ -69,6 +71,12 @@ class AccountRepository extends Repository
             throw new RenderErrorResponseException('邮箱验证码无效');
         }
 
+        $role = $this->role->find(config('adnetwork.role.advertisement'));
+
+        if (is_null($role)) {
+            throw new RenderErrorResponseException('默认角色组异常');
+        }
+
         DB::beginTransaction();
         $advertisement = $this->advertisement->create([
             'type' => $request->get('type'),
@@ -86,8 +94,8 @@ class AccountRepository extends Repository
 
         $advertiser = $this->advertiser->create([
             'advertisement_id' => $advertisement->getKey(),
-            'role_id' => 4,
-            'role_title' => '@todo',
+            'role_id' => $role->getAttribute('id'),
+            'role_title' => $role->getAttribute('title'),
             'usernick' => $request->get('username'),
             'username' => $request->get('username'),
             'userpass' => $userpass,

@@ -17,4 +17,9 @@ return [
     'union' => [
         'link' => 'https://union.baidu.com/?adnetwork',
     ],
+    // 账户注册默认角色组
+    'role' => [
+        'advertisement' => 3,
+        'publishment' => 4,
+    ],
 ];
