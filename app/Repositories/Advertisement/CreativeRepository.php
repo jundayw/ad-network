@@ -77,14 +77,21 @@ class CreativeRepository extends Repository
     private function getSize()
     {
         return $this->size->with([
-            'size',
-        ])->where('pid', 0)->get();
+            'size' => function ($query) {
+                $query->where([
+                    'state' => 'NORMAL',
+                ])->oldest('sorting')->oldest('id');
+            },
+        ])->where([
+            'pid' => 0,
+            'state' => 'NORMAL',
+        ])->oldest('sorting')->oldest('id')->get();
     }
 
     public function create(Request $request): array
     {
         $filter = [
-            'size' => $this->size->where('pid', '<>', 0)->get()->groupBy('device'),
+            'size' => $this->getSize()->pluck('size')->flatten()->groupBy('device'),
             'device' => $this->size->getDevice(),
             'element' => $this->getProgram($request),
             'state' => $this->creative->getState(),
