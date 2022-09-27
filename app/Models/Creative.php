@@ -35,6 +35,11 @@ class Creative extends Model
         return $builder->where('advertisement_id', $request->user()->getAttribute('advertisement_id'));
     }
 
+    public function advertisements(): BelongsTo
+    {
+        return $this->belongsTo(Advertisement::class, 'advertisement_id')->withDefault();
+    }
+
     public function program(): BelongsTo
     {
         return $this->belongsTo(Program::class)->withDefault();

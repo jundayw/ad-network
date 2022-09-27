@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Http\Request;
@@ -32,10 +33,7 @@ class Program extends Model
 
     protected function limit(): Attribute
     {
-        return new Attribute(
-            get: fn($value, $attributes) => bcdiv($value, 100),
-            set: fn($value, $attributes) => bcmul($value, 100),
-        );
+        return $this->getMoney();
     }
 
     public function getState(?string $value = null, ?string $default = '--'): string|array
@@ -62,5 +60,10 @@ class Program extends Model
     public function element(): HasMany
     {
         return $this->hasMany(Element::class);
+    }
+
+    public function advertisements(): BelongsTo
+    {
+        return $this->belongsTo(Advertisement::class, 'advertisement_id')->withDefault();
     }
 }

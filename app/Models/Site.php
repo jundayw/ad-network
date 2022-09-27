@@ -59,6 +59,11 @@ class Site extends Model
         return $builder->where('publishment_id', $request->user()->getAttribute('publishment_id'));
     }
 
+    public function publishments(): BelongsTo
+    {
+        return $this->belongsTo(Publishment::class, 'publishment_id')->withDefault();
+    }
+
     public function industry(): BelongsTo
     {
         return $this->belongsTo(Industry::class)->withDefault();

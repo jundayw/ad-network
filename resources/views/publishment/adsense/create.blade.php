@@ -163,7 +163,7 @@
                                 <label class="col-md-2 control-label col-form-label">图片预览</label>
                                 <div class="col-md-10">
                                     <a href="javascript:void(0);">
-                                        <img src="" style="max-height:200px;" class="img-responsive thumbnail m-r-15">
+                                        <img src="" style="max-height:200px;" class="img-responsive thumbnail m-b-0">
                                     </a>
                                 </div>
                             </div>

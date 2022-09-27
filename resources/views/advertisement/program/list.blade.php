@@ -11,9 +11,9 @@
                     <form action="{{ route('advertisement.program.list') }}" class="form-horizontal" method="get">
                         <div class="panel-body p-b-0">
                             <div class="form-group row">
-                                <label class="col-md-1 control-label col-form-label">名称</label>
+                                <label class="col-md-1 control-label col-form-label">广告计划</label>
                                 <div class="col-md-2">
-                                    <input class="form-control" type="text" name="title" value="{{ $request->get('title') }}" placeholder="请输入名称" autocomplete="off">
+                                    <input class="form-control" type="text" name="title" value="{{ $request->get('title') }}" placeholder="请输入广告计划" autocomplete="off">
                                 </div>
                                 <label class="col-md-1 control-label col-form-label">设备</label>
                                 <div class="col-md-2">
@@ -70,7 +70,7 @@
                                     <thead>
                                     <tr>
                                         <th class="text-center">编号</th>
-                                        <th class="text-center">名称</th>
+                                        <th class="text-center">广告计划</th>
                                         <th class="text-center">设备</th>
                                         <th class="text-center">日限额</th>
                                         <th class="text-center">新增时间</th>

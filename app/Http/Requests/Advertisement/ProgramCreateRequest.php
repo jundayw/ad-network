@@ -16,7 +16,7 @@ class ProgramCreateRequest extends FormRequest
         return [
             'title' => ['required'],
             'device' => ['required'],
-            'limit' => ['required', 'gte:1'],
+            'limit' => ['required', 'numeric'],
         ];
     }
 

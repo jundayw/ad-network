@@ -11,9 +11,9 @@
                     <form action="{{ route('advertisement.element.list') }}" class="form-horizontal" method="get">
                         <div class="panel-body p-b-0">
                             <div class="form-group row">
-                                <label class="col-md-1 control-label col-form-label">名称</label>
+                                <label class="col-md-1 control-label col-form-label">广告单元</label>
                                 <div class="col-md-2">
-                                    <input class="form-control" type="text" name="title" value="{{ $request->get('title') }}" placeholder="请输入名称" autocomplete="off">
+                                    <input class="form-control" type="text" name="title" value="{{ $request->get('title') }}" placeholder="请输入广告单元" autocomplete="off">
                                 </div>
                                 <label class="col-md-1 control-label col-form-label">广告计划</label>
                                 <div class="col-md-2">
@@ -103,7 +103,7 @@
                                         <th class="text-center">编号</th>
                                         <th class="text-center">广告计划</th>
                                         <th class="text-center">投放设备</th>
-                                        <th class="text-center">名称</th>
+                                        <th class="text-center">广告单元</th>
                                         <th class="text-center" colspan="2">投放日期</th>
                                         <th class="text-center" colspan="2">投放时段</th>
                                         <th class="text-center">出价方式</th>

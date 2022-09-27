@@ -62,7 +62,7 @@
                                 <label class="col-md-2 control-label col-form-label">出价</label>
                                 <div class="col-md-5">
                                     <dic class="input-group">
-                                        <input class="form-control" type="number" step="0.01" name="rate" value="{{ $data->rate }}" placeholder="请输入出价" autocomplete="off">
+                                        <input class="form-control" type="text" name="rate" value="{{ $data->rate }}" placeholder="请输入出价" autocomplete="off">
                                         <span class="input-group-addon" target-type>元</span>
                                     </dic>
                                 </div>

@@ -32,7 +32,7 @@
                             <div class="form-group row">
                                 <label class="col-md-2 control-label col-form-label">日限额</label>
                                 <div class="col-md-10">
-                                    <input class="form-control" type="number" step="0.01" name="limit" value="{{ $data->limit }}" placeholder="请输入日限额" autocomplete="off">
+                                    <input class="form-control" type="text" name="limit" value="{{ $data->limit }}" placeholder="请输入日限额" autocomplete="off">
                                 </div>
                             </div>
                             <div class="form-group row">

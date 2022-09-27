@@ -132,6 +132,11 @@ class Adsense extends Model
         return $builder->where('publishment_id', $request->user()->getAttribute('publishment_id'));
     }
 
+    public function publishments(): BelongsTo
+    {
+        return $this->belongsTo(Publishment::class, 'publishment_id')->withDefault();
+    }
+
     public function site(): BelongsTo
     {
         return $this->belongsTo(Site::class)->withDefault();
