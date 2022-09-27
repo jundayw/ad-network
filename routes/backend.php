@@ -83,4 +83,74 @@ Route::namespace('Backend')->name('backend.')->group(function () {
         Route::post('update', 'update')->name('update');
         Route::get('destroy', 'destroy')->name('destroy');
     });
+    // 广告主
+    Route::prefix('advertisement')->controller('AdvertisementController')->name('advertisement.')->group(function () {
+        Route::get('list', 'list')->name('list');
+        Route::get('edit', 'edit')->name('edit');
+        Route::post('update', 'update')->name('update');
+        Route::get('destroy', 'destroy')->name('destroy');
+    });
+    // 广告主账户
+    Route::prefix('advertiser')->controller('AdvertiserController')->name('advertiser.')->group(function () {
+        Route::get('list', 'list')->name('list');
+        Route::get('edit', 'edit')->name('edit');
+        Route::post('update', 'update')->name('update');
+        Route::get('destroy', 'destroy')->name('destroy');
+    });
+    // 广告创意
+    Route::prefix('creative')->controller('CreativeController')->name('creative.')->group(function () {
+        Route::get('list', 'list')->name('list');
+        Route::get('edit', 'edit')->name('edit');
+        Route::post('update', 'update')->name('update');
+        Route::get('destroy', 'destroy')->name('destroy');
+    });
+    // 广告单元
+    Route::prefix('element')->controller('ElementController')->name('element.')->group(function () {
+        Route::get('list', 'list')->name('list');
+        Route::get('edit', 'edit')->name('edit');
+        Route::post('update', 'update')->name('update');
+        Route::get('destroy', 'destroy')->name('destroy');
+    });
+    // 广告计划
+    Route::prefix('program')->controller('ProgramController')->name('program.')->group(function () {
+        Route::get('list', 'list')->name('list');
+        Route::get('edit', 'edit')->name('edit');
+        Route::post('update', 'update')->name('update');
+        Route::get('destroy', 'destroy')->name('destroy');
+    });
+    // 流量主账户
+    Route::prefix('publisher')->controller('PublisherController')->name('publisher.')->group(function () {
+        Route::get('list', 'list')->name('list');
+        Route::get('edit', 'edit')->name('edit');
+        Route::post('update', 'update')->name('update');
+        Route::get('destroy', 'destroy')->name('destroy');
+    });
+    // 流量主
+    Route::prefix('publishment')->controller('PublishmentController')->name('publishment.')->group(function () {
+        Route::get('list', 'list')->name('list');
+        Route::get('edit', 'edit')->name('edit');
+        Route::post('update', 'update')->name('update');
+        Route::get('destroy', 'destroy')->name('destroy');
+    });
+    // 广告位
+    Route::prefix('adsense')->controller('AdsenseController')->name('adsense.')->group(function () {
+        Route::get('list', 'list')->name('list');
+        Route::get('edit', 'edit')->name('edit');
+        Route::post('update', 'update')->name('update');
+        Route::get('destroy', 'destroy')->name('destroy');
+    });
+    // 站点
+    Route::prefix('site')->controller('SiteController')->name('site.')->group(function () {
+        Route::get('list', 'list')->name('list');
+        Route::get('edit', 'edit')->name('edit');
+        Route::post('update', 'update')->name('update');
+        Route::get('destroy', 'destroy')->name('destroy');
+    });
+    // 广告物料
+    Route::prefix('material')->controller('MaterialController')->name('material.')->group(function () {
+        Route::get('list', 'list')->name('list');
+        Route::get('edit', 'edit')->name('edit');
+        Route::post('update', 'update')->name('update');
+        Route::get('destroy', 'destroy')->name('destroy');
+    });
 });
