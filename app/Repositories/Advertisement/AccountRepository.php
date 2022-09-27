@@ -80,6 +80,7 @@ class AccountRepository extends Repository
         DB::beginTransaction();
         $advertisement = $this->advertisement->create([
             'type' => $request->get('type'),
+            'mail' => $request->get('email'),
             'audit' => 'INIT',
             'state' => 'NORMAL',
         ]);
@@ -100,7 +101,6 @@ class AccountRepository extends Repository
             'username' => $request->get('username'),
             'userpass' => $userpass,
             'usersalt' => $usersalt,
-            'mail' => $request->get('mail'),
             'register_ip' => $request->getClientIp(),
             'register_time' => get_time(),
             'state' => 'NORMAL',

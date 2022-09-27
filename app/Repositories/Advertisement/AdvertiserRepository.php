@@ -24,9 +24,6 @@ class AdvertiserRepository extends Repository
             ->when($request->get('title'), function ($query) use ($request) {
                 $query->where('title', 'LIKE', "%{$request->get('title')}%");
             })
-            ->when($request->get('mail'), function ($query) use ($request) {
-                $query->where('mail', 'LIKE', "%{$request->get('mail')}%");
-            })
             ->when($request->get('role'), function ($query) use ($request) {
                 $query->where('role_id', $request->get('role'));
             })

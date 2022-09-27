@@ -62,4 +62,19 @@ class Publishment extends Model
             set: fn($value, $attributes) => strtoupper($value),
         );
     }
+
+    protected function total(): Attribute
+    {
+        return $this->getMoney();
+    }
+
+    protected function balance(): Attribute
+    {
+        return $this->getMoney();
+    }
+
+    protected function frozen(): Attribute
+    {
+        return $this->getMoney();
+    }
 }

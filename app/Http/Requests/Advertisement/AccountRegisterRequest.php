@@ -18,7 +18,7 @@ class AccountRegisterRequest extends FormRequest
             'type' => ['required'],
             'username' => ['required', 'alpha_dash', 'between:4,16', 'unique:advertiser,username'],
             'password' => ['required', 'between:6,16'],
-            'email' => ['required', 'email:rfc,dns', 'unique:advertiser,mail'],
+            'email' => ['required', 'email:rfc,dns', 'unique:advertisement,mail'],
             'captcha' => [new Captcha('signup')],
             'code' => ['required'],
         ];

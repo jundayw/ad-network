@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 
@@ -135,5 +136,19 @@ abstract class Model extends EloquentModel
         return is_null($value) ? $attributes : with($attributes, function ($attributes) use ($value, $default) {
             return array_key_exists($value = strtolower($value), $attributes) ? $attributes[$value] : $default;
         });
+    }
+
+    /**
+     * 金额统一转换
+     *
+     * @param int|null $scale
+     * @return Attribute
+     */
+    protected function getMoney(?int $scale = 4): Attribute
+    {
+        return new Attribute(
+            get: fn($value, $attributes) => $value > 0 ? bcdiv($value, 10000, $scale) : 0,
+            set: fn($value, $attributes) => $value > 0 ? bcmul($value, 10000, $scale) : 0,
+        );
     }
 }

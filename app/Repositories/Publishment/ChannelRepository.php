@@ -114,6 +114,7 @@ class ChannelRepository extends Repository
 
         return $channel->update([
             'title' => $request->get('title'),
+            'description' => $request->get('description'),
             'state' => $request->get('state'),
         ]);
     }

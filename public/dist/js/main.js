@@ -5,6 +5,13 @@ $(function () {
     $('[rel-action=viewer]').each(function () {
         $(this).viewer($(this).data());
     });
+    $('[rel-action=preview]').each(function () {
+        let src = $(this).attr('rel-src');
+        src && ($(src).find('img').attr('src') ? $(src).removeClass('hidden') : $(src).addClass('hidden'));
+        $(this).bind('file:upload.success', function (event, data, files) {
+            src && $(src).removeClass('hidden').find('img').attr('src', files.shift());
+        })
+    });
     $('[rel-action=datetimepicker]').each(function () {
         $(this).datetimepicker({
             language: 'zh-CN',

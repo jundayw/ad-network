@@ -35,10 +35,7 @@ class Element extends Model
 
     protected function rate(): Attribute
     {
-        return new Attribute(
-            get: fn($value, $attributes) => bcdiv($value, 100),
-            set: fn($value, $attributes) => bcmul($value, 100),
-        );
+        return $this->getMoney();
     }
 
     public function getState(?string $value = null, ?string $default = '--'): string|array

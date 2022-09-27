@@ -19,7 +19,6 @@ class ElementUpdateRequest extends FormRequest
             'release_finish' => ['required', 'after_or_equal:release_begin'],
             'period_begin' => ['required', 'before_or_equal:period_finish'],
             'period_finish' => ['required', 'after_or_equal:period_begin'],
-            'type' => ['required'],
             'rate' => ['required', 'numeric'],
         ];
     }
@@ -37,7 +36,6 @@ class ElementUpdateRequest extends FormRequest
             'release_finish' => '截止时间',
             'period_begin' => '开始时段',
             'period_finish' => '截止时段',
-            'type' => '出价方式',
             'rate' => '出价',
         ];
     }

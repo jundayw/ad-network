@@ -19,12 +19,6 @@
                                 <div class="col-md-2">
                                     <input class="form-control" type="text" name="usernick" value="{{ $request->get('usernick') }}" placeholder="请输入昵称" autocomplete="off">
                                 </div>
-                                <label class="col-md-1 control-label col-form-label">邮箱</label>
-                                <div class="col-md-2">
-                                    <input class="form-control" type="text" name="mail" value="{{ $request->get('mail') }}" placeholder="请输入邮箱" autocomplete="off">
-                                </div>
-                            </div>
-                            <div class="form-group row">
                                 <label class="col-md-1 control-label col-form-label">角色</label>
                                 <div class="col-md-2">
                                     <select class="form-control" name="role" rel-action="select">
@@ -85,7 +79,6 @@
                                         <th class="text-center">角色</th>
                                         <th class="text-center">用户名</th>
                                         <th class="text-center">昵称</th>
-                                        <th class="text-center">邮箱</th>
                                         <th class="text-center">登录地址</th>
                                         <th class="text-center">登录时间</th>
                                         <th class="text-center">注册地址</th>
@@ -101,7 +94,6 @@
                                             <td>{{ $items->role_title }}</td>
                                             <td>{{ $items->username }}</td>
                                             <td>{{ $items->usernick }}</td>
-                                            <td>{{ $items->mail ?? '--' }}</td>
                                             <td class="text-center">{{ $items->last_ip ?? '--' }}</td>
                                             <td class="text-center">{{ $items->last_time ?? '--' }}</td>
                                             <td class="text-center">{{ $items->register_ip ?? '--' }}</td>

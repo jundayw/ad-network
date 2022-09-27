@@ -112,11 +112,19 @@
                                 <input type="hidden" name="county" value=""/>
                                 <input type="hidden" name="town" value=""/>
                             </div>
+                            <div class="form-group row" rel-action="viewer" rel-origin="[name=image]">
+                                <label class="col-md-2 control-label col-form-label">图片预览</label>
+                                <div class="col-md-10">
+                                    <a href="javascript:void(0);">
+                                        <img src="" style="max-height:200px;" class="img-responsive thumbnail m-r-15">
+                                    </a>
+                                </div>
+                            </div>
                             <div class="form-group row">
                                 <label class="col-md-2 control-label col-form-label">图片地址</label>
                                 <div class="col-md-10">
                                     <div class="input-group">
-                                        <input class="form-control" type="text" name="image" value="" placeholder="请上传图片地址" autocomplete="off">
+                                        <input class="form-control" type="text" name="image" value="" rel-action="preview" rel-src="[rel-origin='[name=image]']" placeholder="请上传图片地址" autocomplete="off">
                                         <label for="image" class="input-group-addon">上传</label>
                                         <input
                                                 id="image"

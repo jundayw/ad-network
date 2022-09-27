@@ -138,6 +138,11 @@ class ElementRepository extends Repository
 
         return $element->update([
             'title' => $request->get('title'),
+            'release_begin' => $request->get('release_begin'),
+            'release_finish' => $request->get('release_finish'),
+            'period_begin' => $request->get('period_begin'),
+            'period_finish' => $request->get('period_finish'),
+            'rate' => $request->get('rate'),
             'state' => $request->get('state'),
         ]);
     }

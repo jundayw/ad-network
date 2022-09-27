@@ -15,8 +15,8 @@ class ProfileInfoRequest extends FormRequest
     public function rules(): array
     {
         return $this->isMethod('POST') ? [
-            'name' => ['required'],
-            'licence' => ['required'],
+            'name' => ['required', "unique:publishment,name,{$this->user()->getAttribute('publishment_id')}"],
+            'licence' => ['required', "unique:publishment,licence,{$this->user()->getAttribute('publishment_id')}"],
             'licence_image' => ['required'],
             'corporation' => ['required'],
             'mobile' => ['required', new Mobile()],
