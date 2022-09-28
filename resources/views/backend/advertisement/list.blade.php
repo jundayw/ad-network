@@ -93,10 +93,12 @@
                                         <th class="text-center">总额</th>
                                         <th class="text-center">余额</th>
                                         <th class="text-center">冻结金额</th>
-                                        <th class="text-center">新增时间</th>
                                         <th class="text-center">修改时间</th>
                                         <th class="text-center">状态</th>
                                         <th class="text-center">审核状态</th>
+                                        @policy('backend.deposit.create')
+                                        <th class="text-center">资金管理</th>
+                                        @endpolicy
                                         <th class="text-center text-nowrap">操作</th>
                                     </tr>
                                     </thead>
@@ -113,10 +115,16 @@
                                             <td class="text-center">{{ $items->total }}</td>
                                             <td class="text-center">{{ $items->balance }}</td>
                                             <td class="text-center">{{ $items->frozen }}</td>
-                                            <td class="text-center">{{ $items->create_time ?? '--' }}</td>
                                             <td class="text-center">{{ $items->update_time ?? '--' }}</td>
                                             <td class="text-center">{{ $items->state }}</td>
                                             <td class="text-center">{{ $items->audit }}</td>
+                                            @policy('backend.deposit.create')
+                                            <td class="text-center">
+                                                <a href="{{ route('backend.deposit.create', ['type' => 'advertisement', 'id' => $items->id]) }}" rel-action="dialog" rel-height="510" title="资金管理">
+                                                    资金管理
+                                                </a>
+                                            </td>
+                                            @endpolicy
                                             <td class="text-center text-nowrap">
                                                 @policy('backend.advertisement.edit')
                                                 <a href="{{ $items->edit }}" data-toggle="tooltip" data-original-title="编辑">编辑</a>

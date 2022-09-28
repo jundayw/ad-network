@@ -27,6 +27,23 @@ class Publishment extends Model
         );
     }
 
+    public function getWallet(?string $value = null, ?string $default = '--'): string|array
+    {
+        return $this->getEnumeration([
+            'ALIPAY' => '支付宝',
+            'WECHAT' => '微信',
+            'USDT' => 'USDT',
+        ], $value, $default);
+    }
+
+    protected function wallet(): Attribute
+    {
+        return new Attribute(
+            get: fn($value, $attributes) => strtolower($value),
+            set: fn($value, $attributes) => strtoupper($value),
+        );
+    }
+
     // 审核状态{INIT:初始化}{WAIT:待审核}{SUCCESS:成功}{FAILURE:失败}{STOP:终止合作}
     public function getAudit(?string $value = null, ?string $default = '--'): string|array
     {

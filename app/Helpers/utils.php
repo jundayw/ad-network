@@ -179,7 +179,7 @@ function generate_unlined(int $length = 20, string $format = 'YmdHis', string $t
         $length = $stampLen;
     }
 
-    $limit = $length - $stampLen;
+    $limit = $length == $stampLen ? 1 : abs($length - $stampLen);
 
     $random = str_pad(mt_rand(1, pow(10, $limit) - 1), $limit, 0, STR_PAD_LEFT);
 
@@ -271,7 +271,7 @@ function get_format_money_upper(string $number): string
 
     $fractional = ['角', '分'];
     // 小数部分
-    $decimal = function($decimal) use ($char, $fractional) {
+    $decimal = function ($decimal) use ($char, $fractional) {
         // 保留2位有效位
         $decimal = substr($decimal, 0, 2);
         // 不足2位补充齐2位有效位
@@ -287,7 +287,7 @@ function get_format_money_upper(string $number): string
     };
 
     // 整数部分
-    $integer = function($integer) use ($char, $unit, $standard) {
+    $integer = function ($integer) use ($char, $unit, $standard) {
         $integer = strrev($integer);
 
         $string = [];
@@ -629,7 +629,7 @@ function get_luhm(array|string $digit): bool|string
         $digit = str_split($digit);
     }
 
-    if (array_every($digit, function($item) {
+    if (array_every($digit, function ($item) {
             return is_numeric($item);
         }) === false) {
         return false;
@@ -689,7 +689,7 @@ function get_luhn(array|string $digit): bool|int
     // 反转不保留原始健名
     $digit = array_reverse($digit, false);
 
-    if (array_every($digit, function($item) {
+    if (array_every($digit, function ($item) {
             return is_numeric($item);
         }) === false) {
         return false;
@@ -822,7 +822,7 @@ function image_base64_encode(string $data, bool $format = true, bool $split = fa
  */
 function unicode_encode(array|string $string, string $encoding = 'utf-8', string $prefix = '\u'): array|string|null
 {
-    return preg_replace_callback('/./u', function($match) use ($encoding, $prefix) {
+    return preg_replace_callback('/./u', function ($match) use ($encoding, $prefix) {
         // Convert string to requested character encoding
         $decimal = iconv($encoding, 'UCS-2', head($match));
         // Convert binary data into hexadecimal representation
@@ -847,7 +847,7 @@ function unicode_encode(array|string $string, string $encoding = 'utf-8', string
  */
 function unicode_decode(array|string $string, string $encoding = 'utf-8'): array|string|null
 {
-    return preg_replace_callback('/(?P<format>&#|&#x|\\\\u|%u)(?P<decimal>[0-9a-f]{2,})(?P<postfix>;?)/i', function($matches) use ($encoding) {
+    return preg_replace_callback('/(?P<format>&#|&#x|\\\\u|%u)(?P<decimal>[0-9a-f]{2,})(?P<postfix>;?)/i', function ($matches) use ($encoding) {
         $decimal = $matches['decimal'];
         if ($matches['format'] == '&#') {
             $decimal = base_convert($decimal, 10, 16);
