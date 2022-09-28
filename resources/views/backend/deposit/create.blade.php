@@ -42,7 +42,7 @@
                         <input type="hidden" name="deposit" value="{{ $request->get('type') }}"/>
                         <div class="panel-footer">
                             <button type="submit" class="btn btn-default btn-outline">保存</button>
-                            <button type="reset" class="btn btn-default btn-outline">重置</button>
+                            <button type="reset" class="btn btn-default btn-outline" rel-action="dialog-close">关闭</button>
                         </div>
                     </form>
                 </div>

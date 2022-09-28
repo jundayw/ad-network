@@ -31,6 +31,8 @@ class Deposit extends Model
     public function getPayment(?string $value = null, ?string $default = '--'): string|array
     {
         return $this->getEnumeration([
+            'ALIPAY' => '支付宝',
+            'WECHAT' => '微信',
             'OFFLINE' => '线下',
         ], $value, $default);
     }

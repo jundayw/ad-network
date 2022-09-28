@@ -1,5 +1,13 @@
 # Release Notes
 
+## [v0.9.0](https://github.com/jundayw/ad-network/releases/tag/v0.9.0) - 2022-09-27
+
+### Added
+
+- 新增充值管理
+- 新增提现管理
+- 新增财务明细
+
 ## [v0.8.0](https://github.com/jundayw/ad-network/releases/tag/v0.8.0) - 2022-09-27
 
 ### Added

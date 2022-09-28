@@ -98,13 +98,13 @@ class DepositRepository extends Repository
         ]);
 
         if ($request->get('type') == 'withdraw') {
-            $balance = $deposit->deposit->getOriginal('balance') - $deposit->getOriginal('amount');
+            $balance = $deposit->deposit->getAttribute('balance') - $deposit->getAttribute('amount');
             $update  = [
                 'balance' => $balance,
             ];
         } else {
-            $total   = $deposit->deposit->getOriginal('total') + $deposit->getOriginal('amount');
-            $balance = $deposit->deposit->getOriginal('balance') + $deposit->getOriginal('amount');
+            $total   = $deposit->deposit->getAttribute('total') + $deposit->getAttribute('amount');
+            $balance = $deposit->deposit->getAttribute('balance') + $deposit->getAttribute('amount');
             $update  = [
                 'total' => $total,
                 'balance' => $balance,
@@ -173,29 +173,41 @@ class DepositRepository extends Repository
             throw new RenderErrorResponseException('更新流水失败');
         }
 
-        if ($deposit->getOriginal('amount') > $deposit->deposit->getOriginal('frozen')) {
+        if ($deposit->getAttribute('amount') > $deposit->deposit->getAttribute('frozen')) {
             DB::rollBack();
-            throw new RenderErrorResponseException('冻结金额异常');
+            throw new RenderErrorResponseException('冻结金额不足');
         }
 
-        $update = [];
+        if ($deposit->getAttribute('type') == 'withdraw') {
+            // 提现成功：账户冻结金额 - 申请金额
+            // frozen -= amount
+            if ($request->get('state') == 'success') {
+                $deposit->deposit->decrement('frozen', $deposit->getRawOriginal('amount'));
+            }
 
-        if ($request->get('state') == 'success') {
-            $update = [
-                'frozen' => $deposit->deposit->getOriginal('frozen') - $deposit->getOriginal('amount'),
-            ];
+            // 提现失败：账户冻结金额转回账户余额
+            // balance += amount
+            // frozen -= amount
+            if ($request->get('state') == 'failure') {
+                $deposit->deposit->increment('balance', $deposit->getRawOriginal('amount'));
+                $deposit->deposit->decrement('frozen', $deposit->getRawOriginal('amount'));
+            }
         }
 
-        if ($request->get('state') == 'failure') {
-            $update = [
-                'balance' => $deposit->deposit->getOriginal('balance') + $deposit->getOriginal('amount'),
-                'frozen' => $deposit->deposit->getOriginal('frozen') - $deposit->getOriginal('amount'),
-            ];
-        }
+        if ($deposit->getAttribute('type') == 'recharge') {
+            // 充值成功：账户冻结金额转入账户余额
+            // balance += amount
+            // frozen -= amount
+            if ($request->get('state') == 'success') {
+                $deposit->deposit->increment('balance', $deposit->getRawOriginal('amount'));
+                $deposit->deposit->decrement('frozen', $deposit->getRawOriginal('amount'));
+            }
 
-        if (!$deposit->deposit->update($update)) {
-            DB::rollBack();
-            throw new RenderErrorResponseException('更新主体失败');
+            // 充值失败：账户冻结金额 - 申请金额
+            // frozen -= amount
+            if ($request->get('state') == 'failure') {
+                $deposit->deposit->decrement('frozen', $deposit->getRawOriginal('amount'));
+            }
         }
 
         DB::commit();

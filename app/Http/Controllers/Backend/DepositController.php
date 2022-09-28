@@ -59,7 +59,7 @@ class DepositController extends AuthController
     public function update(DepositUpdateRequest $request): RenderResponse
     {
         $this->repository->update($request);
-        return new RenderResponse('操作成功', route('backend.deposit.list'));
+        return new RenderResponse('操作成功', 'javascript:dialogClose();');
     }
 
     /**

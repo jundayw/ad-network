@@ -70,4 +70,12 @@ Route::namespace('Advertisement')->name('advertisement.')->group(function () {
         Route::get('password', 'password')->name('password')->middleware('signed');
         Route::post('password', 'updatePassword')->name('updatePassword');
     });
+    // 财务管理
+    Route::prefix('deposit')->controller('DepositController')->name('deposit.')->group(function () {
+        Route::get('list', 'list')->name('list');
+        Route::get('recharge', 'recharge')->name('recharge');
+        Route::post('store', 'store')->name('store');
+        Route::get('withdraw', 'withdraw')->name('withdraw');
+        Route::post('update', 'update')->name('update');
+    });
 });

@@ -1,5 +1,13 @@
 @extends('backend.layouts.dialog')
 
+@push('plugins')
+    <script>
+        function dialogClose() {
+            parent.layer.close(parent.layer.getFrameIndex(window.name));
+        }
+    </script>
+@endpush
+
 @section('content')
     <div class="row">
         <div class="col-md-12">
@@ -54,7 +62,7 @@
                         <div class="panel-footer">
                             <div class="offset-md-2">
                                 <button type="submit" class="btn btn-default btn-outline">保存</button>
-                                <button type="reset" class="btn btn-default btn-outline">重置</button>
+                                <button type="reset" class="btn btn-default btn-outline" rel-action="dialog-close">关闭</button>
                             </div>
                         </div>
                     </form>
