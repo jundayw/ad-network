@@ -67,4 +67,14 @@ class Size extends Model
     {
         return $this->hasMany(static::class, 'pid', 'id');
     }
+
+    public function adsense(): HasMany
+    {
+        return $this->hasMany(Adsense::class);
+    }
+
+    public function creative(): HasMany
+    {
+        return $this->hasMany(Creative::class);
+    }
 }

@@ -1,6 +1,6 @@
 # Release Notes
 
-## [v0.9.0](https://github.com/jundayw/ad-network/releases/tag/v0.9.0) - 2022-09-27
+## [v0.9.0](https://github.com/jundayw/ad-network/releases/tag/v0.9.0) - 2022-09-28
 
 ### Added
 

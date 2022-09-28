@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Publishment;
 
 use App\Http\Responses\RenderResponse;
 use App\Http\Responses\ViewResponse;
+use App\Repositories\Publishment\PublishmentRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 
@@ -13,7 +14,7 @@ use Illuminate\Support\Facades\Artisan;
  */
 class IndexController extends UnAuthController
 {
-    public function __construct()
+    public function __construct(private readonly PublishmentRepository $repository)
     {
         parent::__construct();
     }
@@ -24,9 +25,7 @@ class IndexController extends UnAuthController
      */
     public function index(Request $request): ViewResponse
     {
-        return new ViewResponse([
-            'message' => 'message',
-        ]);
+        return new ViewResponse($this->repository->index($request));
     }
 
     /**
