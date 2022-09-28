@@ -71,7 +71,15 @@ class SiteRepository extends Repository
 
     public function store(Request $request): array
     {
-        $domain = $request->get('domain');
+        $protocol = $request->get('protocol');
+        $domain   = $request->get('domain');
+        $URLs     = parse_url($protocol . $domain);
+
+        if (!is_array($URLs)) {
+            throw new RenderErrorResponseException('网址有误');
+        }
+
+        $domain = $URLs['host'];
         $verify = password(strtoupper($domain), strtolower($domain));
 
         $collect                 = $request->request->all();
