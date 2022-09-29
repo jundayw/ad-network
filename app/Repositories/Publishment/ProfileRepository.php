@@ -64,6 +64,8 @@ class ProfileRepository extends Repository
             'licence_image' => $request->get('licence_image'),
             'corporation' => $request->get('corporation'),
             'mobile' => $request->get('mobile'),
+            'wallet' => $request->get('wallet'),
+            'acount' => $request->get('acount'),
             'audit' => 'WAIT',
         ]);
     }

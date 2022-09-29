@@ -120,6 +120,22 @@
                                     <input class="form-control" type="text" name="mobile" value="{{ $data->publishment->mobile }}" placeholder="请输入联系电话" autocomplete="off">
                                 </div>
                             </div>
+                            <div class="form-group row">
+                                <label class="col-md-2 control-label col-form-label">钱包类型</label>
+                                <div class="col-md-10">
+                                    <select class="form-control" name="wallet" rel-action="select">
+                                        @foreach($data->publishment->getWallet() as $key => $wallet)
+                                            <option value="{{ $key }}" @selected($key == $data->publishment->wallet)>{{ $wallet }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-2 control-label col-form-label">钱包地址</label>
+                                <div class="col-md-10">
+                                    <input class="form-control" type="text" name="acount" value="{{ $data->publishment->acount }}" placeholder="请输入钱包地址" autocomplete="off">
+                                </div>
+                            </div>
                         </div>
                         <div class="panel-footer">
                             <div class="offset-md-2">

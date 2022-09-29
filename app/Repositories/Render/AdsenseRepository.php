@@ -146,7 +146,7 @@ class AdsenseRepository extends Repository
         // 6.推广单元：投放日期及时间段可用
         // 7.推广单元：价格优先
         return $this->element->whereHas('advertisements', function ($query) {
-            $query->where('balance', '>', 1e4 * 5);
+            $query->where('balance', '>', 0);
         })->whereHas('program', function ($query) use ($request) {
             $query->where([
                 'device' => $request->get('device'),

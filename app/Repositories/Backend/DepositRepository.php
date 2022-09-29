@@ -181,33 +181,29 @@ class DepositRepository extends Repository
         if ($deposit->getAttribute('type') == 'withdraw') {
             // 提现成功：账户冻结金额 - 申请金额
             // frozen -= amount
-            if ($request->get('state') == 'success') {
-                $deposit->deposit->decrement('frozen', $deposit->getRawOriginal('amount'));
-            }
+            $deposit->deposit->decrement('frozen', $deposit->getRawOriginal('amount'));
 
             // 提现失败：账户冻结金额转回账户余额
             // balance += amount
             // frozen -= amount
             if ($request->get('state') == 'failure') {
                 $deposit->deposit->increment('balance', $deposit->getRawOriginal('amount'));
-                $deposit->deposit->decrement('frozen', $deposit->getRawOriginal('amount'));
             }
         }
 
         if ($deposit->getAttribute('type') == 'recharge') {
             // 充值成功：账户冻结金额转入账户余额
+            // total += amount
             // balance += amount
             // frozen -= amount
             if ($request->get('state') == 'success') {
+                $deposit->deposit->increment('total', $deposit->getRawOriginal('amount'));
                 $deposit->deposit->increment('balance', $deposit->getRawOriginal('amount'));
-                $deposit->deposit->decrement('frozen', $deposit->getRawOriginal('amount'));
             }
 
             // 充值失败：账户冻结金额 - 申请金额
             // frozen -= amount
-            if ($request->get('state') == 'failure') {
-                $deposit->deposit->decrement('frozen', $deposit->getRawOriginal('amount'));
-            }
+            $deposit->deposit->decrement('frozen', $deposit->getRawOriginal('amount'));
         }
 
         DB::commit();
