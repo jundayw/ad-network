@@ -112,7 +112,7 @@ class SystemRepository extends Repository
             'description' => $request->get('description'),
         ];
 
-        if ($system->getAttribute('type') == 'static') {
+        if (!in_array($system->getAttribute('type'), ['static'])) {
             $data['value'] = $request->get('value');
         }
 
