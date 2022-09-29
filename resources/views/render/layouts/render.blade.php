@@ -91,6 +91,7 @@
         <a href="javascript:void(0);"
            data-element="{{ $request->get('ne') }}"
            data-hidden="hidden-{{ $request->get('data-ad-client') }}-{{ $request->get('data-ad-slot') }}"
+           data-time="{{ config('system.ad_close_time') }}"
            id="logo-close-btn">
             <img class="logo-close-img"
                  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAFo9M/3AAAAAXNSR0IArs4c6QAAARVJREFUOBF9kzGWwjAMRGNKOEdSc6G9xzahoOIe1LkLPe1egW3DfOHxcxIHv6dne2Y0lkTo5nkeOi9dJp9Xuyntt0PmnnnvO6FHJ+g8BgCI3ATgDTAAMwBEysxd7E9K6d9pFqYKwAJhVCDxL5zL4nxRQF4VfXbuKGC0nYiyECimEBS0OmTBwBOntQOkcOr5ixwEFkEqJnbIugtPphdeWq67iOpFPut5hCDbxbCw1d1ucVm8aYFFjJrfubyJgJUFLwSj7mdFTLF+H+F6SU93TJ1mHtHlCmwa7WnKmHipJQLX8osb84XBR7sxAt4kWrsxaFSBln6bJsWgkXj1QL9x/kfs9uhS2VtGgIOCbz4+vjph74w25wxv9VjxEc3jX7MAAAAASUVORK5CYII=">
@@ -100,7 +101,7 @@
 <script type="text/javascript">
     $(function () {
         $('#logo-close-btn').click(function () {
-            layer.msg('60分钟内不再展示该广告', {
+            layer.msg($(this).data('time') / 60 + '分钟内不再展示该广告', {
                 shift: 2
             });
             window.setTimeout(() => {
@@ -108,6 +109,7 @@
                     action: 'hidden',
                     element: $(this).data('element'),
                     hidden: $(this).data('hidden'),
+                    time: $(this).data('time'),
                 }, '*');
             }, 2000);
         });
