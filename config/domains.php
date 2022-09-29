@@ -13,4 +13,7 @@ return [
     'render' => [
         'domain' => env('DOMAIN_RENDER', 'render.test'),
     ],
+    'analysis' => [
+        'domain' => env('DOMAIN_ANALYSIS', 'analysis.test'),
+    ],
 ];

@@ -51,6 +51,11 @@ class RouteServiceProvider extends ServiceProvider
                 ->middleware('web')
                 ->group(base_path('routes/publishment.php'));
 
+            Route::domain(config('domains.analysis.domain'))
+                ->namespace($this->namespace)
+                ->middleware('web')
+                ->group(base_path('routes/analysis.php'));
+
             Route::domain(config('domains.render.domain'))
                 ->namespace($this->namespace)
                 ->middleware('api')
