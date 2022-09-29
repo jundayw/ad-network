@@ -36,7 +36,7 @@
                                 <label class="col-md-2 control-label col-form-label">配置</label>
                                 <div class="col-md-10">
                                     <textarea class="form-control" name="options" rows="5" placeholder="请输入配置"></textarea>
-                                    <span class="help-block">单选框、下拉框、复选框：输入 JSON 字符串，其他类型作为默认值</span>
+                                    <span class="help-block">单选框、下拉框、复选框：输入 JSON 字符串（<code>{"key":"value"}</code>），其他类型作为默认值</span>
                                 </div>
                             </div>
                             <div class="form-group row">

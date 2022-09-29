@@ -20,8 +20,8 @@ class SystemCreateRequest extends FormRequest
             'modifiable' => ['required'],
         ];
 
-        if (in_array($this->get('type'), ['RADIO', 'SELECT', 'CHECKBOX'])) {
-            $rules['options'] = ['required'];
+        if (in_array($this->get('type'), ['radio', 'select', 'checkbox'])) {
+            $rules['options'] = ['required', 'json'];
         }
 
         return $rules;
