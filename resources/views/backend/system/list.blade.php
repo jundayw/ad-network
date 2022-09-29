@@ -95,11 +95,9 @@
                                             </td>
                                             <td class="text-center">{{ $items->type }}</td>
                                             <td class="text-center text-nowrap">
-                                                @if($items->getRawOriginal('modifiable') == 'NORMAL')
-                                                    @policy('backend.system.edit')
-                                                    <a href="{{ $items->edit }}" data-toggle="tooltip" data-original-title="编辑">编辑</a>
-                                                    @endpolicy
-                                                @endif
+                                                @policy('backend.system.edit')
+                                                <a href="{{ $items->edit }}" data-toggle="tooltip" data-original-title="编辑">编辑</a>
+                                                @endpolicy
                                                 @policy('backend.system.destroy')
                                                 <a href="{{ $items->destroy }}" rel-action="confirm" rel-certain="删除" rel-msg="确定执行删除操作" data-toggle="tooltip" data-original-title="删除">删除</a>
                                                 @endpolicy

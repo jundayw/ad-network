@@ -40,20 +40,6 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-md-2 control-label col-form-label">是否允许编辑</label>
-                                <div class="col-md-10">
-                                    <div class="radio-list">
-                                        @foreach($filter['modifiable'] as $key => $item)
-                                            <label class="radio-inline">
-                                                <input type="radio" name="modifiable" value="{{ $key }}" @checked($loop->first)>
-                                                {{ $item }}
-                                            </label>
-                                        @endforeach
-                                    </div>
-                                    <span class="help-block">禁止修改：新增后不允许编辑</span>
-                                </div>
-                            </div>
-                            <div class="form-group row">
                                 <label class="col-md-2 control-label col-form-label">描述</label>
                                 <div class="col-md-10">
                                     <textarea class="form-control" name="description" rows="5" placeholder="请输入描述"></textarea>

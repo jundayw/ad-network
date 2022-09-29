@@ -22,8 +22,8 @@ class System extends Model
     public function getValue($value = null, ?string $default = '--')
     {
         return match ($this->getAttribute('type')) {
-                'radio', 'select' => json_decode($this->getAttribute('options'))->{$this->getAttribute('value')},
-                'checkbox' => implode(',', array_values(array_filter(json_decode($this->getAttribute('options'), true), function ($value, $key) {
+                'radio', 'select' => array_key_exists($this->getAttribute('value'), $this->getAttribute('options')) ? $this->getAttribute('options')[$this->getAttribute('value')] : null,
+                'checkbox' => implode(',', array_values(array_filter($this->getAttribute('options'), function ($value, $key) {
                     return in_array($key, $this->getAttribute('value'));
                 }, ARRAY_FILTER_USE_BOTH))),
                 default => $value
@@ -33,7 +33,7 @@ class System extends Model
     protected function value(): Attribute
     {
         return new Attribute(
-            get: fn($value, $attributes) => $attributes['type'] == 'CHECKBOX' ? explode(md5(','), $value) : $value,
+            get: fn($value, $attributes) => in_array(strtolower($attributes['type']), ['checkbox']) ? explode(md5(','), $value) : $value,
             set: fn($value, $attributes) => is_array($value) ? implode(md5(','), $value) : $value,
         );
     }
@@ -50,6 +50,7 @@ class System extends Model
             'DATEPICKER' => '日期控件',
             'TIMEPICKER' => '时间控件',
             'FILE' => '上传控件',
+            'STATIC' => '静态文本',
         ], $value, $default);
     }
 
@@ -61,19 +62,11 @@ class System extends Model
         );
     }
 
-    public function getModifiable(?string $value = null, ?string $default = '--'): string|array
-    {
-        return $this->getEnumeration([
-            'NORMAL' => '允许修改',
-            'DISABLE' => '禁止修改',
-        ], $value, $default);
-    }
-
-    protected function modifiable(): Attribute
+    protected function options(): Attribute
     {
         return new Attribute(
-            get: fn($value, $attributes) => strtolower($value),
-            set: fn($value, $attributes) => strtoupper($value),
+            get: fn($value, $attributes) => in_array(strtolower($attributes['type']), ['radio', 'select', 'checkbox']) ? json_decode($value, true) : $value,
+            set: fn($value, $attributes) => $value,
         );
     }
 }

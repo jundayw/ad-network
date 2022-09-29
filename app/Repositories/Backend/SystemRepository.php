@@ -31,23 +31,20 @@ class SystemRepository extends Repository
             ->when($request->get('type'), function ($query) use ($request) {
                 $query->where('type', $request->get('type'));
             })
-            ->latest('modifiable')
             ->latest($this->system->getKeyName());
 
         $data = $data->Paginate($request->get('per', $this->system->getPerPage()), ['*'], 'page', $request->get('page', 1));
 
         $data->transform(function ($items) {
-            $items->value      = $items->getValue($items->value);
-            $items->type       = $items->getType($items->type);
-            $items->modifiable = $items->getModifiable($items->modifiable);
-            $items->edit       = route('backend.system.edit', [$items->getKeyName() => $items->getKey()]);
-            $items->destroy    = route('backend.system.destroy', [$items->getKeyName() => $items->getKey()]);
+            $items->value   = $items->getValue($items->value);
+            $items->type    = $items->getType($items->type);
+            $items->edit    = route('backend.system.edit', [$items->getKeyName() => $items->getKey()]);
+            $items->destroy = route('backend.system.destroy', [$items->getKeyName() => $items->getKey()]);
             return $items;
         });
 
         $filter = [
             'type' => $this->system->getType(),
-            'modifiable' => $this->system->getModifiable(),
         ];
 
         return compact('filter', 'data');
@@ -57,7 +54,6 @@ class SystemRepository extends Repository
     {
         $filter = [
             'type' => $this->system->getType(),
-            'modifiable' => $this->system->getModifiable(),
         ];
 
         return compact('filter');
@@ -70,7 +66,6 @@ class SystemRepository extends Repository
             'key' => $request->get('key'),
             'type' => $request->get('type'),
             'options' => $request->get('options'),
-            'modifiable' => $request->get('modifiable'),
             'description' => $request->get('description'),
         ];
 
@@ -89,22 +84,14 @@ class SystemRepository extends Repository
 
     public function edit(Request $request): array
     {
-        $data = $this->system->where([
-            'modifiable' => 'NORMAL',
-        ])->find($request->get($this->system->getKeyName()));
+        $data = $this->system->find($request->get($this->system->getKeyName()));
 
         if (is_null($data)) {
             throw new RenderErrorResponseException('暂无记录');
         }
 
-        $options = [];
-
-        if (in_array($data->type, ['radio', 'select', 'checkbox'])) {
-            $options = json_decode($data->options, true);
-        }
-
         $filter = [
-            'options' => $options,
+            'options' => $data->options,
         ];
 
         return compact('filter', 'data');
@@ -112,9 +99,7 @@ class SystemRepository extends Repository
 
     public function update(Request $request): bool
     {
-        $system = $this->system->where([
-            'modifiable' => 'NORMAL',
-        ])->find($request->get($this->system->getKeyName()));
+        $system = $this->system->find($request->get($this->system->getKeyName()));
 
         if (is_null($system)) {
             throw new RenderErrorResponseException('参数有误');
@@ -122,11 +107,16 @@ class SystemRepository extends Repository
 
         cache()->forget('system');
 
-        return $system->update([
+        $data = [
             'title' => $request->get('title'),
-            'value' => $request->get('value'),
             'description' => $request->get('description'),
-        ]);
+        ];
+
+        if ($system->getAttribute('type') == 'static') {
+            $data['value'] = $request->get('value');
+        }
+
+        return $system->update($data);
     }
 
     public function destroy(Request $request): bool

@@ -16,6 +16,15 @@
                                     <input class="form-control" type="text" name="title" value="{{ $data->title }}" placeholder="请输入名称" autocomplete="off">
                                 </div>
                             </div>
+                            @if($data->type == 'static')
+                                <div class="form-group row">
+                                    <label class="col-md-2 control-label col-form-label">键值</label>
+                                    <div class="col-md-10">
+                                        <p class="form-control-static">{{ $data->value }}</p>
+                                        <input class="form-control" type="hidden" name="value" value="static" placeholder="请输入键值" autocomplete="off">
+                                    </div>
+                                </div>
+                            @endif
                             @if($data->type == 'text')
                                 <div class="form-group row">
                                     <label class="col-md-2 control-label col-form-label">键值</label>

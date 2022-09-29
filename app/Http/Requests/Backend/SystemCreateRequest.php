@@ -17,7 +17,6 @@ class SystemCreateRequest extends FormRequest
             'title' => ['required'],
             'key' => ['required', 'unique:system,key'],
             'type' => ['required'],
-            'modifiable' => ['required'],
         ];
 
         if (in_array($this->get('type'), ['radio', 'select', 'checkbox'])) {
@@ -39,7 +38,6 @@ class SystemCreateRequest extends FormRequest
             'key' => '键名',
             'type' => '类型',
             'options' => '配置',
-            'modifiable' => '是否允许编辑',
         ];
     }
 }
