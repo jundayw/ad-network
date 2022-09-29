@@ -397,7 +397,8 @@ class AdsenseRepository extends Repository
         // 获取广告主广告物料
         $elements = $this->getRenderElement($request, $adsense);
         // 无广告物料渲染空闲广告
-        if ($elements->isEmpty()) {
+        // 广告位类型为本地广告渲染空闲广告
+        if ($elements->isEmpty() || $adsense->getAttribute('origin') == 'local') {
             // 空闲设置类型：'exchange','default','union','fixed','hidden'
             return $this->getRenderVacant($request, $adsense);
         }

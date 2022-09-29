@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2022-09-28 23:04:53
+Date: 2022-09-29 11:37:31
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -66,8 +66,8 @@ CREATE TABLE `im_advertisement` (
   `mobile` varchar(255) DEFAULT NULL COMMENT '联系电话',
   `mail` varchar(255) DEFAULT NULL COMMENT '邮箱',
   `total` bigint(20) unsigned DEFAULT '0' COMMENT '总额',
-  `balance` bigint(20) unsigned DEFAULT '0' COMMENT '余额',
-  `frozen` bigint(20) unsigned DEFAULT '0' COMMENT '冻结金额',
+  `balance` bigint(20) DEFAULT '0' COMMENT '余额',
+  `frozen` bigint(20) DEFAULT '0' COMMENT '冻结金额',
   `wallet` enum('ALIPAY','WECHAT','USDT') DEFAULT 'USDT' COMMENT '钱包类型{支付宝:ALIPAY}{微信:WECHAT}{USDT:USDT}',
   `acount` varchar(255) DEFAULT NULL COMMENT '钱包地址',
   `audit` enum('INIT','WAIT','SUCCESS','FAILURE','STOP') DEFAULT 'INIT' COMMENT '审核状态{INIT:初始化}{WAIT:待审核}{SUCCESS:成功}{FAILURE:失败}{STOP:终止合作}',
@@ -81,11 +81,11 @@ CREATE TABLE `im_advertisement` (
 -- ----------------------------
 -- Records of im_advertisement
 -- ----------------------------
-INSERT INTO `im_advertisement` VALUES ('1', 'COMPANY', '公益科技有限公司', '91320200747189665N', 'https://via.placeholder.com/200x200/ac68e1/fff/200x200.png?text=200x200', '公益', '13627666666', 'admin@admin.com', '0', '0', '0', 'USDT', '0x000000', 'SUCCESS', null, '2022-09-20 12:16:03', null, 'NORMAL');
-INSERT INTO `im_advertisement` VALUES ('2', 'PERSONAL', '换量科技有限公司', '91320200747189665N', 'https://via.placeholder.com/200x200/ac68e1/fff/200x200.png?text=200x200', '换量', '13627685888', 'manager@manager.com', '0', '0', '0', 'USDT', '0x000000', 'SUCCESS', '2022-09-20 11:57:46', '2022-09-20 12:05:50', null, 'NORMAL');
-INSERT INTO `im_advertisement` VALUES ('10086', 'PERSONAL', 'ad1', '91320200747189665N', 'https://via.placeholder.com/200x200/ac68e1/fff/200x200.png?text=200x200', 'ad1', '13627685888', 'test1@test.com', '0', '0', '0', 'USDT', '0x000000', 'SUCCESS', '2022-09-20 11:57:46', '2022-09-20 12:05:50', null, 'NORMAL');
-INSERT INTO `im_advertisement` VALUES ('10087', 'COMPANY', 'ad2', '91320200747189665N', 'https://via.placeholder.com/200x200/ac68e1/fff/200x200.png?text=200x200', 'ad2', '13627685888', 'test2@test.com', '0', '0', '0', 'USDT', '0x000000', 'SUCCESS', '2022-09-20 11:57:46', '2022-09-20 12:05:50', null, 'NORMAL');
-INSERT INTO `im_advertisement` VALUES ('10088', 'COMPANY', 'ad3', '91320200747189665N', 'https://via.placeholder.com/200x200/ac68e1/fff/200x200.png?text=200x200', 'ad3', '13627685888', 'test3@test.com', '0', '0', '0', 'USDT', '0x000000', 'SUCCESS', '2022-09-20 11:57:46', '2022-09-28 22:33:35', null, 'NORMAL');
+INSERT INTO `im_advertisement` VALUES ('1', 'COMPANY', '公益科技有限公司', '913202007471896651', 'https://via.placeholder.com/200x200/ac68e1/fff/200x200.png?text=200x200', '公益', '13627666666', 'admin@admin.com', '0', '0', '0', 'USDT', '0x000000', 'SUCCESS', null, '2022-09-20 12:16:03', null, 'NORMAL');
+INSERT INTO `im_advertisement` VALUES ('2', 'PERSONAL', '换量科技有限公司', '913202007471896652', 'https://via.placeholder.com/200x200/ac68e1/fff/200x200.png?text=200x200', '换量', '13627685888', 'manager@manager.com', '0', '0', '0', 'USDT', '0x000000', 'SUCCESS', '2022-09-20 11:57:46', '2022-09-20 12:05:50', null, 'NORMAL');
+INSERT INTO `im_advertisement` VALUES ('10086', 'PERSONAL', 'ad1', '913202007471896653', 'https://via.placeholder.com/200x200/ac68e1/fff/200x200.png?text=200x200', 'ad1', '13627685888', 'test1@test.com', '1000000', '1000000', '0', 'USDT', '0x000000', 'SUCCESS', '2022-09-20 11:57:46', '2022-09-29 10:14:17', null, 'NORMAL');
+INSERT INTO `im_advertisement` VALUES ('10087', 'COMPANY', 'ad2', '913202007471896654', 'https://via.placeholder.com/200x200/ac68e1/fff/200x200.png?text=200x200', 'ad2', '13627685888', 'test2@test.com', '0', '0', '0', 'USDT', '0x000000', 'SUCCESS', '2022-09-20 11:57:46', '2022-09-20 12:05:50', null, 'NORMAL');
+INSERT INTO `im_advertisement` VALUES ('10088', 'COMPANY', 'ad3', '913202007471896655', 'https://via.placeholder.com/200x200/ac68e1/fff/200x200.png?text=200x200', 'ad3', '13627685888', 'test3@test.com', '0', '0', '0', 'USDT', '0x000000', 'SUCCESS', '2022-09-20 11:57:46', '2022-09-28 22:33:35', null, 'NORMAL');
 
 -- ----------------------------
 -- Table structure for `im_advertiser`
@@ -118,12 +118,12 @@ CREATE TABLE `im_advertiser` (
 -- ----------------------------
 -- Records of im_advertiser
 -- ----------------------------
-INSERT INTO `im_advertiser` VALUES ('1', '1', '3', '管理员', 'admin', 'admin', 'fe711720669a634139a1c650be70a4ae', 'VOKYQR', '127.0.0.1', '2022-01-01 18:00:00', '127.0.0.1', '2022-09-28 20:39:49', '2022-01-01 18:00:00', '2022-09-28 20:39:49', null, 'NORMAL');
+INSERT INTO `im_advertiser` VALUES ('1', '1', '3', '管理员', 'admin', 'admin', 'fe711720669a634139a1c650be70a4ae', 'VOKYQR', '127.0.0.1', '2022-01-01 18:00:00', '127.0.0.1', '2022-09-29 09:49:43', '2022-01-01 18:00:00', '2022-09-29 09:49:43', null, 'NORMAL');
 INSERT INTO `im_advertiser` VALUES ('2', '2', '3', '管理员', 'manager', 'manager', '55cfd6ad117185fceece18cc454e7984', 'JGtlMl', '127.0.0.1', '2022-09-20 11:57:46', '127.0.0.1', '2022-09-21 17:15:56', '2022-09-20 11:57:46', '2022-09-21 17:15:56', null, 'NORMAL');
 INSERT INTO `im_advertiser` VALUES ('3', '2', '3', '管理员', 'member', 'member', '77ddc03c676f3489190ed595d0bb12f6', '1KZcof', '127.0.0.1', '2022-01-01 18:00:00', '127.0.0.1', '2022-09-21 17:15:56', '2022-09-20 11:57:46', '2022-09-20 11:57:46', null, 'NORMAL');
-INSERT INTO `im_advertiser` VALUES ('4', '10086', '3', '管理员', 'test1', 'test1', '77ddc03c676f3489190ed595d0bb12f6', '1KZcof', '127.0.0.1', '2022-01-01 18:00:00', '127.0.0.1', '2022-09-28 21:01:51', '2022-01-01 18:00:00', '2022-09-28 21:01:51', null, 'NORMAL');
+INSERT INTO `im_advertiser` VALUES ('4', '10086', '3', '管理员', 'test1', 'test1', '77ddc03c676f3489190ed595d0bb12f6', '1KZcof', '127.0.0.1', '2022-01-01 18:00:00', '127.0.0.1', '2022-09-29 01:01:15', '2022-01-01 18:00:00', '2022-09-29 01:01:15', null, 'NORMAL');
 INSERT INTO `im_advertiser` VALUES ('5', '10087', '3', '管理员', 'test2', 'test2', '77ddc03c676f3489190ed595d0bb12f6', '1KZcof', '127.0.0.1', '2022-01-01 18:00:00', '127.0.0.1', '2022-01-01 18:00:00', '2022-01-01 18:00:00', '2022-01-01 18:00:00', null, 'NORMAL');
-INSERT INTO `im_advertiser` VALUES ('6', '10088', '3', '管理员', 'test3', 'test3', '0cb064d42c4605dff04c5f72ec5b56e7', 'gOBVRL', '127.0.0.1', '2022-01-01 18:00:00', '127.0.0.1', '2022-09-28 21:02:40', '2022-01-01 18:00:00', '2022-09-28 21:02:40', null, 'NORMAL');
+INSERT INTO `im_advertiser` VALUES ('6', '10088', '3', '管理员', 'test3', 'test3', '0cb064d42c4605dff04c5f72ec5b56e7', 'gOBVRL', '127.0.0.1', '2022-01-01 18:00:00', '127.0.0.1', '2022-09-29 00:47:13', '2022-01-01 18:00:00', '2022-09-29 00:47:13', null, 'NORMAL');
 INSERT INTO `im_advertiser` VALUES ('7', '10086', '3', '管理员', 'test22', 'test22', '4c5beb620ee5db9ab7b934a2606efa48', '20CiBZ', '127.0.0.1', '2022-09-27 00:37:39', null, null, '2022-09-27 00:37:39', '2022-09-27 18:23:48', '2022-09-27 18:23:48', 'DISABLE');
 
 -- ----------------------------
@@ -200,11 +200,12 @@ CREATE TABLE `im_deposit` (
   `delete_time` datetime DEFAULT NULL,
   `state` enum('SUCCESS','FAILURE','WAIT','INIT') DEFAULT 'INIT' COMMENT '状态{成功:SUCCESS}{失败:FAILURE}{待审核:WAIT}{初始化:INIT}',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='资金管理';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='资金管理';
 
 -- ----------------------------
 -- Records of im_deposit
 -- ----------------------------
+INSERT INTO `im_deposit` VALUES ('1', '2022092910141728', '202209291014174258', '10086', 'advertisement', 'RECHARGE', 'OFFLINE', '1000000', '测试充值', '2022-09-29 10:14:17', '2022-09-29 10:14:17', null, 'SUCCESS');
 
 -- ----------------------------
 -- Table structure for `im_element`
@@ -301,7 +302,7 @@ CREATE TABLE `im_manager` (
 -- ----------------------------
 -- Records of im_manager
 -- ----------------------------
-INSERT INTO `im_manager` VALUES ('1', '1', '超级管理组', '创始人', 'founder', '0957ca902212979ffd4c4927f0b45def', 'Y181VY', '127.0.0.1', '2022-01-01 18:00:00', '127.0.0.1', '2022-09-28 21:03:46', '2022-01-01 18:00:00', '2022-09-28 21:03:46', null, 'NORMAL');
+INSERT INTO `im_manager` VALUES ('1', '1', '超级管理组', '创始人', 'founder', '0957ca902212979ffd4c4927f0b45def', 'Y181VY', '127.0.0.1', '2022-01-01 18:00:00', '127.0.0.1', '2022-09-29 09:13:59', '2022-01-01 18:00:00', '2022-09-29 09:13:59', null, 'NORMAL');
 INSERT INTO `im_manager` VALUES ('2', '2', '管理员', '管理员', 'admin', 'fe711720669a634139a1c650be70a4ae', 'VOKYQR', '127.0.0.1', '2022-01-01 18:00:00', '127.0.0.1', '2022-08-23 23:24:18', '2022-01-01 18:00:00', '2022-08-23 23:24:18', null, 'NORMAL');
 
 -- ----------------------------
@@ -619,10 +620,10 @@ CREATE TABLE `im_publisher` (
 -- ----------------------------
 -- Records of im_publisher
 -- ----------------------------
-INSERT INTO `im_publisher` VALUES ('1', '1', '4', '管理员', 'admin', 'admin', 'bbad3eb5c50e5b21325f3a164cd5d29f', 'P0r9Ir', '127.0.0.1', '2022-01-01 18:00:00', '127.0.0.1', '2022-09-28 20:39:52', '2022-01-01 18:00:00', '2022-09-28 20:39:52', null, 'NORMAL');
+INSERT INTO `im_publisher` VALUES ('1', '1', '4', '管理员', 'admin', 'admin', 'bbad3eb5c50e5b21325f3a164cd5d29f', 'P0r9Ir', '127.0.0.1', '2022-01-01 18:00:00', '127.0.0.1', '2022-09-29 09:14:10', '2022-01-01 18:00:00', '2022-09-29 09:14:10', null, 'NORMAL');
 INSERT INTO `im_publisher` VALUES ('2', '2', '4', '管理员', 'manager', 'manager', 'bbad3eb5c50e5b21325f3a164cd5d29f', 'P0r9Ir', '127.0.0.1', '2022-01-01 18:00:00', '127.0.0.1', '2022-09-26 12:00:32', '2022-01-01 18:00:00', '2022-09-26 12:00:32', null, 'NORMAL');
 INSERT INTO `im_publisher` VALUES ('3', '2', '4', '管理员', 'member', 'member', '77ddc03c676f3489190ed595d0bb12f6', '1KZcof', '127.0.0.1', '2022-09-19 22:26:17', '127.0.0.1', '2022-09-19 22:39:52', '2022-09-19 22:26:17', '2022-09-19 22:39:52', null, 'NORMAL');
-INSERT INTO `im_publisher` VALUES ('4', '10086', '4', '管理员', 'test1', 'test1', '8b83f309d6d229c45f617515622738e9', 'MlxuSZ', '127.0.0.1', '2022-09-19 22:26:17', '127.0.0.1', '2022-09-28 14:29:24', '2022-09-19 22:26:17', '2022-09-28 14:29:24', null, 'NORMAL');
+INSERT INTO `im_publisher` VALUES ('4', '10086', '4', '管理员', 'test1', 'test1', '8b83f309d6d229c45f617515622738e9', 'MlxuSZ', '127.0.0.1', '2022-09-19 22:26:17', '127.0.0.1', '2022-09-29 01:01:24', '2022-09-19 22:26:17', '2022-09-29 01:01:24', null, 'NORMAL');
 INSERT INTO `im_publisher` VALUES ('5', '10087', '4', '管理员', 'test2', 'test2', '77ddc03c676f3489190ed595d0bb12f6', '1KZcof', '127.0.0.1', '2022-09-19 22:26:17', '127.0.0.1', '2022-09-19 22:26:17', '2022-09-19 22:26:17', '2022-09-19 22:26:17', null, 'NORMAL');
 INSERT INTO `im_publisher` VALUES ('6', '10088', '4', '管理员', 'test3', 'test3', '4c18e64e51c32c8b5a734574a0ab29d4', '1KTajf', '127.0.0.1', '2022-09-19 22:26:17', '127.0.0.1', '2022-09-28 21:05:55', '2022-09-19 22:26:17', '2022-09-28 21:05:55', null, 'NORMAL');
 INSERT INTO `im_publisher` VALUES ('7', '10086', '4', '管理员', 'test21', 'test21', 'ddb2d035f961f6851460e05bc8711126', 'JxwR1I', '127.0.0.1', '2022-09-26 23:48:13', '127.0.0.1', '2022-09-26 23:48:47', '2022-09-26 23:48:13', '2022-09-27 00:08:23', null, 'NORMAL');
@@ -641,8 +642,8 @@ CREATE TABLE `im_publishment` (
   `mobile` varchar(255) DEFAULT NULL COMMENT '联系电话',
   `mail` varchar(255) DEFAULT NULL COMMENT '邮箱',
   `total` bigint(20) unsigned DEFAULT '0' COMMENT '总额',
-  `balance` bigint(20) unsigned DEFAULT '0' COMMENT '余额',
-  `frozen` bigint(20) unsigned DEFAULT '0' COMMENT '冻结金额',
+  `balance` bigint(20) DEFAULT '0' COMMENT '余额',
+  `frozen` bigint(20) DEFAULT '0' COMMENT '冻结金额',
   `weight` bigint(20) DEFAULT '0' COMMENT '换量权重',
   `wallet` enum('ALIPAY','WECHAT','USDT') DEFAULT 'USDT' COMMENT '钱包类型{支付宝:ALIPAY}{微信:WECHAT}{USDT:USDT}',
   `acount` varchar(255) DEFAULT NULL COMMENT '钱包地址',
@@ -657,11 +658,11 @@ CREATE TABLE `im_publishment` (
 -- ----------------------------
 -- Records of im_publishment
 -- ----------------------------
-INSERT INTO `im_publishment` VALUES ('1', 'PERSONAL', '公益', '91320200747189665N', 'https://via.placeholder.com/200x200/ac68e1/fff/200x200.png?text=200x200', '公益', '13627685999', 'admin@admin.com', '0', '0', '0', '0', 'USDT', '0x000000', 'SUCCESS', null, '2022-09-20 00:00:52', null, 'NORMAL');
-INSERT INTO `im_publishment` VALUES ('2', 'COMPANY', '换量', '91320200747189665N', 'https://via.placeholder.com/200x200/ac68e1/fff/200x200.png?text=200x200', '换量', '13627685999', 'manager@manager.com', '0', '0', '0', '0', 'USDT', '0x000000', 'SUCCESS', '2022-09-19 22:26:17', '2022-09-19 23:54:00', null, 'NORMAL');
-INSERT INTO `im_publishment` VALUES ('10086', 'COMPANY', 'test1', '91320200747189665N', 'https://via.placeholder.com/200x200/ac68e1/fff/200x200.png?text=200x200', 'test1', '13627685999', 'test1@test.com', '0', '0', '0', '0', 'USDT', '0x000000', 'SUCCESS', '2022-09-19 22:26:17', '2022-09-19 23:54:00', null, 'NORMAL');
-INSERT INTO `im_publishment` VALUES ('10087', 'COMPANY', 'test2', '91320200747189665N', 'https://via.placeholder.com/200x200/ac68e1/fff/200x200.png?text=200x200', 'test2', '13627685999', 'test2@test.com', '0', '0', '0', '0', 'USDT', '0x000000', 'SUCCESS', '2022-09-19 22:26:17', '2022-09-28 15:38:18', null, 'NORMAL');
-INSERT INTO `im_publishment` VALUES ('10088', 'COMPANY', 'test3', '91320200747189665N', 'https://via.placeholder.com/200x200/ac68e1/fff/200x200.png?text=200x200', 'test3', '13627685999', 'test3@test.com', '0', '0', '0', '0', 'USDT', '0x000000', 'SUCCESS', '2022-09-19 22:26:17', '2022-09-28 22:54:50', null, 'NORMAL');
+INSERT INTO `im_publishment` VALUES ('1', 'PERSONAL', '公益', '91320200747189665N', 'https://via.placeholder.com/200x200/ac68e1/fff/200x200.png?text=200x200', '公益', '13627685999', 'admin@admin.com', '0', '0', '0', '0', 'ALIPAY', 'alipay@alipay.com', 'SUCCESS', null, '2022-09-29 10:11:17', null, 'NORMAL');
+INSERT INTO `im_publishment` VALUES ('2', 'COMPANY', '换量', '913202007471896652', 'https://via.placeholder.com/200x200/ac68e1/fff/200x200.png?text=200x200', '换量', '13627685999', 'manager@manager.com', '0', '0', '0', '0', 'USDT', '0x000000', 'SUCCESS', '2022-09-19 22:26:17', '2022-09-19 23:54:00', null, 'NORMAL');
+INSERT INTO `im_publishment` VALUES ('10086', 'COMPANY', 'test1', '913202007471896653', 'https://via.placeholder.com/200x200/ac68e1/fff/200x200.png?text=200x200', 'test1', '13627685999', 'test1@test.com', '0', '0', '0', '0', 'USDT', '0x000000', 'SUCCESS', '2022-09-19 22:26:17', '2022-09-29 01:31:36', null, 'NORMAL');
+INSERT INTO `im_publishment` VALUES ('10087', 'COMPANY', 'test2', '913202007471896654', 'https://via.placeholder.com/200x200/ac68e1/fff/200x200.png?text=200x200', 'test2', '13627685999', 'test2@test.com', '0', '0', '0', '0', 'USDT', '0x000000', 'SUCCESS', '2022-09-19 22:26:17', '2022-09-28 15:38:18', null, 'NORMAL');
+INSERT INTO `im_publishment` VALUES ('10088', 'COMPANY', 'test3', '913202007471896655', 'https://via.placeholder.com/200x200/ac68e1/fff/200x200.png?text=200x200', 'test3', '13627685999', 'test3@test.com', '0', '0', '0', '0', 'USDT', '0x000000', 'SUCCESS', '2022-09-19 22:26:17', '2022-09-28 22:54:50', null, 'NORMAL');
 
 -- ----------------------------
 -- Table structure for `im_role`
