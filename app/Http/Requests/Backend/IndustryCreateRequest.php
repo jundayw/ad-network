@@ -14,7 +14,7 @@ class IndustryCreateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['required'],
+            'title' => ['required', 'unique:industry,title'],
             'sorting' => ['required', 'gte:1'],
         ];
     }

@@ -14,7 +14,7 @@ class IndustryUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['required'],
+            'title' => ['required', "unique:industry,title,{$this->get('id')}"],
             'sorting' => ['required', 'gte:1'],
         ];
     }

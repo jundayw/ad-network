@@ -86,6 +86,15 @@ class SizeRepository extends Repository
 
     public function store(Request $request): Size
     {
+        $size = $this->size->where([
+            'width' => $request->get('width'),
+            'height' => $request->get('height'),
+        ])->first();
+
+        if ($size) {
+            throw new RenderErrorResponseException('广告尺寸已存在');
+        }
+
         $size = $this->size->create([
             'pid' => $request->get('pid'),
             'title' => $request->get('title'),
@@ -125,6 +134,16 @@ class SizeRepository extends Repository
 
     public function update(Request $request): bool
     {
+        $size = $this->size->where([
+            'width' => $request->get('width'),
+            'height' => $request->get('height'),
+            ['id', '<>', $request->get($this->size->getKeyName())],
+        ])->first();
+
+        if ($size) {
+            throw new RenderErrorResponseException('广告尺寸已存在');
+        }
+
         $size = $this->size->find($request->get($this->size->getKeyName()));
 
         if (is_null($size)) {
