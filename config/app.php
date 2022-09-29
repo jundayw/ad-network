@@ -201,6 +201,7 @@ return [
         App\Providers\ReflectionCommentProvider::class,
         App\Providers\SessionCacheGuardServiceProvider::class,
         App\Providers\ViewServiceProvider::class,
+        App\Providers\ConfigServiceProvider::class,
 
     ],
 
