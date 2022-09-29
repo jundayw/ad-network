@@ -71,7 +71,7 @@ class AccountRepository extends Repository
             throw new RenderErrorResponseException('邮箱验证码无效');
         }
 
-        $role = $this->role->find(config('adnetwork.role.advertisement'));
+        $role = $this->role->find(config('system.advertisement_role_id'));
 
         if (is_null($role)) {
             throw new RenderErrorResponseException('默认角色组异常');

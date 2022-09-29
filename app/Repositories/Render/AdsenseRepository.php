@@ -183,7 +183,11 @@ class AdsenseRepository extends Repository
      */
     public function getRenderUnAvailable(Request $request): AdRenderService
     {
-        $unavailable = config('adnetwork.unavailable');
+        $unavailable = [
+            'location' => config('system.unavailable_location'),
+            'image' => config('system.unavailable_image'),
+            'callback' => config('system.unavailable_callback'),
+        ];
         return new AdRenderService('render.adsense.unavailable.index', compact('unavailable', 'request'));
     }
 
@@ -267,7 +271,7 @@ class AdsenseRepository extends Repository
             'state' => 'NORMAL',
         ])->get();
         if ($materials->isEmpty()) {
-            return $this->getRenderVacantForMaterial($request, $adsense, config('adnetwork.vacant.exchange'));
+            return $this->getRenderVacantForMaterial($request, $adsense, explode(',', config('system.vacant_exchange_publishment_id')));
         }
         $material = $materials->random();
         $material = [
@@ -318,7 +322,7 @@ class AdsenseRepository extends Repository
      */
     private function getRenderVacantForFixed(Request $request, Adsense $adsense): ?array
     {
-        return $this->getRenderVacantForMaterial($request, $adsense, config('adnetwork.vacant.fixed'));
+        return $this->getRenderVacantForMaterial($request, $adsense, explode(',', config('system.vacant_fixed_publishment_id')));
     }
 
     /**

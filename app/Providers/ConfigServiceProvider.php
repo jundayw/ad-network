@@ -32,7 +32,7 @@ class ConfigServiceProvider extends ServiceProvider
             });
         });
         config([
-            'adnetwork.system' => $system,
+            'system' => $system,
         ]);
     }
 }
