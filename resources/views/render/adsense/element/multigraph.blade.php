@@ -9,8 +9,8 @@
 @endpush
 
 @push('scripts')
-    <link href="{{ H('render/swiper/css/swiper.min.css', true) }}" rel="stylesheet" type="text/css">
-    <script src="{{ H('render/swiper/js/swiper.min.js', true) }}" type="text/javascript" charset="utf-8"></script>
+    <link href="{{ H('plugins/components/swiper/css/swiper.min.css') }}" rel="stylesheet" type="text/css">
+    <script src="{{ H('plugins/components/swiper/js/swiper.min.js') }}" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript">
         $(function () {
             new Swiper('.swiper-container', {

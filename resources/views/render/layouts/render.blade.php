@@ -100,6 +100,7 @@
 </div>
 <script type="text/javascript">
     $(function () {
+        // 关闭按钮事件冒泡
         $('#logo-close-btn').click(function () {
             layer.msg($(this).data('time') / 60 + '分钟内不再展示该广告', {
                 shift: 2
@@ -114,8 +115,18 @@
             }, 2000);
             return false;
         });
-        $("body:not(.logo-container)").click(function () {
-            //
+        // 解决多图前后追加图片问题，兼容单图
+        let images = [];
+        $('img[callback]').on('load', function () {
+            let image = $(this).attr('callback');
+            if (images.indexOf(image) == -1) {
+                with (new Image(1, 1)) {
+                    onload = () => {
+                        console.log(image);
+                    }, src = image
+                }
+                images.push(image);
+            }
         });
     });
 </script>

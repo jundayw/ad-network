@@ -11,11 +11,12 @@
     </style>
 </head>
 <body>
+<img style="display: none;" src="{{ $hidden['callback'] }}">
 <script>
     window.parent.postMessage({
         action: 'hidden',
         element: '{{ $request->get('ne') }}',
-        hidden: 'hidden-{{ $request->get('data-ad-client') }}-{{ $request->get('data-ad-slot') }}',
+        hidden: '{{ $hidden['hidden'] }}',
     }, '*');
 </script>
 </body>

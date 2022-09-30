@@ -12,7 +12,7 @@
 */
 Route::namespace('Analysis')->name('analysis.')->group(function () {
     Route::prefix('analysis')->controller('AnalysisController')->name('analysis.')->group(function () {
-        Route::post('review', 'review')->name('review');
-        Route::get('redirect', 'redirect')->name('redirect');//->middleware('signed');
+        Route::get('review', 'review')->name('review')->middleware('signed');
+        Route::get('redirect', 'redirect')->name('redirect')->middleware('signed');
     });
 });

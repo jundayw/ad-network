@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Analysis;
 
-use App\Http\Responses\RenderResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class AnalysisController extends BaseController
 {
@@ -13,9 +13,11 @@ class AnalysisController extends BaseController
         parent::__construct();
     }
 
-    public function review(Request $request): RenderResponse
+    public function review(Request $request): Response
     {
-        return new RenderResponse();
+        return response(
+            content: base64_decode('R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=')
+        )->header('Content-Type', 'image/gif');
     }
 
     public function redirect(Request $request): RedirectResponse

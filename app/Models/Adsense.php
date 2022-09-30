@@ -77,7 +77,7 @@ class Adsense extends Model
             // 'CPS' => '按销售金额计费',
             'CPC' => 'CPC',
             'CPM' => 'CPM',
-            'CPV' => 'CPV',
+            // 'CPV' => 'CPV',
             'CPA' => 'CPA',
             'CPS' => 'CPS',
         ], $value, $default);
@@ -98,7 +98,8 @@ class Adsense extends Model
             'EXCHANGE' => '显示换量广告',
             'DEFAULT' => '显示本地广告',
             'UNION' => '显示联盟广告',
-            'FIXED' => '固定占位符',
+            // 'FIXED' => '固定占位符',
+            'FIXED' => '显示公益广告',
             'HIDDEN' => '隐藏广告位',
         ], $value, $default);
     }

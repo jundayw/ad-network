@@ -3,6 +3,7 @@
 namespace App\Repositories\Render;
 
 use App\Models\Adsense;
+use App\Models\Creative;
 use App\Models\Element;
 use App\Models\Material;
 use App\Repositories\Repository;
@@ -26,11 +27,11 @@ class AdsenseRepository extends Repository
      * 获取流量主广告位信息
      *
      * @param Request $request
-     * @return Adsense
+     * @return Adsense|null
      */
-    private function getAdsense(Request $request): Adsense
+    private function getAdsense(Request $request): ?Adsense
     {
-        $adsense = $this->adsense->with([
+        return $this->adsense->with([
             'size' => function ($query) {
                 $query->select([
                     'id', 'width', 'height', 'device', 'type',
@@ -40,12 +41,6 @@ class AdsenseRepository extends Repository
             'publishment_id' => $request->get('data-ad-client', 0),
             'state' => 'NORMAL',
         ])->find($request->get('data-ad-slot', 0));
-
-        if (is_null($adsense)) {
-            $adsense = $this->adsense;
-        }
-
-        return $adsense;
     }
 
     /**
@@ -58,10 +53,14 @@ class AdsenseRepository extends Repository
     {
         $data = $request->all();
 
-        $client = $request->get('data-ad-client', 0);
-        $slot   = $request->get('data-ad-slot', 0);
+        $client  = $request->get('data-ad-client', 0);
+        $slot    = $request->get('data-ad-slot', 0);
+        $adsense = $this->getAdsense($request);
 
-        $adsense        = $this->getAdsense($request);
+        if (is_null($adsense)) {
+            return new AdNetworkService('render.adsense.network.empty', compact('data', 'request'), '', $request);
+        }
+
         $width          = $adsense->size->getAttribute('width');
         $height         = $adsense->size->getAttribute('height');
         $width          = $request->get('width', $request->get('data-ad-width', $width));
@@ -116,17 +115,6 @@ class AdsenseRepository extends Repository
             'size_id' => $request->get('sid', 0),
             'state' => 'NORMAL',
         ])->find($request->get('aid', 0));
-    }
-
-    /**
-     * 广告位无效:广告代码无效
-     *
-     * @param Request $request
-     * @return AdRenderService
-     */
-    public function getRenderAdsenseUnAvailable(Request $request): AdRenderService
-    {
-        return new AdRenderService('render.adsense.vacant.hidden', compact('request'));
     }
 
     /**
@@ -217,8 +205,8 @@ class AdsenseRepository extends Repository
             return new AdRenderService('render.adsense.vacant.fixed', $fixed);
         }
         // 隐藏广告位
-        if ($adsense->getAttribute('vacant') == 'hidden') {
-            return new AdRenderService('render.adsense.vacant.hidden', compact('request'));
+        if ($adsense->getAttribute('vacant') == 'hidden' && $hidden = $this->getRenderVacantForHidden($request, $adsense)) {
+            return new AdRenderService('render.adsense.vacant.hidden', $hidden);
         }
         // 广告位无效
         return $this->getRenderUnAvailable($request);
@@ -245,9 +233,9 @@ class AdsenseRepository extends Repository
         }
 
         $material = [
-            'location' => $material->getAttribute('location'),
+            'location' => $this->getAnalysisForVacantFromMaterial('analysis.analysis.redirect', $request, $adsense, $material),
             'image' => $material->getAttribute('image'),
-            'callback' => 'test',
+            'callback' => $this->getAnalysisForVacantFromMaterial('analysis.analysis.review', $request, $adsense, $material),
         ];
 
         return compact('material', 'request');
@@ -275,9 +263,9 @@ class AdsenseRepository extends Repository
         }
         $material = $materials->random();
         $material = [
-            'location' => $material->getAttribute('location'),
+            'location' => $this->getAnalysisForVacantFromMaterial('analysis.analysis.redirect', $request, $adsense, $material),
             'image' => $material->getAttribute('image'),
-            'callback' => 'test',
+            'callback' => $this->getAnalysisForVacantFromMaterial('analysis.analysis.review', $request, $adsense, $material),
         ];
         return compact('material', 'request');
     }
@@ -292,9 +280,9 @@ class AdsenseRepository extends Repository
     private function getRenderVacantForDefault(Request $request, Adsense $adsense): array
     {
         $local = [
-            'location' => $adsense->getAttribute('locator'),
+            'location' => $this->getAnalysisForVacant('analysis.analysis.redirect', $request, $adsense),
             'image' => $adsense->getAttribute('image'),
-            'callback' => 'test',
+            'callback' => $this->getAnalysisForVacant('analysis.analysis.review', $request, $adsense),
         ];
         return compact('local', 'request');
     }
@@ -308,9 +296,14 @@ class AdsenseRepository extends Repository
      */
     private function getRenderVacantForUnion(Request $request, Adsense $adsense): array
     {
-        $code = $adsense->getAttribute('code');
-        $code = str_ireplace(['alert', 'console', 'location', 'cookie', 'eval'], [''], $code);
-        return compact('code', 'request');
+        $code  = $adsense->getAttribute('code');
+        $code  = str_ireplace(['alert', 'console', 'location', 'cookie', 'eval'], [''], $code);
+        $union = [
+            'location' => $this->getAnalysisForVacant('analysis.analysis.redirect', $request, $adsense),
+            'code' => $code,
+            'callback' => $this->getAnalysisForVacant('analysis.analysis.review', $request, $adsense),
+        ];
+        return compact('union', 'request');
     }
 
     /**
@@ -323,6 +316,23 @@ class AdsenseRepository extends Repository
     private function getRenderVacantForFixed(Request $request, Adsense $adsense): ?array
     {
         return $this->getRenderVacantForMaterial($request, $adsense, explode(',', config('system.vacant_fixed_publishment_id')));
+    }
+
+    /**
+     * 隐藏广告位
+     *
+     * @param Request $request
+     * @param Adsense $adsense
+     * @return array
+     */
+    private function getRenderVacantForHidden(Request $request, Adsense $adsense): array
+    {
+        $hidden = [
+            'location' => $this->getAnalysisForVacant('analysis.analysis.redirect', $request, $adsense),
+            'hidden' => sprintf('hidden-%s-%s', $request->get('data-ad-client'), $request->get('data-ad-slot')),
+            'callback' => $this->getAnalysisForVacant('analysis.analysis.review', $request, $adsense),
+        ];
+        return compact('hidden', 'request');
     }
 
     /**
@@ -354,12 +364,12 @@ class AdsenseRepository extends Repository
      */
     private function getRenderElementFromMultigraph(Request $request, Adsense $adsense, Collection $elements): array
     {
-        $multigraph = $elements->map(function (Element $element) {
+        $multigraph = $elements->map(function (Element $element) use ($adsense, $request) {
             $creative = $element->getRelation('creative')->random();
             return [
-                'location' => $creative->getAttribute('location'),
+                'location' => $this->getAnalysisForElement('analysis.analysis.redirect', $request, $adsense, $creative),
                 'image' => $creative->getAttribute('image'),
-                'callback' => 'test',
+                'callback' => $this->getAnalysisForElement('analysis.analysis.review', $request, $adsense, $creative),
             ];
         });
         return compact('multigraph', 'request');
@@ -377,9 +387,9 @@ class AdsenseRepository extends Repository
     {
         $creative = $elements->random()->getRelation('creative')->random();
         $creative = [
-            'location' => $creative->getAttribute('location'),
+            'location' => $this->getAnalysisForElement('analysis.analysis.redirect', $request, $adsense, $creative),
             'image' => $creative->getAttribute('image'),
-            'callback' => 'test',
+            'callback' => $this->getAnalysisForElement('analysis.analysis.review', $request, $adsense, $creative),
         ];
         return compact('creative', 'request');
     }
@@ -396,7 +406,7 @@ class AdsenseRepository extends Repository
         $adsense = $this->getRenderAdsense($request);
         // 广告位无效
         if (is_null($adsense)) {
-            return $this->getRenderAdsenseUnAvailable($request);
+            return $this->getRenderUnAvailable($request);
         }
         // 获取广告主广告物料
         $elements = $this->getRenderElement($request, $adsense);
@@ -414,5 +424,87 @@ class AdsenseRepository extends Repository
     {
         // 可以优化加个缓存，减轻对系统压力
         return $this->getRender($request);
+    }
+
+    public function getAnalysis(string $name, Request $request, array $data = []): string
+    {
+        return url()->signedRoute($name, array_merge([
+            'aid' => $request->get('aid'),
+            'dm' => $request->get('dm'),
+            'dp' => $request->get('dp'),
+            'height' => $request->get('height'),
+            'lt' => $request->get('lt'),
+            'lr' => $request->get('lr'),
+            'lu' => $request->get('lu'),
+            'ne' => $request->get('ne'),
+            'nl' => $request->get('nl'),
+            'np' => $request->get('np'),
+            'pid' => $request->get('pid'),
+            'rr' => $request->get('rr'),
+            'sa' => $request->get('sa'),
+            'si' => $request->get('si'),
+            'sid' => $request->get('sid'),
+            'so' => $request->get('so'),
+            'sr' => $request->get('sr'),
+            'ss' => $request->get('ss'),
+            'st' => $request->get('st'),
+            't' => $request->get('t'),
+            'ua' => $request->get('ua'),
+            'uu' => $request->get('uu'),
+            'vv' => $request->get('vv'),
+            'width' => $request->get('width'),
+        ], $data));
+    }
+
+    /**
+     * 展现类型{SINGLE:单图}{MULTIGRAPH:多图}{POPUP:弹窗}{FLOAT:悬浮}{COUPLET:对联}
+     *
+     * @param string $name
+     * @param Request $request
+     * @param Adsense $adsense
+     * @param Creative $creative
+     * @return string
+     */
+    protected function getAnalysisForElement(string $name, Request $request, Adsense $adsense, Creative $creative): string
+    {
+        return $this->getAnalysis($name, $request, [
+            'type' => $adsense->getAttribute('type'),
+            'tid' => $creative->getAttribute('advertisement_id'),
+            'mid' => $creative->getAttribute('program_id'),
+            'eid' => $creative->getAttribute('element_id'),
+            'cid' => $creative->getAttribute('creative'),
+        ]);
+    }
+
+    /**
+     * 空闲设置{DEFAULT:显示默认广告}{UNION:显示联盟广告}{HIDDEN:隐藏广告位}
+     *
+     * @param string $name
+     * @param Request $request
+     * @param Adsense $adsense
+     * @return string
+     */
+    protected function getAnalysisForVacant(string $name, Request $request, Adsense $adsense): string
+    {
+        return $this->getAnalysis($name, $request, [
+            'type' => $adsense->getAttribute('vacant'),
+        ]);
+    }
+
+    /**
+     * 空闲设置{EXCHANGE:显示换量广告}{FIXED:固定占位符}
+     *
+     * @param string $name
+     * @param Request $request
+     * @param Adsense $adsense
+     * @param Material $material
+     * @return string
+     */
+    protected function getAnalysisForVacantFromMaterial(string $name, Request $request, Adsense $adsense, Material $material): string
+    {
+        return $this->getAnalysis($name, $request, [
+            'type' => $adsense->getAttribute('vacant'),
+            'lid' => $material->getAttribute('id'),
+        ]);
     }
 }
