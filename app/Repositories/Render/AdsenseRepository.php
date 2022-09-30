@@ -61,21 +61,21 @@ class AdsenseRepository extends Repository
             return new AdNetworkService('render.adsense.network.empty', compact('data', 'request'), '', $request);
         }
 
-        $width          = $adsense->size->getAttribute('width');
-        $height         = $adsense->size->getAttribute('height');
-        $width          = $request->get('width', $request->get('data-ad-width', $width));
-        $height         = $request->get('height', $request->get('data-ad-height', $height));
-        $data['pid']    = $adsense->getAttribute('publishment_id');
-        $data['sid']    = $adsense->getAttribute('size_id');
-        $data['aid']    = $adsense->getAttribute('id');
-        $data['origin'] = $adsense->getAttribute('origin');
-        $data['device'] = $adsense->getAttribute('device');
-        $data['type']   = $adsense->getAttribute('type');
-        $data['vacant'] = $adsense->getAttribute('vacant');
-        $data['width']  = $width;
-        $data['height'] = $height;
-        $data['st']     = get_timestamp(true);
-        $data['ne']     = sprintf('u_%s', password($client, $slot));
+        $width  = $request->get('data-ad-width', $adsense->size->getAttribute('width'));
+        $height = $request->get('data-ad-height', $adsense->size->getAttribute('height'));
+        $data   = array_merge($data, [
+            'pid' => $adsense->getAttribute('publishment_id'),
+            'sid' => $adsense->getAttribute('size_id'),
+            'aid' => $adsense->getAttribute('id'),
+            'origin' => $adsense->getAttribute('origin'),
+            'device' => $adsense->getAttribute('device'),
+            'type' => $adsense->getAttribute('type'),
+            'vacant' => $adsense->getAttribute('vacant'),
+            'width' => $request->get('width', $width),
+            'height' => $request->get('height', $height),
+            'st' => get_timestamp(true),
+            'ne' => sprintf('u_%s', password($client, $slot)),
+        ]);
 
         if ($adsense->getAttribute('type') == 'couplet') {
             $data['data-ad-couplet-top']   = $request->get('data-ad-couplet-top', 100);
