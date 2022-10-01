@@ -472,7 +472,7 @@ class AdsenseRepository extends Repository
             'tid' => $creative->getAttribute('advertisement_id'),
             'mid' => $creative->getAttribute('program_id'),
             'eid' => $creative->getAttribute('element_id'),
-            'cid' => $creative->getAttribute('creative'),
+            'cid' => $creative->getAttribute('id'),
         ]);
     }
 

@@ -24,7 +24,10 @@ class AnalysisController extends BaseController
 
     public function redirect(Request $request): RedirectResponse
     {
-        $redirect = $this->repository->redirect($request);
-        return response()->redirectTo('https://www.baidu.com');
+        $repository = $this->repository->redirect($request);
+        return response()->redirectTo(
+            path: $repository->get('path'),
+            headers: $repository->get('headers')
+        );
     }
 }
