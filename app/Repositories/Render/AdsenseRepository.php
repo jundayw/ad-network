@@ -440,7 +440,7 @@ class AdsenseRepository extends Repository
             'nl' => $request->get('nl'),
             'np' => $request->get('np'),
             'pid' => $request->get('pid'),
-            'rr' => $request->get('rr'),
+            'ru' => $request->get('ru'),
             'sa' => $request->get('sa'),
             'si' => $request->get('si'),
             'sid' => $request->get('sid'),
@@ -450,8 +450,8 @@ class AdsenseRepository extends Repository
             'st' => $request->get('st'),
             't' => $request->get('t'),
             'ua' => $request->get('ua'),
+            'gu' => $request->get('gu'),
             'uu' => $request->get('uu'),
-            'vv' => $request->get('vv'),
             'width' => $request->get('width'),
         ], $data));
     }

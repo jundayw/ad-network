@@ -13,7 +13,7 @@ class AnalysisRedirectJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    public array $data;
+    public array $data = [];
 
     /**
      * Create a new job instance.
@@ -28,10 +28,11 @@ class AnalysisRedirectJob implements ShouldQueue
     /**
      * Execute the job.
      *
+     * @param AnalysisReviewService $reviewService
      * @return void
      */
-    public function handle(): void
+    public function handle(AnalysisReviewService $reviewService): void
     {
-        (new AnalysisReviewService())->run($this->data);
+        echo $reviewService->run(collect($this->data));
     }
 }

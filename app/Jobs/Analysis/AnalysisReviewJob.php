@@ -2,6 +2,7 @@
 
 namespace App\Jobs\Analysis;
 
+use App\Services\Analysis\AnalysisRedirectService;
 use App\Services\Analysis\AnalysisReviewService;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -13,7 +14,7 @@ class AnalysisReviewJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    public array $data;
+    public array $data = [];
 
     /**
      * Create a new job instance.
@@ -28,10 +29,11 @@ class AnalysisReviewJob implements ShouldQueue
     /**
      * Execute the job.
      *
+     * @param AnalysisRedirectService $redirectService
      * @return void
      */
-    public function handle(): void
+    public function handle(AnalysisRedirectService $redirectService): void
     {
-        (new AnalysisReviewService())->run($this->data);
+        echo $redirectService->run(collect($this->data));
     }
 }

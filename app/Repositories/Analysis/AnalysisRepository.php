@@ -7,10 +7,6 @@ use App\Jobs\Analysis\AnalysisReviewJob;
 use App\Models\Adsense;
 use App\Models\Creative;
 use App\Models\Material;
-use App\Models\Vacation;
-use App\Models\Visitant;
-use App\Models\Visitor;
-use App\Models\Visits;
 use App\Repositories\Repository;
 use App\Services\Analysis\AnalysisRedirectService;
 use App\Services\Analysis\AnalysisReviewService;
@@ -20,13 +16,11 @@ use Illuminate\Support\Collection;
 class AnalysisRepository extends Repository
 {
     public function __construct(
-        private readonly Visits $visits,
-        private readonly Visitor $visitor,
-        private readonly Visitant $visitant,
-        private readonly Vacation $vacation,
         private readonly Creative $creative,
         private readonly Adsense $adsense,
         private readonly Material $material,
+        private readonly AnalysisReviewService $reviewService,
+        private readonly AnalysisRedirectService $redirectService,
     )
     {
         //
@@ -34,21 +28,27 @@ class AnalysisRepository extends Repository
 
     public function review(Request $request): void
     {
+        $data = array_merge($request->all(), [
+            'ip' => $request->getClientIp(),
+        ]);
         if (config('system.analysis_queue_ad', 'disable') == 'normal') {
             // 调度给队列处理图片展示统计
-            AnalysisReviewJob::dispatch($request->all())->delay(now()->addSeconds(mt_rand(30, 60)));
+            AnalysisReviewJob::dispatch($data)->delay(now()->addSeconds(mt_rand(30, 60) / 15));
         } else {
-            (new AnalysisReviewService())->run($request->all());
+            $this->reviewService->run(collect($data));
         }
     }
 
     public function redirect(Request $request): Collection
     {
+        $data = array_merge($request->all(), [
+            'ip' => $request->getClientIp(),
+        ]);
         if (config('system.analysis_queue_location', 'disable') == 'normal') {
             // 调度给队列处理点击统计
-            AnalysisRedirectJob::dispatch($request->all())->delay(now()->addSeconds(mt_rand(300, 360)));
+            AnalysisRedirectJob::dispatch($data)->delay(now()->addSeconds(mt_rand(300, 360) / 500));
         } else {
-            (new AnalysisRedirectService())->run($request->all());
+            $this->redirectService->run(collect($data));
         }
         $path = match ($request->get('type')) {
             'single', 'multigraph', 'popup', 'float', 'couplet' => $this->element($request),
