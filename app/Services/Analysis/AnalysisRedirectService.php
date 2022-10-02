@@ -44,6 +44,7 @@ class AnalysisRedirectService
     {
         $key = password($request->get('gu'), $request->get('uu'));
         $key = password($key, $request->get('ru'));
+        $key = password($key, $request->get('cid', 0));
 
         if ($visits = cache($key)) {
             return $visits;
@@ -53,6 +54,7 @@ class AnalysisRedirectService
             'guid' => $request->get('gu'),
             'uuid' => $request->get('uu'),
             'ruid' => $request->get('ru'),
+            'creative_id' => $request->get('cid', 0),
         ])->first();
 
         if (is_null($visits)) {
@@ -68,13 +70,16 @@ class AnalysisRedirectService
 
     protected function redirect(Collection $request, array $data = []): string
     {
+        $request = $request->merge($data);
+
         if (is_null($visits = $this->getVisitsExists($request))) {
             return $request->get('type');
         }
 
         $key = password($request->get('gu'), $request->get('uu'));
         $key = password($key, $request->get('ru'));
-        $key = password($key, 'visitant_id');
+        $key = password($key, $request->get('cid', 0));
+        $key = password($key, 'redirect');
 
         $ttl = now()->endOfDay()->diffInSeconds(now());
 
@@ -83,6 +88,7 @@ class AnalysisRedirectService
                 'guid' => $request->get('gu'),
                 'uuid' => $request->get('uu'),
                 'ruid' => $request->get('ru'),
+                'creative_id' => $request->get('cid', 0),
             ])->count();
         });
 

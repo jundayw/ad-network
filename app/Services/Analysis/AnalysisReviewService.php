@@ -91,6 +91,7 @@ class AnalysisReviewService
     {
         $key = password($request->get('gu'), $request->get('uu'));
         $key = password($key, $request->get('ru'));
+        $key = password($key, $request->get('cid', 0));
 
         if ($visits = cache($key)) {
             return $visits;
@@ -100,6 +101,7 @@ class AnalysisReviewService
             'guid' => $request->get('gu'),
             'uuid' => $request->get('uu'),
             'ruid' => $request->get('ru'),
+            'creative_id' => $request->get('cid', 0),
         ])->first();
 
         if (is_null($visits)) {
@@ -124,6 +126,8 @@ class AnalysisReviewService
      */
     protected function review(Collection $request, Visitor $visitor, array $data = []): string
     {
+        $request = $request->merge($data);
+
         if ($this->getVisitsExists($request)) {
             return $request->get('type');
         }
