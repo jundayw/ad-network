@@ -72,6 +72,7 @@ class AnalysisRedirectService
     {
         $request = $request->merge($data);
 
+        // 未展示过的广告位点击行为无效
         if (is_null($visits = $this->getVisitsExists($request))) {
             return $request->get('type');
         }
@@ -92,6 +93,7 @@ class AnalysisRedirectService
             ])->count();
         });
 
+        // 重复点击已点击过的广告链接行为无效
         if ($count) {
             return $request->get('type');
         }

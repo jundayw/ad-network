@@ -128,6 +128,7 @@ class AnalysisReviewService
     {
         $request = $request->merge($data);
 
+        // 重复刷新已展示过的广告位无效
         if ($this->getVisitsExists($request)) {
             return $request->get('type');
         }
