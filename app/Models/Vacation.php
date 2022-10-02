@@ -14,11 +14,11 @@ class Vacation extends Model
     public function getType(?string $value = null, ?string $default = '--'): string|array
     {
         return $this->getEnumeration([
-            'CPC' => 'CPC',
-            'CPM' => 'CPM',
-            'CPV' => 'CPV',
-            'CPA' => 'CPA',
-            'CPS' => 'CPS',
+            'CPC' => '按点击付费(CPC)',
+            'CPM' => '按千次IP展示付费(CPM)',
+            'CPV' => '按千次页面展示付费(CPV)',
+            'CPA' => '按指定的行为付费(CPA)',
+            'CPS' => '按佣金付费(CPS)',
         ], $value, $default);
     }
 

@@ -55,7 +55,7 @@
                             <div class="form-group row">
                                 <label class="col-md-2 control-label col-form-label">出价方式</label>
                                 <div class="col-md-10">
-                                    <p class="form-control-static">{{ $data->type }}</p>
+                                    <p class="form-control-static">{{ $data->getType($data->type) }}</p>
                                 </div>
                             </div>
                             <div class="form-group row">

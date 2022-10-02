@@ -70,16 +70,16 @@ class Adsense extends Model
     {
         return $this->getEnumeration([
             'DEFAULT' => '智能',
-            // 'CPC' => '按点击计费',
-            // 'CPM' => '按IP地址计费',
-            // 'CPV' => '按页面访问计费',
-            // 'CPA' => '按行为计费',
-            // 'CPS' => '按销售金额计费',
-            'CPC' => 'CPC',
-            'CPM' => 'CPM',
+            'CPC' => '按点击付费(CPC)',
+            'CPM' => '按千次IP展示付费(CPM)',
+            'CPV' => '按千次页面展示付费(CPV)',
+            'CPA' => '按指定的行为付费(CPA)',
+            'CPS' => '按佣金付费(CPS)',
+            // 'CPC' => 'CPC',
+            // 'CPM' => 'CPM',
             // 'CPV' => 'CPV',
-            'CPA' => 'CPA',
-            'CPS' => 'CPS',
+            // 'CPA' => 'CPA',
+            // 'CPS' => 'CPS',
         ], $value, $default);
     }
 

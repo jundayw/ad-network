@@ -80,6 +80,7 @@ class ElementRepository extends Repository
         }
 
         $filter = [
+            'type' => $this->element->getType(),
             'state' => $this->element->getState(),
         ];
 

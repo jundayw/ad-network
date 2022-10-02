@@ -7,6 +7,7 @@
                 var target = '元';
                 switch ($(this).val()) {
                     case 'cpm':
+                    case 'cpv':
                         target = '元/千次';
                         break;
                     default:
