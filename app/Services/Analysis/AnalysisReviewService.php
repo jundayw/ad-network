@@ -2,18 +2,19 @@
 
 namespace App\Services\Analysis;
 
-use App\Models\Adsense;
 use App\Models\Visitor;
 use App\Models\Visits;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Date;
 
+/**
+ * 记录有效展示
+ */
 class AnalysisReviewService
 {
     public function __construct(
         private readonly Visits $visits,
         private readonly Visitor $visitor,
-        private readonly Adsense $adsense,
     )
     {
         echo PHP_EOL;
@@ -127,23 +128,16 @@ class AnalysisReviewService
             return $request->get('type');
         }
 
-        $adsense = $this->adsense->find($request->get('aid'));
-
         $this->visits->create(array_merge([
             'guid' => $request->get('gu'),
             'uuid' => $request->get('uu'),
             'ruid' => $request->get('ru'),
             'visitor_id' => $visitor->getKey(),
             'size_id' => $request->get('sid'),
-            // 'advertisement_id' => $request->get('tid', 0),
-            // 'program_id' => $request->get('mid', 0),
-            // 'element_id' => $request->get('eid', 0),
-            // 'creative_id' => $request->get('cid', 0),
             'publishment_id' => $request->get('pid'),
-            'site_id' => $adsense->site_id,
-            'channel_id' => $adsense->channel_id,
+            'site_id' => $request->get('wid'),
+            'channel_id' => $request->get('nid'),
             'adsense_id' => $request->get('aid'),
-            // 'material_id' => $request->get('lid', 0),
             'document_title' => $request->get('lt'),
             'document_referrer' => $request->get('lr'),
             'document_url' => $request->get('lu'),
@@ -151,10 +145,7 @@ class AnalysisReviewService
             'height' => $request->get('height'),
             'request_time' => Date::createFromTimestamp($request->get('t')),
             'response_time' => Date::createFromTimestamp($request->get('st')),
-            'origin' => $adsense->origin,
-            'device' => $adsense->device,
             'type' => $request->get('type'),
-            'charging' => $adsense->charging,
             'ip' => $request->get('ip'),
             'time' => $request->get('time'),
         ], $data));
@@ -174,7 +165,7 @@ class AnalysisReviewService
 
     protected function vacant(Collection $request, Visitor $visitor): string
     {
-        return $this->review($request, $visitor, []);
+        return $this->review($request, $visitor);
     }
 
     protected function material(Collection $request, Visitor $visitor): string

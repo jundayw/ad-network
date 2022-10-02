@@ -64,8 +64,10 @@ class AdsenseRepository extends Repository
         $width  = $request->get('data-ad-width', $adsense->size->getAttribute('width'));
         $height = $request->get('data-ad-height', $adsense->size->getAttribute('height'));
         $data   = array_merge($data, [
-            'pid' => $adsense->getAttribute('publishment_id'),
             'sid' => $adsense->getAttribute('size_id'),
+            'pid' => $adsense->getAttribute('publishment_id'),
+            'wid' => $adsense->getAttribute('site_id'),
+            'nid' => $adsense->getAttribute('channel_id'),
             'aid' => $adsense->getAttribute('id'),
             'origin' => $adsense->getAttribute('origin'),
             'device' => $adsense->getAttribute('device'),
@@ -417,9 +419,9 @@ class AdsenseRepository extends Repository
     public function getAnalysis(string $name, Request $request, array $data = []): string
     {
         return url()->signedRoute($name, array_merge([
-            'aid' => $request->get('aid'),
             'dm' => $request->get('dm'),
             'dp' => $request->get('dp'),
+            'gu' => $request->get('gu'),
             'height' => $request->get('height'),
             'lt' => $request->get('lt'),
             'lr' => $request->get('lr'),
@@ -427,18 +429,20 @@ class AdsenseRepository extends Repository
             'ne' => $request->get('ne'),
             'nl' => $request->get('nl'),
             'np' => $request->get('np'),
-            'pid' => $request->get('pid'),
             'ru' => $request->get('ru'),
             'sa' => $request->get('sa'),
             'si' => $request->get('si'),
             'sid' => $request->get('sid'),
+            'pid' => $request->get('pid'),
+            'wid' => $request->get('wid'),
+            'nid' => $request->get('nid'),
+            'aid' => $request->get('aid'),
             'so' => $request->get('so'),
             'sr' => $request->get('sr'),
             'ss' => $request->get('ss'),
             'st' => $request->get('st'),
             't' => $request->get('t'),
             'ua' => $request->get('ua'),
-            'gu' => $request->get('gu'),
             'uu' => $request->get('uu'),
             'width' => $request->get('width'),
         ], $data));
