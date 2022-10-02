@@ -72,6 +72,24 @@ class AnalysisRedirectService
             return $request->get('type');
         }
 
+        $key = password($request->get('gu'), $request->get('uu'));
+        $key = password($key, $request->get('ru'));
+        $key = password($key, 'visitant_id');
+
+        $ttl = now()->endOfDay()->diffInSeconds(now());
+
+        $count = cache()->remember($key, $ttl, function () use ($request) {
+            return $this->visitant->where([
+                'guid' => $request->get('gu'),
+                'uuid' => $request->get('uu'),
+                'ruid' => $request->get('ru'),
+            ])->count();
+        });
+
+        if ($count) {
+            return $request->get('type');
+        }
+
         $visitant = $this->visitant->create(array_merge([
             'guid' => $request->get('gu'),
             'uuid' => $request->get('uu'),
@@ -86,9 +104,11 @@ class AnalysisRedirectService
             'time' => $request->get('time'),
         ], $data));
 
-        $visits->save([
+        $visits->update([
             'visitant_id' => $visitant->getKey(),
         ]);
+
+        cache()->forget($key);
 
         return $request->get('type');
     }
