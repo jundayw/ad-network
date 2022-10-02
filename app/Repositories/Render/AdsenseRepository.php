@@ -213,35 +213,6 @@ class AdsenseRepository extends Repository
     }
 
     /**
-     * 获取默认广告:未匹配的换量广告及固定占位符广告
-     *
-     * @param Request $request
-     * @param Adsense $adsense
-     * @param array $materials
-     * @return array|null
-     */
-    private function getRenderVacantForMaterial(Request $request, Adsense $adsense, array $materials = []): ?array
-    {
-        $material = $this->material->whereIn('publishment_id', $materials)->where([
-            'size_id' => $request->get('sid', 0),
-            'device' => $adsense->getAttribute('device'),
-            'state' => 'NORMAL',
-        ])->inRandomOrder()->first();
-
-        if (is_null($material)) {
-            return null;
-        }
-
-        $material = [
-            'location' => $this->getAnalysisForVacantFromMaterial('analysis.analysis.redirect', $request, $adsense, $material),
-            'image' => $material->getAttribute('image'),
-            'callback' => $this->getAnalysisForVacantFromMaterial('analysis.analysis.review', $request, $adsense, $material),
-        ];
-
-        return compact('material', 'request');
-    }
-
-    /**
      * 显示换量广告
      *
      * @param Request $request
@@ -259,15 +230,15 @@ class AdsenseRepository extends Repository
             'state' => 'NORMAL',
         ])->get();
         if ($materials->isEmpty()) {
-            return $this->getRenderVacantForMaterial($request, $adsense, explode(',', config('system.vacant_exchange_publishment_id')));
+            return null;
         }
         $material = $materials->random();
-        $material = [
+        $exchange = [
             'location' => $this->getAnalysisForVacantFromMaterial('analysis.analysis.redirect', $request, $adsense, $material),
             'image' => $material->getAttribute('image'),
             'callback' => $this->getAnalysisForVacantFromMaterial('analysis.analysis.review', $request, $adsense, $material),
         ];
-        return compact('material', 'request');
+        return compact('exchange', 'request');
     }
 
     /**
@@ -315,7 +286,24 @@ class AdsenseRepository extends Repository
      */
     private function getRenderVacantForFixed(Request $request, Adsense $adsense): ?array
     {
-        return $this->getRenderVacantForMaterial($request, $adsense, explode(',', config('system.vacant_fixed_publishment_id')));
+        $materials = explode(',', config('system.vacant_fixed_publishment_id'));
+        $material  = $this->material->whereIn('publishment_id', $materials)->where([
+            'size_id' => $request->get('sid', 0),
+            'device' => $adsense->getAttribute('device'),
+            'state' => 'NORMAL',
+        ])->inRandomOrder()->first();
+
+        if (is_null($material)) {
+            return null;
+        }
+
+        $material = [
+            'location' => $this->getAnalysisForVacantFromMaterial('analysis.analysis.redirect', $request, $adsense, $material),
+            'image' => $material->getAttribute('image'),
+            'callback' => $this->getAnalysisForVacantFromMaterial('analysis.analysis.review', $request, $adsense, $material),
+        ];
+
+        return compact('material', 'request');
     }
 
     /**

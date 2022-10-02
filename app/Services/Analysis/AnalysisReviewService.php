@@ -174,9 +174,7 @@ class AnalysisReviewService
 
     protected function vacant(Collection $request, Visitor $visitor): string
     {
-        return $this->review($request, $visitor, $request->get('lid') ? [
-            'material_id' => $request->get('lid'),
-        ] : []);
+        return $this->review($request, $visitor, []);
     }
 
     protected function material(Collection $request, Visitor $visitor): string
