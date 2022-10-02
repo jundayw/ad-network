@@ -39,6 +39,7 @@ class AdsenseRepository extends Repository
             },
         ])->where([
             'publishment_id' => $request->get('data-ad-client', 0),
+            'device' => $request->get('dp'),
             'state' => 'NORMAL',
         ])->find($request->get('data-ad-slot', 0));
     }
