@@ -30,6 +30,7 @@ class AnalysisRepository extends Repository
     {
         $data = array_merge($request->all(), [
             'ip' => $request->getClientIp(),
+            'time' => get_time(),
         ]);
         if (config('system.analysis_queue_ad', 'disable') == 'normal') {
             // 调度给队列处理图片展示统计
@@ -43,6 +44,7 @@ class AnalysisRepository extends Repository
     {
         $data = array_merge($request->all(), [
             'ip' => $request->getClientIp(),
+            'time' => get_time(),
         ]);
         if (config('system.analysis_queue_location', 'disable') == 'normal') {
             // 调度给队列处理点击统计

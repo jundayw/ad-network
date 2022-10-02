@@ -26,6 +26,8 @@ class AnalysisReviewService
 
     /**
      * 记录用户设备信息
+     * 1.局域网内相同IP会有多个UV
+     * 2.移动网络环境下相同UV会有多个IP
      *
      * @param Collection $request
      * @return Visitor
@@ -33,12 +35,14 @@ class AnalysisReviewService
     private function visitor(Collection $request): Visitor
     {
         $key = password($request->get('gu', generate_string()), $request->get('uu', generate_string()));
+        $key = password($request->get('ip', generate_string()), $key);
         $ttl = now()->endOfDay()->diffInSeconds(now());
         return cache()->remember($key, $ttl, function () use ($request) {
             $visitor = $this->visitor->where([
                 'guid' => $request->get('gu'),
                 'uuid' => $request->get('uu'),
-            ])->whereDate('create_time', get_time('Y-m-d'))->first();
+                'ip' => $request->get('ip'),
+            ])->whereDate('time', get_time('Y-m-d'))->first();
 
             if ($visitor) {
                 return $visitor;
@@ -58,6 +62,8 @@ class AnalysisReviewService
                 'screen_width' => $width,
                 'screen_height' => $height,
                 'user_agent' => $request->get('ua'),
+                'ip' => $request->get('ip'),
+                'time' => $request->get('time'),
             ]);
         });
     }
@@ -72,29 +78,6 @@ class AnalysisReviewService
             'exchange', 'fixed' => $this->material($request, $visitor),
             default => $request->get('type')
         };
-    }
-
-    /**
-     * 判断用户是新访客/老访客
-     *
-     * @param Collection $request
-     * @return string
-     */
-    private function getVisitsState(Collection $request): string
-    {
-        $key = password($request->get('gu'), 'guid');
-
-        if ($visits = cache($key)) {
-            return $visits;
-        }
-
-        if ($this->visits->where('guid', $request->get('gu'))->count() == 0) {
-            return 'NORMAL';
-        }
-
-        return cache()->rememberForever($key, function () {
-            return 'DISABLE';
-        });
     }
 
     /**
@@ -173,7 +156,7 @@ class AnalysisReviewService
             'type' => $request->get('type'),
             'charging' => $adsense->charging,
             'ip' => $request->get('ip'),
-            'state' => $this->getVisitsState($request),
+            'time' => $request->get('time'),
         ], $data));
 
         return $request->get('type');

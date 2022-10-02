@@ -86,20 +86,4 @@ class Visits extends Model
             set: fn($value, $attributes) => strtoupper($value),
         );
     }
-
-    public function getState(?string $value = null, ?string $default = '--'): string|array
-    {
-        return $this->getEnumeration([
-            'NORMAL' => '新访客',
-            'DISABLE' => '老访客',
-        ], $value, $default);
-    }
-
-    protected function state(): Attribute
-    {
-        return new Attribute(
-            get: fn($value, $attributes) => strtolower($value),
-            set: fn($value, $attributes) => strtoupper($value),
-        );
-    }
 }
