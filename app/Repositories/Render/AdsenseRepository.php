@@ -227,10 +227,10 @@ class AdsenseRepository extends Repository
         $materials = $this->material->whereHas('publishments', function ($query) {
             $query->where('weight', '>', '0');
         })->where([
-            'publishment_id' => $request->get('pid', 0),
             'size_id' => $request->get('sid', 0),
             'device' => $adsense->getAttribute('device'),
             'state' => 'NORMAL',
+            ['publishment_id', '<>', $request->get('pid', 0)],
         ])->get();
         if ($materials->isEmpty()) {
             return null;

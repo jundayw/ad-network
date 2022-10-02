@@ -116,7 +116,7 @@
                     <i class="ti-shield bg-inverse"></i>
                     <div class="bodystate">
                         <h4>{{ $request->user()->publishment->getAttribute('weight') }}</h4>
-                        <span class="text-muted">账户权重</span>
+                        <span class="text-muted">换量权重</span>
                     </div>
                 </div>
             </div>

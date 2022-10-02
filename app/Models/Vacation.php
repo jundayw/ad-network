@@ -30,22 +30,8 @@ class Vacation extends Model
         );
     }
 
-    public function getVacant(?string $value = null, ?string $default = '--'): string|array
+    protected function rate(): Attribute
     {
-        return $this->getEnumeration([
-            'EXCHANGE' => '显示换量广告',
-            'DEFAULT' => '显示本地广告',
-            'UNION' => '显示联盟广告',
-            'FIXED' => '显示公益广告',
-            'HIDDEN' => '隐藏广告位',
-        ], $value, $default);
-    }
-
-    protected function vacant(): Attribute
-    {
-        return new Attribute(
-            get: fn($value, $attributes) => strtolower($value),
-            set: fn($value, $attributes) => strtoupper($value),
-        );
+        return $this->getMoney();
     }
 }

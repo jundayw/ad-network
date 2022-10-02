@@ -4,6 +4,7 @@ namespace App\Services\Analysis;
 
 use App\Models\Visitor;
 use App\Models\Visits;
+use App\Services\Analysis\Review\ReviewService;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Date;
 
@@ -15,6 +16,7 @@ class AnalysisReviewService
     public function __construct(
         private readonly Visits $visits,
         private readonly Visitor $visitor,
+        private readonly ReviewService $reviewService,
     )
     {
         echo PHP_EOL;
@@ -35,38 +37,33 @@ class AnalysisReviewService
      */
     private function visitor(Collection $request): Visitor
     {
-        $key = password($request->get('gu', generate_string()), $request->get('uu', generate_string()));
-        $key = password($request->get('ip', generate_string()), $key);
-        $ttl = now()->endOfDay()->diffInSeconds(now());
-        return cache()->remember($key, $ttl, function () use ($request) {
-            $visitor = $this->visitor->where([
-                'guid' => $request->get('gu'),
-                'uuid' => $request->get('uu'),
-                'ip' => $request->get('ip'),
-            ])->whereDate('time', get_time('Y-m-d'))->first();
+        $visitor = $this->visitor->where([
+            'guid' => $request->get('gu'),
+            'uuid' => $request->get('uu'),
+            'ip' => $request->get('ip'),
+        ])->whereDate('time', get_time('Y-m-d'))->first();
 
-            if ($visitor) {
-                return $visitor;
-            }
+        if ($visitor) {
+            return $visitor;
+        }
 
-            $separator = 'x';
-            $screen    = $request->get('sr') . $separator;
+        $separator = 'x';
+        $screen    = $request->get('sr') . $separator;
 
-            [$width, $height] = explode($separator, $screen);
+        [$width, $height] = explode($separator, $screen);
 
-            return $this->visitor->create([
-                'guid' => $request->get('gu'),
-                'uuid' => $request->get('uu'),
-                'language' => $request->get('nl'),
-                'platform' => $request->get('np'),
-                'device' => $request->get('dp'),
-                'screen_width' => $width,
-                'screen_height' => $height,
-                'user_agent' => $request->get('ua'),
-                'ip' => $request->get('ip'),
-                'time' => $request->get('time'),
-            ]);
-        });
+        return $this->visitor->create([
+            'guid' => $request->get('gu'),
+            'uuid' => $request->get('uu'),
+            'language' => $request->get('nl'),
+            'platform' => $request->get('np'),
+            'device' => $request->get('dp'),
+            'screen_width' => $width,
+            'screen_height' => $height,
+            'user_agent' => $request->get('ua'),
+            'ip' => $request->get('ip'),
+            'time' => $request->get('time'),
+        ]);
     }
 
     public function run(Collection $request): string
@@ -89,30 +86,12 @@ class AnalysisReviewService
      */
     private function getVisitsExists(Collection $request): ?Visits
     {
-        $key = password($request->get('gu'), $request->get('uu'));
-        $key = password($key, $request->get('ru'));
-        $key = password($key, $request->get('cid', 0));
-
-        if ($visits = cache($key)) {
-            return $visits;
-        }
-
-        $visits = $this->visits->where([
+        return $this->visits->where([
             'guid' => $request->get('gu'),
             'uuid' => $request->get('uu'),
             'ruid' => $request->get('ru'),
-            'creative_id' => $request->get('cid', 0),
+            'creative_id' => $request->get('cid', 0),// 多图兼容
         ])->first();
-
-        if (is_null($visits)) {
-            return null;
-        }
-
-        $ttl = now()->endOfDay()->diffInSeconds(now());
-
-        return cache()->remember($key, $ttl, function () use ($visits) {
-            return $visits;
-        });
     }
 
     /**
@@ -131,6 +110,10 @@ class AnalysisReviewService
         // 重复刷新已展示过的广告位无效
         if ($this->getVisitsExists($request)) {
             return $request->get('type');
+        }
+
+        if ($vacation = $this->reviewService->review($request)) {
+            $data['vacation_id'] = $vacation->getKey();
         }
 
         $this->visits->create(array_merge([

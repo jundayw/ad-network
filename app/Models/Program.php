@@ -36,6 +36,11 @@ class Program extends Model
         return $this->getMoney();
     }
 
+    protected function charge(): Attribute
+    {
+        return $this->getMoney();
+    }
+
     public function getState(?string $value = null, ?string $default = '--'): string|array
     {
         return $this->getEnumeration([

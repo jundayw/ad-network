@@ -5,6 +5,7 @@ namespace App\Services\Analysis;
 use App\Models\Visitant;
 use App\Models\Visits;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Date;
 
 /**
  * 记录有效点击
@@ -42,30 +43,12 @@ class AnalysisRedirectService
      */
     private function getVisitsExists(Collection $request): ?Visits
     {
-        $key = password($request->get('gu'), $request->get('uu'));
-        $key = password($key, $request->get('ru'));
-        $key = password($key, $request->get('cid', 0));
-
-        if ($visits = cache($key)) {
-            return $visits;
-        }
-
-        $visits = $this->visits->where([
+        return $this->visits->where([
             'guid' => $request->get('gu'),
             'uuid' => $request->get('uu'),
             'ruid' => $request->get('ru'),
-            'creative_id' => $request->get('cid', 0),
+            'creative_id' => $request->get('cid', 0),// 多图兼容
         ])->first();
-
-        if (is_null($visits)) {
-            return null;
-        }
-
-        $ttl = now()->endOfDay()->diffInSeconds(now());
-
-        return cache()->remember($key, $ttl, function () use ($visits) {
-            return $visits;
-        });
     }
 
     protected function redirect(Collection $request, array $data = []): string
@@ -77,21 +60,12 @@ class AnalysisRedirectService
             return $request->get('type');
         }
 
-        $key = password($request->get('gu'), $request->get('uu'));
-        $key = password($key, $request->get('ru'));
-        $key = password($key, $request->get('cid', 0));
-        $key = password($key, 'redirect');
-
-        $ttl = now()->endOfDay()->diffInSeconds(now());
-
-        $count = cache()->remember($key, $ttl, function () use ($request) {
-            return $this->visitant->where([
-                'guid' => $request->get('gu'),
-                'uuid' => $request->get('uu'),
-                'ruid' => $request->get('ru'),
-                'creative_id' => $request->get('cid', 0),
-            ])->count();
-        });
+        $count = $this->visitant->where([
+            'guid' => $request->get('gu'),
+            'uuid' => $request->get('uu'),
+            'ruid' => $request->get('ru'),
+            'creative_id' => $request->get('cid', 0),
+        ])->count();
 
         // 重复点击已点击过的广告链接行为无效
         if ($count) {
@@ -107,6 +81,8 @@ class AnalysisRedirectService
             'site_id' => $request->get('wid'),
             'channel_id' => $request->get('nid'),
             'adsense_id' => $request->get('aid'),
+            'request_time' => Date::createFromTimestamp($request->get('t')),
+            'response_time' => Date::createFromTimestamp($request->get('st')),
             'type' => $request->get('type'),
             'ip' => $request->get('ip'),
             'time' => $request->get('time'),
@@ -115,8 +91,6 @@ class AnalysisRedirectService
         $visits->update([
             'visitant_id' => $visitant->getKey(),
         ]);
-
-        cache()->forget($key);
 
         return $request->get('type');
     }
