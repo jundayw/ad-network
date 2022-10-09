@@ -150,12 +150,16 @@ class ReviewEntity extends Entity
 
     private function materialExchange(Collection $request): ?Material
     {
-        $time   = Date::createFromTimestamp($request->get('st'))->toDateString();
+        if (config('system.exchange_charging_type', 'cpc') == 'cpc') {
+            return null;
+        }
+
+        $time   = Date::createFromTimestamp($request->get('st'))->subSeconds(config('system.cpv_min_time', 300));
         $visits = $this->visits->where([
             'material_id' => $request->get('lid'),
             'site_id' => $request->get('wid'),
             'uuid' => $request->get('uu'),
-        ])->whereDate('request_time', $time)->count();
+        ])->whereDate('request_time', '>', $time)->count();
 
         if ($visits) {
             return null;

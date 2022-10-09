@@ -93,6 +93,52 @@
 
 @section('content')
     <div class="row">
+        <div class="col-md-3 col-sm-6">
+            <div class="white-box">
+                <div class="r-icon-stats">
+                    <i class="ti-wallet bg-success"></i>
+                    <div class="bodystate">
+                        <h4>{{ config('system.total_amount') }}</h4>
+                        <span class="text-muted">平台总额</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+            <div class="white-box">
+                <div class="r-icon-stats">
+                    <i class="ti-wallet bg-info"></i>
+                    <div class="bodystate">
+                        <h4>{{ config('system.rate') }}%</h4>
+                        <span class="text-muted">平台默认提成比例</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+            <div class="white-box">
+                <div class="r-icon-stats">
+                    <i class="ti-wallet bg-danger"></i>
+                    <div class="bodystate">
+                        <h4>{{ config('system.cpv_min_time') }}</h4>
+                        <span class="text-muted">CPV有效间隔(秒)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+            <div class="white-box">
+                <div class="r-icon-stats">
+                    <i class="ti-gallery bg-inverse"></i>
+                    <div class="bodystate">
+                        <h4>{{ config('system.ad_close_time') }}</h4>
+                        <span class="text-muted">广告关闭时效(秒)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-md-12">
             <div class="white-box">
                 <h3 class="box-title">广告创意与广告位尺寸分布</h3>

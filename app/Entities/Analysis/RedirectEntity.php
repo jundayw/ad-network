@@ -133,6 +133,10 @@ class RedirectEntity extends Entity
 
     private function materialExchange(Collection $request): ?Material
     {
+        if (config('system.exchange_charging_type', 'cpc') == 'cpv') {
+            return null;
+        }
+
         $time   = Date::createFromTimestamp($request->get('st'))->toDateString();
         $visits = $this->visits->where([
             'material_id' => $request->get('lid'),
