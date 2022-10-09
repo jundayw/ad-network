@@ -169,8 +169,8 @@
                                             <td>{{ $items->size->title }}</td>
                                             <td class="text-center">{{ $items->origin }}</td>
                                             <td class="text-center">{{ $items->device }}</td>
-                                            <td class="text-center">{{ $items->type }}</td>
                                             <td class="text-center">{{ $items->charging }}</td>
+                                            <td class="text-center">{{ $items->type }}</td>
                                             <td class="text-center">{{ $items->vacant }}</td>
                                             <td class="text-center">{{ $items->state }}</td>
                                             <td class="text-center">

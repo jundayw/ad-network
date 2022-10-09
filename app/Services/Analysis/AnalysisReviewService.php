@@ -2,9 +2,9 @@
 
 namespace App\Services\Analysis;
 
+use App\Entities\Analysis\ReviewEntity;
 use App\Models\Visitor;
 use App\Models\Visits;
-use App\Services\Analysis\Review\ReviewService;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Date;
 
@@ -16,7 +16,7 @@ class AnalysisReviewService
     public function __construct(
         private readonly Visits $visits,
         private readonly Visitor $visitor,
-        private readonly ReviewService $reviewService,
+        private readonly ReviewEntity $entity,
     )
     {
         echo PHP_EOL;
@@ -66,18 +66,6 @@ class AnalysisReviewService
         ]);
     }
 
-    public function run(Collection $request): string
-    {
-        $visitor = $this->visitor($request);
-
-        return match ($request->get('type')) {
-            'single', 'multigraph', 'popup', 'float', 'couplet' => $this->element($request, $visitor),
-            'default', 'union', 'hidden' => $this->vacant($request, $visitor),
-            'exchange', 'fixed' => $this->material($request, $visitor),
-            default => $request->get('type')
-        };
-    }
-
     /**
      * 访问记录是否存在
      *
@@ -94,6 +82,23 @@ class AnalysisReviewService
         ])->first();
     }
 
+    public function run(Collection $request): string
+    {
+        $visitor = $this->visitor($request);
+
+        // 重复刷新已展示过的广告位无效
+        if ($this->getVisitsExists($request)) {
+            return $request->get('type');
+        }
+
+        return match ($request->get('type')) {
+            'single', 'multigraph', 'popup', 'float', 'couplet' => $this->element($request, $visitor),
+            'default', 'union', 'hidden' => $this->vacant($request, $visitor),
+            'exchange', 'fixed' => $this->material($request, $visitor),
+            default => $request->get('type')
+        };
+    }
+
     /**
      * 保存记录
      * 重复记录不保存
@@ -105,17 +110,6 @@ class AnalysisReviewService
      */
     protected function review(Collection $request, Visitor $visitor, array $data = []): string
     {
-        $request = $request->merge($data);
-
-        // 重复刷新已展示过的广告位无效
-        if ($this->getVisitsExists($request)) {
-            return $request->get('type');
-        }
-
-        if ($vacation = $this->reviewService->review($request)) {
-            $data['vacation_id'] = $vacation->getKey();
-        }
-
         $this->visits->create(array_merge([
             'guid' => $request->get('gu'),
             'uuid' => $request->get('uu'),
@@ -143,23 +137,23 @@ class AnalysisReviewService
 
     protected function element(Collection $request, Visitor $visitor): string
     {
-        return $this->review($request, $visitor, [
+        return $this->review($request, $visitor, $this->entity->element($request, [
             'advertisement_id' => $request->get('tid'),
             'program_id' => $request->get('mid'),
             'element_id' => $request->get('eid'),
             'creative_id' => $request->get('cid'),
-        ]);
+        ]));
     }
 
     protected function vacant(Collection $request, Visitor $visitor): string
     {
-        return $this->review($request, $visitor);
+        return $this->review($request, $visitor, $this->entity->vacant($request));
     }
 
     protected function material(Collection $request, Visitor $visitor): string
     {
-        return $this->review($request, $visitor, [
+        return $this->review($request, $visitor, $this->entity->material($request, [
             'material_id' => $request->get('lid'),
-        ]);
+        ]));
     }
 }

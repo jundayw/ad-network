@@ -2,6 +2,7 @@
 
 namespace App\Services\Analysis;
 
+use App\Entities\Analysis\RedirectEntity;
 use App\Models\Visitant;
 use App\Models\Visits;
 use Illuminate\Support\Collection;
@@ -15,6 +16,7 @@ class AnalysisRedirectService
     public function __construct(
         private readonly Visits $visits,
         private readonly Visitant $visitant,
+        private readonly RedirectEntity $entity,
     )
     {
         echo PHP_EOL;
@@ -23,16 +25,6 @@ class AnalysisRedirectService
     public function __destruct()
     {
         echo PHP_EOL;
-    }
-
-    public function run(Collection $request): string
-    {
-        return match ($request->get('type')) {
-            'single', 'multigraph', 'popup', 'float', 'couplet' => $this->element($request),
-            'default', 'union', 'hidden' => $this->vacant($request),
-            'exchange', 'fixed' => $this->material($request),
-            default => $request->get('type')
-        };
     }
 
     /**
@@ -51,10 +43,8 @@ class AnalysisRedirectService
         ])->first();
     }
 
-    protected function redirect(Collection $request, array $data = []): string
+    public function run(Collection $request): string
     {
-        $request = $request->merge($data);
-
         // 未展示过的广告位点击行为无效
         if (is_null($visits = $this->getVisitsExists($request))) {
             return $request->get('type');
@@ -72,6 +62,16 @@ class AnalysisRedirectService
             return $request->get('type');
         }
 
+        return match ($request->get('type')) {
+            'single', 'multigraph', 'popup', 'float', 'couplet' => $this->element($request, $visits),
+            'default', 'union', 'hidden' => $this->vacant($request, $visits),
+            'exchange', 'fixed' => $this->material($request, $visits),
+            default => $request->get('type')
+        };
+    }
+
+    protected function redirect(Collection $request, Visits $visits, array $data = []): string
+    {
         $visitant = $this->visitant->create(array_merge([
             'guid' => $request->get('gu'),
             'uuid' => $request->get('uu'),
@@ -90,30 +90,31 @@ class AnalysisRedirectService
 
         $visits->update([
             'visitant_id' => $visitant->getKey(),
+            'vacation_id' => $visitant->getAttribute('vacation_id'),
         ]);
 
         return $request->get('type');
     }
 
-    protected function element(Collection $request): string
+    protected function element(Collection $request, Visits $visits): string
     {
-        return $this->redirect($request, [
+        return $this->redirect($request, $visits, $this->entity->element($request, [
             'advertisement_id' => $request->get('tid'),
             'program_id' => $request->get('mid'),
             'element_id' => $request->get('eid'),
             'creative_id' => $request->get('cid'),
-        ]);
+        ]));
     }
 
-    protected function vacant(Collection $request): string
+    protected function vacant(Collection $request, Visits $visits): string
     {
-        return $this->redirect($request);
+        return $this->redirect($request, $visits, $this->entity->vacant($request));
     }
 
-    protected function material(Collection $request): string
+    protected function material(Collection $request, Visits $visits): string
     {
-        return $this->redirect($request, [
+        return $this->redirect($request, $visits, $this->entity->material($request, [
             'material_id' => $request->get('lid'),
-        ]);
+        ]));
     }
 }

@@ -30,6 +30,11 @@ class Vacation extends Model
         );
     }
 
+    protected function originRate(): Attribute
+    {
+        return $this->getMoney();
+    }
+
     protected function rate(): Attribute
     {
         return $this->getMoney();

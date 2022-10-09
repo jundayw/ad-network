@@ -13,7 +13,8 @@
         "jundayw/location-based-services": "^1.0",
         "jundayw/pinyin": "^3.0",
         "laravel/framework": "^9.19",
-        "laravel/tinker": "^2.7"
+        "laravel/tinker": "^2.7",
+        "ext-bcmath": "*"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.7",

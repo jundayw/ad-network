@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Analysis\Review;
+namespace App\Entities\Analysis;
 
 use App\Models\Advertisement;
 use App\Models\Element;
@@ -13,7 +13,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
 
-class ReviewService
+class ReviewEntity extends Entity
 {
     public function __construct(
         private readonly Visits $visits,
@@ -30,42 +30,43 @@ class ReviewService
 
     private function elementCPM(Collection $request, Element $element): ?Vacation
     {
+        $time     = Date::createFromTimestamp($request->get('st'))->toDateString();
         $vacation = $this->vacation->where([
             'creative_id' => $request->get('cid'),
             'site_id' => $request->get('wid'),
             'ip' => $request->get('ip'),
-        ])->whereDate('request_time', Date::createFromTimestamp($request->get('st'))->toDateString())->count();
+        ])->whereDate('request_time', $time)->count();
 
         if ($vacation) {
             return null;
         }
 
-        return $this->element($request, $element);
+        return $this->elementVacation($request, $element);
     }
 
     private function elementCPV(Collection $request, Element $element): ?Vacation
     {
+        $time     = Date::createFromTimestamp($request->get('st'))->subSeconds(config('system.cpv_min_time', 300));
         $vacation = $this->vacation->where([
-            'uuid' => $request->get('uu'),
             'creative_id' => $request->get('cid'),
             'site_id' => $request->get('wid'),
-            ['request_time', '>', Date::createFromTimestamp($request->get('st'))->subSeconds(config('system.cpv_min_time', 300))],
-        ])->count();
+            'uuid' => $request->get('uu'),
+        ])->where('request_time', '>', $time)->count();
 
         if ($vacation) {
             return null;
         }
 
-        return $this->element($request, $element);
+        return $this->elementVacation($request, $element);
     }
 
-    protected function element(Collection $request, Element $element): ?Vacation
+    protected function elementVacation(Collection $request, Element $element): ?Vacation
     {
         DB::beginTransaction();
 
         try {
             $rateOriginal  = bcdiv($element->getRawOriginal('rate', 0), 1000, 4);
-            $rateAttribute = bcdiv($element->getAttribute('rate', 0), 1000, 4);
+            $rateAttribute = bcdiv($element->getAttribute('rate'), 1000, 4);
 
             $pt     = $rateOriginal * bcdiv(config('system.rate'), 100, 4);
             $origin = max($rateOriginal - $pt, 0);
@@ -76,7 +77,8 @@ class ReviewService
             // 流量主获取佣金
             $this->publishment->find($request->get('pid'))->increment('balance', $origin);
             // 广告计划限额更新
-            if ($element->program->getAttribute('expire') == ($expire = get_time('Y-m-d'))) {
+            $expire = Date::createFromTimestamp($request->get('st'))->toDateString();
+            if ($element->program->getAttribute('expire') == $expire) {
                 $element->program->increment('charge', $rateOriginal);
             } else {
                 $element->program->lockForUpdate()->find($element->program->id)->update([
@@ -102,6 +104,7 @@ class ReviewService
                 'request_time' => Date::createFromTimestamp($request->get('t')),
                 'response_time' => Date::createFromTimestamp($request->get('st')),
                 'type' => $element->getAttribute('type'),
+                'origin_rate' => $rateAttribute,
                 'rate' => bcdiv($origin, 10000, 4),
                 'ip' => $request->get('ip'),
                 'time' => $request->get('time'),
@@ -117,21 +120,48 @@ class ReviewService
         return null;
     }
 
-    protected function vacantExchange(Collection $request)
+    public function element(Collection $request, array $data = []): array
     {
+        $element = $this->element->withWhereHas('program')->find($request->get('eid'));
+
+        if (is_null($element)) {
+            return $data;
+        }
+
+        $vacation = match ($element->getAttribute('type')) {
+            'cpm' => $this->elementCPM($request, $element),
+            'cpv' => $this->elementCPV($request, $element),
+            default => null
+        };
+
+        if (is_null($vacation)) {
+            return $data;
+        }
+
+        return array_merge($data, [
+            'vacation_id' => $vacation->getKey(),
+        ]);
+    }
+
+    public function vacant(Collection $request, array $data = []): array
+    {
+        return $data;
+    }
+
+    private function materialExchange(Collection $request): ?Material
+    {
+        $time   = Date::createFromTimestamp($request->get('st'))->toDateString();
         $visits = $this->visits->where([
-            'uuid' => $request->get('uu'),
             'material_id' => $request->get('lid'),
             'site_id' => $request->get('wid'),
-        ])->whereDate('request_time', Date::createFromTimestamp($request->get('st'))->toDateString())->count();
+            'uuid' => $request->get('uu'),
+        ])->whereDate('request_time', $time)->count();
 
         if ($visits) {
             return null;
         }
 
-        $material = $this->material->with([
-            'publishments',
-        ])->find($request->get('lid'));
+        $material = $this->material->withWhereHas('publishments')->find($request->get('lid'));
 
         if (is_null($material)) {
             return null;
@@ -139,33 +169,22 @@ class ReviewService
 
         $material->publishments->decrement('weight');
 
-        $this->publishment->find($request->get('pid'))->increment('weight');
+        $this->publishment->lockForUpdate()->find($request->get('pid'))->increment('weight');
 
-        return null;
+        return $material;
     }
 
-    public function review(Collection $request): ?Vacation
+    public function material(Collection $request, array $data = []): array
     {
-        if ($request->get('type') == 'exchange') {
-            return $this->vacantExchange($request);
+        $material = match ($request->get('type')) {
+            'exchange' => $this->materialExchange($request),
+            default => null
+        };
+
+        if (is_null($material)) {
+            return $data;
         }
 
-        $element = $this->element->with([
-            'program',
-        ])->find($request->get('eid'));
-
-        if (is_null($element)) {
-            return null;
-        }
-
-        if ($element->getAttribute('type') == 'cpm') {
-            return $this->elementCPM($request, $element);
-        }
-
-        if ($element->getAttribute('type') == 'cpv') {
-            return $this->elementCPV($request, $element);
-        }
-
-        return null;
+        return $data;
     }
 }
