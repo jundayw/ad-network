@@ -15,13 +15,23 @@ class Vacation extends Model
 
     public function getType(?string $value = null, ?string $default = '--'): string|array
     {
-        return $this->getEnumeration([
+        $attributes = [
             'CPC' => '按点击付费(CPC)',
             'CPM' => '按千次IP展示付费(CPM)',
             'CPV' => '按千次页面展示付费(CPV)',
-            'CPA' => '按指定的行为付费(CPA)',
-            'CPS' => '按佣金付费(CPS)',
-        ], $value, $default);
+            // 'CPA' => '按指定的行为付费(CPA)',
+            // 'CPS' => '按佣金付费(CPS)',
+        ];
+
+        if (config('system.cpa_state', 'disable') == 'normal') {
+            $attributes['CPA'] = '按指定的行为付费(CPA)';
+        }
+
+        if (config('system.cps_state', 'disable') == 'normal') {
+            $attributes['CPS'] = '按佣金付费(CPS)';
+        }
+
+        return $this->getEnumeration($attributes, $value, $default);
     }
 
     protected function type(): Attribute
