@@ -33,9 +33,9 @@ class ReviewEntity extends Entity
         $time     = Date::createFromTimestamp($request->get('st'))->toDateString();
         $vacation = $this->vacation->where([
             'creative_id' => $request->get('cid'),
-            'site_id' => $request->get('wid'),
+            'adsense_id' => $request->get('aid'),
             'ip' => $request->get('ip'),
-        ])->whereDate('request_time', $time)->count();
+        ])->whereDate('response_time', $time)->count();
 
         if ($vacation) {
             return null;
@@ -49,9 +49,10 @@ class ReviewEntity extends Entity
         $time     = Date::createFromTimestamp($request->get('st'))->subSeconds(config('system.cpv_min_time', 300));
         $vacation = $this->vacation->where([
             'creative_id' => $request->get('cid'),
-            'site_id' => $request->get('wid'),
+            'adsense_id' => $request->get('aid'),
+            'guid' => $request->get('gu'),
             'uuid' => $request->get('uu'),
-        ])->where('request_time', '>', $time)->count();
+        ])->where('response_time', '>', $time)->count();
 
         if ($vacation) {
             return null;
@@ -157,9 +158,10 @@ class ReviewEntity extends Entity
         $time   = Date::createFromTimestamp($request->get('st'))->subSeconds(config('system.cpv_min_time', 300));
         $visits = $this->visits->where([
             'material_id' => $request->get('lid'),
-            'site_id' => $request->get('wid'),
+            'adsense_id' => $request->get('aid'),
+            'guid' => $request->get('gu'),
             'uuid' => $request->get('uu'),
-        ])->whereDate('request_time', '>', $time)->count();
+        ])->where('response_time', '>', $time)->count();
 
         if ($visits) {
             return null;

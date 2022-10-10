@@ -30,11 +30,13 @@ class RedirectEntity extends Entity
 
     private function elementCPC(Collection $request, Element $element): ?Vacation
     {
+        $time     = Date::createFromTimestamp($request->get('st'))->subSeconds(config('system.cpc_min_time', 300));
         $vacation = $this->vacation->where([
+            'creative_id' => $request->get('cid'),
+            'adsense_id' => $request->get('aid'),
             'guid' => $request->get('gu'),
             'uuid' => $request->get('uu'),
-            'ruid' => $request->get('ru'),
-        ])->count();
+        ])->where('response_time', '>', $time)->count();
 
         if ($vacation) {
             return null;
@@ -136,12 +138,13 @@ class RedirectEntity extends Entity
             return null;
         }
 
-        $time   = Date::createFromTimestamp($request->get('st'))->toDateString();
+        $time   = Date::createFromTimestamp($request->get('st'))->subSeconds(config('system.cpc_min_time', 300));
         $visits = $this->visits->where([
             'material_id' => $request->get('lid'),
-            'site_id' => $request->get('wid'),
+            'adsense_id' => $request->get('aid'),
+            'guid' => $request->get('gu'),
             'uuid' => $request->get('uu'),
-        ])->whereDate('request_time', $time)->count();
+        ])->where('response_time', $time)->count();
 
         if ($visits) {
             return null;
