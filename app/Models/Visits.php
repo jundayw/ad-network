@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Visits extends Model
@@ -33,5 +34,10 @@ class Visits extends Model
             get: fn($value, $attributes) => strtolower($value),
             set: fn($value, $attributes) => strtoupper($value),
         );
+    }
+
+    public function visitor(): BelongsTo
+    {
+        return $this->belongsTo(Visitor::class)->withTrashed();
     }
 }

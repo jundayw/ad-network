@@ -78,4 +78,8 @@ Route::namespace('Advertisement')->name('advertisement.')->group(function () {
         Route::get('withdraw', 'withdraw')->name('withdraw');
         Route::post('update', 'update')->name('update');
     });
+    // 报告
+    Route::prefix('vacation')->controller('VacationController')->name('vacation.')->group(function () {
+        Route::get('list', 'list')->name('list');
+    });
 });
