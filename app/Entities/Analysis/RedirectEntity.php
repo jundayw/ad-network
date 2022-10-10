@@ -98,7 +98,6 @@ class RedirectEntity extends Entity
             return $vacation;
         } catch (\Exception $exception) {
             DB::rollBack();
-            dd($exception);
         }
 
         return null;

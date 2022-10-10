@@ -88,9 +88,12 @@ class AnalysisRedirectService
             'time' => $request->get('time'),
         ], $data));
 
+        if ($vacation_id = $visitant->getAttribute('vacation_id')) {
+            $visits->setAttribute('vacation_id', $vacation_id);
+        }
+
         $visits->update([
             'visitant_id' => $visitant->getKey(),
-            'vacation_id' => $visitant->getAttribute('vacation_id'),
         ]);
 
         return $request->get('type');
