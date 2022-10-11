@@ -32,9 +32,9 @@ class AnalysisRepository extends Repository
             'ip' => $request->getClientIp(),
             'time' => get_time(),
         ]);
-        if (config('system.analysis_queue_ad', 'disable') == 'normal') {
+        if (config('system.analysis_queue_review', 'disable') == 'normal') {
             // 调度给队列处理图片展示统计
-            $review = config('system.analysis_queue_ad_time');
+            $review = config('system.analysis_queue_review_time');
             $delay  = mt_rand($review, $review += config('system.cpv_min_time') / 2);
             AnalysisReviewJob::dispatch($data)->delay(now()->addSeconds($delay));
         } else {
