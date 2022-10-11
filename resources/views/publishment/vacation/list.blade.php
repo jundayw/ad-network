@@ -105,8 +105,8 @@
                                         <th data-hide="all">User-Agent</th>
                                         <th data-hide="all">IP</th>
                                         <th data-hide="all">来源网址</th>
-                                        <th data-hide="all">标题</th>
-                                        <th data-hide="all">网址</th>
+                                        <th data-hide="all">网站标题</th>
+                                        <th data-hide="all">网站网址</th>
                                     </tr>
                                     </thead>
                                     <tbody rel-action="viewer">

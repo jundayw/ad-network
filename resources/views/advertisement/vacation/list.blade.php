@@ -105,8 +105,10 @@
                                         <th data-hide="all">User-Agent</th>
                                         <th data-hide="all">IP</th>
                                         <th data-hide="all">来源网址</th>
-                                        <th data-hide="all">标题</th>
-                                        <th data-hide="all">网址</th>
+                                        <th data-hide="all">网站标题</th>
+                                        <th data-hide="all">网站网址</th>
+                                        <th data-hide="all">网站编号</th>
+                                        <th data-hide="all">广告位编号</th>
                                     </tr>
                                     </thead>
                                     <tbody rel-action="viewer">
@@ -141,6 +143,8 @@
                                             <td>{{ $items?->visits?->document_referrer ?? '--' }}</td>
                                             <td>{{ $items?->visits?->document_title ?? '--' }}</td>
                                             <td>{{ $items?->visits?->document_url ?? '--' }}</td>
+                                            <td>{{ password($items->site_id, $items->site_id) ?? '--' }}</td>
+                                            <td>{{ password($items->adsense_id, $items->adsense_id) ?? '--' }}</td>
                                         </tr>
                                     @endforeach
                                     </tbody>

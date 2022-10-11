@@ -33,7 +33,8 @@ class ReviewEntity extends Entity
         $time     = Date::createFromTimestamp($request->get('st'))->toDateString();
         $vacation = $this->vacation->where([
             'creative_id' => $request->get('cid'),
-            'adsense_id' => $request->get('aid'),
+            // 'adsense_id' => $request->get('aid'),
+            'site_id' => $request->get('wid'),
             'ip' => $request->get('ip'),
         ])->whereDate('response_time', $time)->count();
 
@@ -74,18 +75,18 @@ class ReviewEntity extends Entity
             $this->system->where('key', 'TOTAL_AMOUNT')->increment('value', bcdiv($rateOriginal - $origin, 10000, 4));
 
             // 广告主支付费用
-            $advertisement = tap($this->advertisement->find($request->get('tid')), function ($advertisement) use ($rateOriginal) {
-                $advertisement->decrement('balance', $rateOriginal);
-            });
-
-            if ($advertisement->getAttribute('balance') < 0) {
-                throw new \Exception("{$advertisement->getAttribute('name')} 账户余额不足");
+            $advertisement = $this->advertisement->where([
+                'id' => $request->get('tid'),
+                ['balance', '>=', $rateOriginal],
+            ])->decrement('balance', $rateOriginal);
+            // 账户余额不足
+            if ($advertisement == 0) {
+                throw new \Exception("广告主 {$request->get('tid')} 账户余额不足");
             }
 
             // 流量主获取佣金
-            tap($this->publishment->find($request->get('pid')), function ($publishment) use ($origin) {
-                $publishment->increment('balance', $origin);
-            });
+            $this->publishment->where('id', $request->get('pid'))->increment('balance', $origin);
+
             // 广告计划限额更新
             $expire = Date::createFromTimestamp($request->get('st'))->toDateString();
             if ($element->program->getAttribute('expire') == $expire) {
