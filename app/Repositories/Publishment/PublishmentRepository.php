@@ -3,13 +3,16 @@
 namespace App\Repositories\Publishment;
 
 use App\Models\Size;
+use App\Models\Vacation;
 use App\Repositories\Repository;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class PublishmentRepository extends Repository
 {
     public function __construct(
-        private readonly Size $size
+        private readonly Size $size,
+        private readonly Vacation $vacation
     )
     {
         //
@@ -17,8 +20,31 @@ class PublishmentRepository extends Repository
 
     public function index(Request $request): array
     {
-        $data = [];
+        $name = sprintf('%s-%s', __METHOD__, $request->user()->publishment_id);
 
+        if (cache()->has($name)) {
+            return cache()->get($name);
+        }
+
+        $data = [
+            'size' => $this->getSize($request),
+            'vacation' => $this->getVacation($request),
+            'publishment' => $request->user()->publishment,
+        ];
+
+        $filter = [
+            'time' => get_time(),
+        ];
+
+        $compact = compact('filter', 'data');
+
+        cache()->remember($name, 5 * 60, fn() => $compact);
+
+        return $compact;
+    }
+
+    private function getSize(Request $request): array
+    {
         $size = $this->size->withCount([
             'adsense' => function ($query) use ($request) {
                 $query->where('publishment_id', $request->user()->getAttribute('publishment_id'));
@@ -39,16 +65,50 @@ class PublishmentRepository extends Repository
             return $items;
         });
 
-        $data['size'] = [
+        return [
             'xAxis' => $size->pluck('legend')->implode(','),
             'adsense' => $size->pluck('adsense_count')->implode(','),
             'creative' => $size->pluck('creative_count')->implode(','),
         ];
+    }
 
-        $filter = [
-            'time' => get_time(),
+    private function getVacation(Request $request): array
+    {
+        $times = now()->subDays(7)->daysUntil(now())->map(function (Carbon $carbon) {
+            return $carbon->toDateString();
+        });
+
+        $vacation = $this->vacation
+            ->selectRaw('type,SUM(rate) AS rate,DATE(response_time) AS response_time')
+            ->groupBy('type')
+            ->groupByRaw('DATE(response_time)')
+            ->whereDate('response_time', '>=', now()->subDays(7)->toDateString())
+            ->where('publishment_id', $request->user()->getAttribute('publishment_id'))
+            ->get();
+
+        $vacations = [
+            'type' => ['CPC', 'CPM', 'CPV', 'CPA', 'CPS'],
         ];
 
-        return compact('filter', 'data');
+        foreach ($times as $time) {
+            $vacations['times'][] = $time;
+            $vacations['cpc'][]   = $vacation->where('type', 'cpc')->where('response_time', $time)->sum('rate');
+            $vacations['cpm'][]   = $vacation->where('type', 'cpm')->where('response_time', $time)->sum('rate');
+            $vacations['cpv'][]   = $vacation->where('type', 'cpv')->where('response_time', $time)->sum('rate');
+            $vacations['cpa'][]   = $vacation->where('type', 'cpa')->where('response_time', $time)->sum('rate');
+            $vacations['cps'][]   = $vacation->where('type', 'cps')->where('response_time', $time)->sum('rate');
+        }
+
+        return [
+            'type' => "'" . implode("','", $vacations['type']) . "'",
+            'times' => "'" . implode("','", $vacations['times']) . "'",
+            'data' => [
+                'CPC' => implode(',', $vacations['cpc']),
+                'CPM' => implode(',', $vacations['cpm']),
+                'CPV' => implode(',', $vacations['cpv']),
+                'CPA' => implode(',', $vacations['cpa']),
+                'CPS' => implode(',', $vacations['cps']),
+            ],
+        ];
     }
 }

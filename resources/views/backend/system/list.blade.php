@@ -80,8 +80,8 @@
                                     @foreach($data as $items)
                                         <tr>
                                             <td class="text-center">{{ $items->id }}</td>
-                                            <td class="text-center">{{ $items->title }}</td>
-                                            <td class="text-center">{{ $items->getRawOriginal('key') }}</td>
+                                            <td class="text-left">{{ $items->title }}</td>
+                                            <td class="text-left">{{ $items->getRawOriginal('key') }}</td>
                                             <td>
                                                 @if($items->getRawOriginal('type') == 'FILE')
                                                     <a href="javascript:void(0);">

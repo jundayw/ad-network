@@ -147,8 +147,8 @@ abstract class Model extends EloquentModel
     protected function getMoney(?int $scale = 4): Attribute
     {
         return new Attribute(
-            get: fn($value, $attributes) => $value > 0 ? bcdiv($value, 10000, $scale) : 0,
-            set: fn($value, $attributes) => $value > 0 ? bcmul($value, 10000, $scale) : 0,
+            get: fn($value, $attributes) => bcdiv($value, 10000, $scale),
+            set: fn($value, $attributes) => bcmul($value, 10000, $scale),
         );
     }
 }
