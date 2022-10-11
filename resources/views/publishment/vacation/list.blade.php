@@ -104,6 +104,9 @@
                                         <th data-hide="all">分辨率</th>
                                         <th data-hide="all">User-Agent</th>
                                         <th data-hide="all">IP</th>
+                                        <th data-hide="all">来源网址</th>
+                                        <th data-hide="all">标题</th>
+                                        <th data-hide="all">网址</th>
                                     </tr>
                                     </thead>
                                     <tbody rel-action="viewer">
@@ -135,6 +138,9 @@
                                             </td>
                                             <td>{{ $items?->visits?->visitor?->user_agent ?? '--' }}</td>
                                             <td>{{ $items->ip }}</td>
+                                            <td>{{ $items?->visits?->document_referrer ?? '--' }}</td>
+                                            <td>{{ $items?->visits?->document_title ?? '--' }}</td>
+                                            <td>{{ $items?->visits?->document_url ?? '--' }}</td>
                                         </tr>
                                     @endforeach
                                     </tbody>
