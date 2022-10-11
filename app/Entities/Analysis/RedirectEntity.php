@@ -58,9 +58,18 @@ class RedirectEntity extends Entity
             $this->system->where('key', 'TOTAL_AMOUNT')->increment('value', bcdiv($rateOriginal - $origin, 10000, 4));
 
             // 广告主支付费用
-            $this->advertisement->find($request->get('tid'))->decrement('balance', $rateOriginal);
+            $advertisement = tap($this->advertisement->find($request->get('tid')), function ($advertisement) use ($rateOriginal) {
+                $advertisement->decrement('balance', $rateOriginal);
+            });
+
+            if ($advertisement->getAttribute('balance') < 0) {
+                throw new \Exception("{$advertisement->getAttribute('name')} 账户余额不足");
+            }
+
             // 流量主获取佣金
-            $this->publishment->find($request->get('pid'))->increment('balance', $origin);
+            tap($this->publishment->find($request->get('pid')), function ($publishment) use ($origin) {
+                $publishment->increment('balance', $origin);
+            });
             // 广告计划限额更新
             $expire = Date::createFromTimestamp($request->get('st'))->toDateString();
             if ($element->program->getAttribute('expire') == $expire) {
