@@ -13,14 +13,25 @@ class ElementUpdateRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
+        $rules = [
             'title' => ['required'],
             'release_begin' => ['required', 'before_or_equal:release_finish'],
             'release_finish' => ['required', 'after_or_equal:release_begin'],
             'period_begin' => ['required', 'before_or_equal:period_finish'],
             'period_finish' => ['required', 'after_or_equal:period_begin'],
-            'rate' => ['required', 'numeric'],
         ];
+
+        $rate = match ($this->get('type')) {
+            'cpc' => config('system.cpc_min_amount'),
+            'cpm' => config('system.cpm_min_amount'),
+            'cpv' => config('system.cpv_min_amount'),
+            'cpa' => config('system.cpa_min_amount'),
+            'cps' => config('system.cps_min_amount'),
+        };
+
+        $rules['rate'] = ['required', 'numeric', "gte:{$rate}"];
+
+        return $rules;
     }
 
     /**

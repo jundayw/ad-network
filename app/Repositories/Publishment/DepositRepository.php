@@ -134,6 +134,10 @@ class DepositRepository extends Repository
 
     public function update(Request $request): Deposit
     {
+        if (($withdraw_min_amount = config('system.withdraw_min_amount')) > $request->get('amount')) {
+            throw new RenderErrorResponseException("最低提现金额：{$withdraw_min_amount}");
+        }
+
         $count = $this->deposit->where([
             'deposit_id' => $request->user()->getAttribute('publishment_id'),
             'deposit_type' => 'publishment',

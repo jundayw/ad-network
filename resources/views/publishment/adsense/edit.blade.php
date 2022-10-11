@@ -51,14 +51,15 @@
                             <div class="form-group row">
                                 <label class="col-md-2 control-label col-form-label">类型</label>
                                 <div class="col-md-10">
-                                    <div class="radio-list">
-                                        @foreach($filter['origin'] as $key => $origin)
+                                    @foreach($filter['origin'] as $key => $origin)
+                                        <div class="form-check">
                                             <label class="radio-inline">
                                                 <input type="radio" name="origin" value="{{ $key }}" @checked($key == $data->origin)>
                                                 {{ $origin }}
+                                                <small class="form-text">{{ $filter['helps']['origin'][$key] ?? '' }}</small>
                                             </label>
-                                        @endforeach
-                                    </div>
+                                        </div>
+                                    @endforeach
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -69,6 +70,7 @@
                                             <label class="radio-inline">
                                                 <input type="radio" name="charging" value="{{ $key }}" @checked($key == $data->charging)>
                                                 {{ $charging }}
+                                                <small class="form-text">{{ $filter['helps']['type'][$key] ?? '' }}</small>
                                             </label>
                                         </div>
                                     @endforeach
@@ -118,6 +120,7 @@
                                             <label class="radio-inline">
                                                 <input type="radio" name="vacant" value="{{ $key }}" @checked($key == $data->vacant)>
                                                 {{ $vacant }}
+                                                <small class="form-text">{{ $filter['helps']['vacant'][$key] ?? '' }}</small>
                                             </label>
                                         </div>
                                     @endforeach

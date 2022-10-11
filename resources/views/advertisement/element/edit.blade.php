@@ -1,5 +1,26 @@
 @extends('advertisement.layouts.main')
 
+@push('plugins')
+    <script>
+        $(function () {
+            $('[name=type]').each(function () {
+                let target = '元';
+                switch ($(this).val()) {
+                    case 'cpm':
+                        target = '元/千/IP';
+                        break;
+                    case 'cpv':
+                        target = '元/千/PV';
+                        break;
+                    default:
+                        target = '元/次';
+                }
+                $('[target-type]').html(target);
+            });
+        });
+    </script>
+@endpush
+
 @section('content')
     <div class="row">
         <div class="col-md-12">
@@ -81,6 +102,7 @@
                                 </div>
                             </div>
                         </div>
+                        <input type="hidden" name="type" value="{{ $data->type }}"/>
                         <input type="hidden" name="id" value="{{ $data->id }}"/>
                         <div class="panel-footer">
                             <div class="offset-md-2">

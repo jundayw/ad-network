@@ -151,4 +151,41 @@ abstract class Model extends EloquentModel
             set: fn($value, $attributes) => bcmul($value, 10000, $scale),
         );
     }
+
+    public function helpBlock(string $block = ''): mixed
+    {
+        $cpc_min_time           = config('system.cpc_min_time', 300);
+        $cpv_min_time           = config('system.cpv_min_time', 300);
+        $exchange_charging_type = config('system.exchange_charging_type', 'cpc') == 'cpc' ? '点击' : '展示';
+        // help block
+        $blocks = [
+            'origin' => [
+                'union' => '广告位展示联盟广告资源',
+                'local' => '广告位不匹配联盟广告资源，您可以在【空闲设置】中自定义展示内容',
+            ],
+            'type' => [
+                'default' => '自动匹配广告类型',
+                'cpc' => "按点击付费，{$cpc_min_time}秒内重复点击不计费",
+                'cpm' => '按一天24小时内，每条广告资源在每个广告位内1000个IP地址付费',
+                'cpv' => "按展示付费，{$cpv_min_time}秒内重复展示不计费",
+                'cpa' => '按下载、注册等行为付费',
+                'cps' => '按成交订单金额比例付费',
+            ],
+            'vacant' => [
+                'exchange' => "未匹配到广告资源时所有站点之间互相引量，按{$exchange_charging_type}计算换量权重",
+                'default' => '未匹配到广告资源时显示您自定义的广告',
+                'union' => '未匹配到广告资源时使用第三方广告联盟代码',
+                'fixed' => '未匹配到广告资源时显示联盟公益广告',
+                'hidden' => '未匹配到广告资源时隐藏当前广告位',
+            ],
+        ];
+
+        foreach (explode('.', $block) as $key) {
+            if ($key) {
+                $blocks = array_key_exists($key, $blocks) ? $blocks[$key] : [];
+            }
+        }
+
+        return $blocks;
+    }
 }

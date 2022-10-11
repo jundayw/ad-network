@@ -79,10 +79,39 @@ class ElementRepository extends Repository
 
     public function create(Request $request): array
     {
+        $estimate = cache()->remember(static::class, 5 * 60, function () {
+            return $this->element->selectRaw('type,MAX(rate) AS rate')->whereHas('program', function ($query) {
+                $query->where([
+                    'state' => 'NORMAL',
+                ])->where(function ($query) {
+                    $query->where(function ($query) {
+                        $query->where([
+                            'expire' => get_time('Y-m-d'),
+                        ])->whereRaw('`charge` < `limit`');
+                    })->orWhere('expire', '<>', get_time('Y-m-d'))->orWhereNull('expire');
+                });
+            })->where('state', 'NORMAL')->groupBy('type')->get();
+        });
+
+        $element = function ($element) {
+            if ($element instanceof Element) {
+                return $element->getAttribute('rate');
+            }
+            return $element['rate'];
+        };
+
         $filter = [
             'program' => $this->program($request),
             'type' => $this->element->getType(),
             'state' => $this->element->getState(),
+            'helps' => $this->element->helpBlock(),
+            'estimate' => [
+                'cpc' => $estimate->where('type', 'cpc')->push(['rate' => config('system.cpc_min_amount')])->max($element),
+                'cpm' => $estimate->where('type', 'cpm')->push(['rate' => config('system.cpm_min_amount')])->max($element),
+                'cpv' => $estimate->where('type', 'cpv')->push(['rate' => config('system.cpv_min_amount')])->max($element),
+                'cpa' => $estimate->where('type', 'cpa')->push(['rate' => config('system.cpa_min_amount')])->max($element),
+                'cps' => $estimate->where('type', 'cps')->push(['rate' => config('system.cps_min_amount')])->max($element),
+            ],
         ];
 
         return compact('filter');

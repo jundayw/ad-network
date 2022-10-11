@@ -4,11 +4,13 @@
     <script>
         $(function () {
             $('[name=type]').change(function () {
-                var target = '元';
-                switch ($(this).val()) {
+                let target = '元';
+                switch ($('[name=type]:checked').val()) {
                     case 'cpm':
+                        target = '元/千/IP';
+                        break;
                     case 'cpv':
-                        target = '元/千次';
+                        target = '元/千/PV';
                         break;
                     default:
                         target = '元/次';
@@ -83,6 +85,8 @@
                                             <label class="radio-inline">
                                                 <input type="radio" name="type" value="{{ $key }}" @checked($loop->first)>
                                                 {{ $type }}
+                                                <small class="form-text text-muted">每 <code>5</code> 分钟更新一次预估出价（低于该价格可能无展现机会）：<code>{{ $filter['estimate'][$key] ?? '--' }}</code></small>
+                                                <small>{{ $filter['helps']['type'][$key] ?? '' }}</small>
                                             </label>
                                         </div>
                                     @endforeach

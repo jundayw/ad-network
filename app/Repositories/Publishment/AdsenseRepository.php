@@ -131,6 +131,7 @@ class AdsenseRepository extends Repository
             'charging' => $this->adsense->getCharging(),
             'vacant' => $this->adsense->getVacant(),
             'state' => $this->adsense->getState(),
+            'helps' => $this->adsense->helpBlock(),
         ];
         return compact('filter');
     }
@@ -214,6 +215,7 @@ class AdsenseRepository extends Repository
             'charging' => $this->adsense->getCharging(),
             'vacant' => $this->adsense->getVacant(),
             'state' => $this->adsense->getState(),
+            'helps' => $this->adsense->helpBlock(),
         ];
 
         return compact('filter', 'data');

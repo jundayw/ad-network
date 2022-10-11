@@ -13,7 +13,7 @@ class ElementCreateRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
+        $rules = [
             'title' => ['required'],
             'program' => ['required', 'gte:1'],
             'release_begin' => ['required', 'before_or_equal:release_finish'],
@@ -21,8 +21,19 @@ class ElementCreateRequest extends FormRequest
             'period_begin' => ['required', 'before_or_equal:period_finish'],
             'period_finish' => ['required', 'after_or_equal:period_begin'],
             'type' => ['required'],
-            'rate' => ['required', 'numeric'],
         ];
+
+        $rate = match ($this->get('type')) {
+            'cpc' => config('system.cpc_min_amount'),
+            'cpm' => config('system.cpm_min_amount'),
+            'cpv' => config('system.cpv_min_amount'),
+            'cpa' => config('system.cpa_min_amount'),
+            'cps' => config('system.cps_min_amount'),
+        };
+
+        $rules['rate'] = ['required', 'numeric', "gte:{$rate}"];
+
+        return $rules;
     }
 
     /**
