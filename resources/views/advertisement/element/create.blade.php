@@ -85,8 +85,8 @@
                                             <label class="radio-inline">
                                                 <input type="radio" name="type" value="{{ $key }}" @checked($loop->first)>
                                                 {{ $type }}
-                                                <small class="form-text text-muted">每 <code>5</code> 分钟更新一次预估出价（低于该价格可能无展现机会）：<code>{{ $filter['estimate'][$key] ?? '--' }}</code></small>
-                                                <small>{{ $filter['helps']['type'][$key] ?? '' }}</small>
+                                                <small class="form-text text-muted">每 <code>5</code> 分钟更新一次预估出价：<code>{{ $filter['estimate'][$key] ?? '--' }}</code>，低于该价格可能无展现机会</small>
+                                                <small class="form-text">{{ $filter['helps']['type'][$key] ?? '' }}</small>
                                             </label>
                                         </div>
                                     @endforeach

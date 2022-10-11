@@ -165,14 +165,14 @@ abstract class Model extends EloquentModel
             ],
             'type' => [
                 'default' => '自动匹配广告类型',
-                'cpc' => "按点击付费，{$cpc_min_time}秒内重复点击不计费",
-                'cpm' => '按一天24小时内，每条广告资源在每个广告位内1000个IP地址付费',
-                'cpv' => "按展示付费，{$cpv_min_time}秒内重复展示不计费",
+                'cpc' => "按点击付费 {$cpc_min_time} 秒内重复点击不计费",
+                'cpm' => '按一天 24 小时内，每条广告资源在每个广告位内 1000 个IP地址付费',
+                'cpv' => "按展示付费 {$cpv_min_time} 秒内重复展示不计费",
                 'cpa' => '按下载、注册等行为付费',
                 'cps' => '按成交订单金额比例付费',
             ],
             'vacant' => [
-                'exchange' => "未匹配到广告资源时所有站点之间互相引量，按{$exchange_charging_type}计算换量权重",
+                'exchange' => "未匹配到广告资源时所有站点之间互相引量，按 {$exchange_charging_type} 计算换量权重",
                 'default' => '未匹配到广告资源时显示您自定义的广告',
                 'union' => '未匹配到广告资源时使用第三方广告联盟代码',
                 'fixed' => '未匹配到广告资源时显示联盟公益广告',

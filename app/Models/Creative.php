@@ -17,7 +17,7 @@ class Creative extends Model
     public function getState(?string $value = null, ?string $default = '--'): string|array
     {
         return $this->getEnumeration([
-            'NORMAL' => '正常',
+            'NORMAL' => '启用',
             'DISABLE' => '禁用',
         ], $value, $default);
     }
