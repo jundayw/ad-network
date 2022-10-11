@@ -86,6 +86,8 @@
                                         <th class="text-center">名称</th>
                                         <th class="text-center" colspan="3">广告</th>
                                         <th class="text-center">设备</th>
+                                        <th class="text-center">浏览量</th>
+                                        <th class="text-center">点击量</th>
                                         <th class="text-center">状态</th>
                                         <th class="text-center text-nowrap">操作</th>
                                     </tr>
@@ -95,14 +97,16 @@
                                         <tr>
                                             <td class="text-center">{{ $items->id }}</td>
                                             <td>{{ $items->title }}</td>
-                                            <td>{{ $items->size->width }}x{{ $items->size->height }}</td>
                                             <td>{{ $items->size->title }}</td>
+                                            <td>{{ $items->size->width }}x{{ $items->size->height }}</td>
                                             <td width="120">
                                                 <a href="javascript:void(0);">
                                                     <img src="{{ $items->image }}" style="max-height: 18px;">
                                                 </a>
                                             </td>
                                             <td class="text-center">{{ $items->device }}</td>
+                                            <td class="text-center">{{ $items->visits_count }}</td>
+                                            <td class="text-center">{{ $items->visitant_count }}</td>
                                             <td class="text-center">{{ $items->state }}</td>
                                             <td class="text-center text-nowrap">
                                                 @policy('publishment.material.edit')
