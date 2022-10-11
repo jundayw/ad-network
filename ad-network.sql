@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2022-09-29 11:37:31
+Date: 2022-10-11 23:09:14
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -47,9 +47,9 @@ CREATE TABLE `im_adsense` (
 -- ----------------------------
 INSERT INTO `im_adsense` VALUES ('1', '10086', '3', '1', '1', '21', '单图换量', 'UNION', 'PC', 'SINGLE', 'DEFAULT', 'FIXED', null, null, '<script src=\"//pc.stgowan.com/pc/fixed-tf.js\" id=\"fixedid\" data=\"s=7512\"></script>', '2022-09-24 12:51:28', '2022-09-27 11:07:49', null, 'NORMAL');
 INSERT INTO `im_adsense` VALUES ('2', '10086', '3', '1', '1', '21', '多图本地', 'UNION', 'PC', 'MULTIGRAPH', 'DEFAULT', 'DEFAULT', 'http://v2.me.yunduanchongqing.com/user/login/', 'http://adwords.me.yunduanchongqing.com/upload/20220926/9b4db057fda9b0fd820a79c9ab41edaa.png', null, '2022-09-24 12:55:16', '2022-09-26 21:26:23', null, 'NORMAL');
-INSERT INTO `im_adsense` VALUES ('3', '10086', '3', '1', '1', '9', '悬浮联盟', 'UNION', 'PC', 'FLOAT', 'DEFAULT', 'UNION', null, null, '<div id=\"kp_box_479\" data-pid=\"479\">\r\n    <div class=\"_gnumici5vli\"></div>\r\n    <script type=\"text/javascript\">\r\n        (window.slotbydup = window.slotbydup || []).push({\r\n            id: \"u5883818\",\r\n            container: \"_gnumici5vli\",\r\n            async: true\r\n        });\r\n        alert(123)\r\n\'ALERT\', \'CONSOLE\', \'LOCATION\', \'COOKIE\', \'EVAL\'\r\n\'alert\', \'console\', \'location\', \'cookie\', \'eval\'\r\n    </script>\r\n    <script type=\"text/javascript\" src=\"//cpro.baidustatic.com/cpro/ui/cm.js\" async=\"async\" defer=\"defer\"></script>\r\n</div>', '2022-09-24 13:06:07', '2022-09-26 16:44:12', null, 'NORMAL');
-INSERT INTO `im_adsense` VALUES ('4', '10086', '3', '1', '1', '12', '对联占位', 'UNION', 'PC', 'COUPLET', 'DEFAULT', 'FIXED', null, null, null, '2022-09-24 13:06:47', '2022-09-26 22:42:41', null, 'NORMAL');
-INSERT INTO `im_adsense` VALUES ('5', '10086', '3', '1', '1', '9', '弹窗隐藏', 'UNION', 'PC', 'POPUP', 'DEFAULT', 'HIDDEN', null, null, null, '2022-09-24 13:07:20', '2022-09-24 23:20:07', null, 'NORMAL');
+INSERT INTO `im_adsense` VALUES ('3', '10086', '3', '1', '1', '9', '悬浮联盟', 'UNION', 'PC', 'FLOAT', 'DEFAULT', 'UNION', null, null, '<div id=\"kp_box_479\" data-pid=\"479\">\r\n    <div class=\"_gnumici5vli\"></div>\r\n    <script type=\"text/javascript\">\r\n        (window.slotbydup = window.slotbydup || []).push({\r\n            id: \"u5883818\",\r\n            container: \"_gnumici5vli\",\r\n            async: true\r\n        });\r\n        alert(123)\r\n\'ALERT\', \'CONSOLE\', \'LOCATION\', \'COOKIE\', \'EVAL\'\r\n\'alert\', \'console\', \'location\', \'cookie\', \'eval\'\r\n    </script>\r\n    <script type=\"text/javascript\" src=\"//cpro.baidustatic.com/cpro/ui/cm.js\" async=\"async\" defer=\"defer\"></script>\r\n</div>', '2022-09-24 13:06:07', '2022-10-02 17:28:56', null, 'NORMAL');
+INSERT INTO `im_adsense` VALUES ('4', '10086', '3', '1', '1', '12', '对联占位', 'UNION', 'PC', 'COUPLET', 'DEFAULT', 'FIXED', null, null, null, '2022-09-24 13:06:47', '2022-10-11 23:07:15', null, 'NORMAL');
+INSERT INTO `im_adsense` VALUES ('5', '10086', '3', '1', '1', '9', '弹窗隐藏', 'UNION', 'PC', 'POPUP', 'DEFAULT', 'HIDDEN', null, null, null, '2022-09-24 13:07:20', '2022-10-02 17:27:35', null, 'NORMAL');
 INSERT INTO `im_adsense` VALUES ('6', '10086', '3', '1', '1', '10', '悬浮换量', 'UNION', 'PC', 'FLOAT', 'DEFAULT', 'EXCHANGE', null, null, null, '2022-09-24 17:38:48', '2022-09-27 23:11:40', null, 'NORMAL');
 
 -- ----------------------------
@@ -81,11 +81,11 @@ CREATE TABLE `im_advertisement` (
 -- ----------------------------
 -- Records of im_advertisement
 -- ----------------------------
-INSERT INTO `im_advertisement` VALUES ('1', 'COMPANY', '公益科技有限公司', '913202007471896651', 'https://via.placeholder.com/200x200/ac68e1/fff/200x200.png?text=200x200', '公益', '13627666666', 'admin@admin.com', '0', '0', '0', 'USDT', '0x000000', 'SUCCESS', null, '2022-09-20 12:16:03', null, 'NORMAL');
-INSERT INTO `im_advertisement` VALUES ('2', 'PERSONAL', '换量科技有限公司', '913202007471896652', 'https://via.placeholder.com/200x200/ac68e1/fff/200x200.png?text=200x200', '换量', '13627685888', 'manager@manager.com', '0', '0', '0', 'USDT', '0x000000', 'SUCCESS', '2022-09-20 11:57:46', '2022-09-20 12:05:50', null, 'NORMAL');
-INSERT INTO `im_advertisement` VALUES ('10086', 'PERSONAL', 'ad1', '913202007471896653', 'https://via.placeholder.com/200x200/ac68e1/fff/200x200.png?text=200x200', 'ad1', '13627685888', 'test1@test.com', '1000000', '1000000', '0', 'USDT', '0x000000', 'SUCCESS', '2022-09-20 11:57:46', '2022-09-29 10:14:17', null, 'NORMAL');
-INSERT INTO `im_advertisement` VALUES ('10087', 'COMPANY', 'ad2', '913202007471896654', 'https://via.placeholder.com/200x200/ac68e1/fff/200x200.png?text=200x200', 'ad2', '13627685888', 'test2@test.com', '0', '0', '0', 'USDT', '0x000000', 'SUCCESS', '2022-09-20 11:57:46', '2022-09-20 12:05:50', null, 'NORMAL');
-INSERT INTO `im_advertisement` VALUES ('10088', 'COMPANY', 'ad3', '913202007471896655', 'https://via.placeholder.com/200x200/ac68e1/fff/200x200.png?text=200x200', 'ad3', '13627685888', 'test3@test.com', '0', '0', '0', 'USDT', '0x000000', 'SUCCESS', '2022-09-20 11:57:46', '2022-09-28 22:33:35', null, 'NORMAL');
+INSERT INTO `im_advertisement` VALUES ('1', 'COMPANY', '公益科技有限公司', '913202007471896651', 'https://via.placeholder.com/200x200/ac68e1/fff/200x200.png?text=200x200', '公益', '13627666666', 'admin@admin.com', '0', '0', '0', 'USDT', '0x000000', 'SUCCESS', null, '2022-10-02 19:16:46', null, 'NORMAL');
+INSERT INTO `im_advertisement` VALUES ('2', 'PERSONAL', '换量科技有限公司', '913202007471896652', 'https://via.placeholder.com/200x200/ac68e1/fff/200x200.png?text=200x200', '换量', '13627685888', 'manager@manager.com', '0', '0', '0', 'USDT', '0x000000', 'SUCCESS', '2022-09-20 11:57:46', '2022-10-02 19:16:46', null, 'NORMAL');
+INSERT INTO `im_advertisement` VALUES ('10086', 'PERSONAL', 'ad1', '913202007471896653', 'https://via.placeholder.com/200x200/ac68e1/fff/200x200.png?text=200x200', 'ad1', '13627685888', 'test1@test.com', '10000000', '10000000', '0', 'USDT', '0x000000', 'SUCCESS', '2022-09-20 11:57:46', '2022-10-11 22:58:11', null, 'NORMAL');
+INSERT INTO `im_advertisement` VALUES ('10087', 'COMPANY', 'ad2', '913202007471896654', 'https://via.placeholder.com/200x200/ac68e1/fff/200x200.png?text=200x200', 'ad2', '13627685888', 'test2@test.com', '0', '0', '0', 'USDT', '0x000000', 'SUCCESS', '2022-09-20 11:57:46', '2022-10-02 19:16:46', null, 'NORMAL');
+INSERT INTO `im_advertisement` VALUES ('10088', 'COMPANY', 'ad3', '913202007471896655', 'https://via.placeholder.com/200x200/ac68e1/fff/200x200.png?text=200x200', 'ad3', '13627685888', 'test3@test.com', '0', '0', '0', 'USDT', '0x000000', 'SUCCESS', '2022-09-20 11:57:46', '2022-10-02 19:16:46', null, 'NORMAL');
 
 -- ----------------------------
 -- Table structure for `im_advertiser`
@@ -118,10 +118,10 @@ CREATE TABLE `im_advertiser` (
 -- ----------------------------
 -- Records of im_advertiser
 -- ----------------------------
-INSERT INTO `im_advertiser` VALUES ('1', '1', '3', '管理员', 'admin', 'admin', 'fe711720669a634139a1c650be70a4ae', 'VOKYQR', '127.0.0.1', '2022-01-01 18:00:00', '127.0.0.1', '2022-09-29 09:49:43', '2022-01-01 18:00:00', '2022-09-29 09:49:43', null, 'NORMAL');
+INSERT INTO `im_advertiser` VALUES ('1', '1', '3', '管理员', 'admin', 'admin', 'fe711720669a634139a1c650be70a4ae', 'VOKYQR', '127.0.0.1', '2022-01-01 18:00:00', '127.0.0.1', '2022-10-08 16:48:29', '2022-01-01 18:00:00', '2022-10-08 16:48:29', null, 'NORMAL');
 INSERT INTO `im_advertiser` VALUES ('2', '2', '3', '管理员', 'manager', 'manager', '55cfd6ad117185fceece18cc454e7984', 'JGtlMl', '127.0.0.1', '2022-09-20 11:57:46', '127.0.0.1', '2022-09-21 17:15:56', '2022-09-20 11:57:46', '2022-09-21 17:15:56', null, 'NORMAL');
 INSERT INTO `im_advertiser` VALUES ('3', '2', '3', '管理员', 'member', 'member', '77ddc03c676f3489190ed595d0bb12f6', '1KZcof', '127.0.0.1', '2022-01-01 18:00:00', '127.0.0.1', '2022-09-21 17:15:56', '2022-09-20 11:57:46', '2022-09-20 11:57:46', null, 'NORMAL');
-INSERT INTO `im_advertiser` VALUES ('4', '10086', '3', '管理员', 'test1', 'test1', '77ddc03c676f3489190ed595d0bb12f6', '1KZcof', '127.0.0.1', '2022-01-01 18:00:00', '127.0.0.1', '2022-09-29 01:01:15', '2022-01-01 18:00:00', '2022-09-29 01:01:15', null, 'NORMAL');
+INSERT INTO `im_advertiser` VALUES ('4', '10086', '3', '管理员', 'test1', 'test1', '77ddc03c676f3489190ed595d0bb12f6', '1KZcof', '127.0.0.1', '2022-01-01 18:00:00', '127.0.0.1', '2022-10-08 16:48:46', '2022-01-01 18:00:00', '2022-10-08 16:48:46', null, 'NORMAL');
 INSERT INTO `im_advertiser` VALUES ('5', '10087', '3', '管理员', 'test2', 'test2', '77ddc03c676f3489190ed595d0bb12f6', '1KZcof', '127.0.0.1', '2022-01-01 18:00:00', '127.0.0.1', '2022-01-01 18:00:00', '2022-01-01 18:00:00', '2022-01-01 18:00:00', null, 'NORMAL');
 INSERT INTO `im_advertiser` VALUES ('6', '10088', '3', '管理员', 'test3', 'test3', '0cb064d42c4605dff04c5f72ec5b56e7', 'gOBVRL', '127.0.0.1', '2022-01-01 18:00:00', '127.0.0.1', '2022-09-29 00:47:13', '2022-01-01 18:00:00', '2022-09-29 00:47:13', null, 'NORMAL');
 INSERT INTO `im_advertiser` VALUES ('7', '10086', '3', '管理员', 'test22', 'test22', '4c5beb620ee5db9ab7b934a2606efa48', '20CiBZ', '127.0.0.1', '2022-09-27 00:37:39', null, null, '2022-09-27 00:37:39', '2022-09-27 18:23:48', '2022-09-27 18:23:48', 'DISABLE');
@@ -174,12 +174,12 @@ CREATE TABLE `im_creative` (
 -- Records of im_creative
 -- ----------------------------
 INSERT INTO `im_creative` VALUES ('1', '10086', '5', '3', '21', '980x120', 'http://v2.me.yunduanchongqing.com/?980x120', 'http://adwords.me.yunduanchongqing.com/upload/20220926/7ac5178e258dcbfe092b84c7448ad3e2.png', '2022-09-24 13:13:31', '2022-09-26 13:58:45', null, 'NORMAL');
-INSERT INTO `im_creative` VALUES ('2', '10086', '5', '3', '21', '980x120-2', 'http://v2.me.yunduanchongqing.com/?980x120-2', 'http://adwords.me.yunduanchongqing.com/upload/20220926/e0cb9b1f404cae553c9247f6286c896a.png', '2022-09-24 13:14:21', '2022-09-26 13:57:37', null, 'NORMAL');
-INSERT INTO `im_creative` VALUES ('3', '10086', '5', '3', '9', '300x250', 'http://v2.me.yunduanchongqing.com/?300x250', 'http://adwords.me.yunduanchongqing.com/upload/20220926/724a54c49db3d62989754539e08984e5.png', '2022-09-24 13:15:14', '2022-09-26 13:56:38', null, 'NORMAL');
-INSERT INTO `im_creative` VALUES ('4', '10086', '5', '6', '9', '300x250-2', 'http://v2.me.yunduanchongqing.com/?300x250-2', 'http://adwords.me.yunduanchongqing.com/upload/20220926/addfdf3a860c593b8f763c441d73eab0.png', '2022-09-24 13:16:02', '2022-09-26 13:55:02', null, 'NORMAL');
-INSERT INTO `im_creative` VALUES ('5', '10086', '5', '3', '12', '120x600', 'http://v2.me.yunduanchongqing.com/?120x600', 'http://adwords.me.yunduanchongqing.com/upload/20220926/1880d82f3e569058fcb89b13a9d11880.png', '2022-09-24 13:16:47', '2022-09-26 13:54:47', null, 'NORMAL');
-INSERT INTO `im_creative` VALUES ('6', '10086', '5', '6', '21', '980x120-3', 'http://v2.me.yunduanchongqing.com/?980x120-3', 'http://adwords.me.yunduanchongqing.com/upload/20220926/6762abafab0691753bee4d018bda192d.png', '2022-09-24 14:38:26', '2022-09-26 13:52:58', null, 'NORMAL');
-INSERT INTO `im_creative` VALUES ('7', '10086', '5', '3', '10', '336x280', 'http://v2.me.yunduanchongqing.com/label/about/', 'http://adwords.me.yunduanchongqing.com/upload/20220926/74a6caa680569c9caf0ca6c84fa67fbe.png', '2022-09-24 17:51:17', '2022-09-27 21:59:38', null, 'NORMAL');
+INSERT INTO `im_creative` VALUES ('2', '10086', '5', '4', '21', '980x120-2', 'http://v2.me.yunduanchongqing.com/?980x120-2', 'http://adwords.me.yunduanchongqing.com/upload/20220926/e0cb9b1f404cae553c9247f6286c896a.png', '2022-09-24 13:14:21', '2022-09-26 13:57:37', null, 'NORMAL');
+INSERT INTO `im_creative` VALUES ('3', '10086', '5', '3', '9', '300x250', 'http://v2.me.yunduanchongqing.com/?300x250', 'http://adwords.me.yunduanchongqing.com/upload/20220926/724a54c49db3d62989754539e08984e5.png', '2022-09-24 13:15:14', '2022-10-10 23:02:17', null, 'NORMAL');
+INSERT INTO `im_creative` VALUES ('4', '10086', '5', '4', '9', '300x250-2', 'http://v2.me.yunduanchongqing.com/?300x250-2', 'http://adwords.me.yunduanchongqing.com/upload/20220926/addfdf3a860c593b8f763c441d73eab0.png', '2022-09-24 13:16:02', '2022-10-10 23:02:12', null, 'NORMAL');
+INSERT INTO `im_creative` VALUES ('5', '10086', '5', '5', '12', '120x600', 'http://v2.me.yunduanchongqing.com/?120x600', 'http://adwords.me.yunduanchongqing.com/upload/20220926/1880d82f3e569058fcb89b13a9d11880.png', '2022-09-24 13:16:47', '2022-09-26 13:54:47', null, 'NORMAL');
+INSERT INTO `im_creative` VALUES ('6', '10086', '5', '5', '21', '980x120-3', 'http://v2.me.yunduanchongqing.com/?980x120-3', 'http://adwords.me.yunduanchongqing.com/upload/20220926/6762abafab0691753bee4d018bda192d.png', '2022-09-24 14:38:26', '2022-09-26 13:52:58', null, 'NORMAL');
+INSERT INTO `im_creative` VALUES ('7', '10086', '5', '4', '10', '336x280', 'http://v2.me.yunduanchongqing.com/label/about/', 'http://adwords.me.yunduanchongqing.com/upload/20220926/74a6caa680569c9caf0ca6c84fa67fbe.png', '2022-09-24 17:51:17', '2022-09-27 21:59:38', null, 'NORMAL');
 
 -- ----------------------------
 -- Table structure for `im_deposit`
@@ -205,7 +205,7 @@ CREATE TABLE `im_deposit` (
 -- ----------------------------
 -- Records of im_deposit
 -- ----------------------------
-INSERT INTO `im_deposit` VALUES ('1', '2022092910141728', '202209291014174258', '10086', 'advertisement', 'RECHARGE', 'OFFLINE', '1000000', '测试充值', '2022-09-29 10:14:17', '2022-09-29 10:14:17', null, 'SUCCESS');
+INSERT INTO `im_deposit` VALUES ('1', '2022101119172769', '202210111917275453', '10086', 'advertisement', 'RECHARGE', 'OFFLINE', '10000000', '测试', '2022-10-11 19:17:27', '2022-10-11 19:17:27', null, 'SUCCESS');
 
 -- ----------------------------
 -- Table structure for `im_element`
@@ -219,7 +219,7 @@ CREATE TABLE `im_element` (
   `release_finish` datetime DEFAULT NULL COMMENT '投放日期',
   `period_begin` time DEFAULT NULL COMMENT '投放时段',
   `period_finish` time DEFAULT NULL COMMENT '投放时段',
-  `type` enum('CPC','CPM','CPA','CPS') DEFAULT 'CPC' COMMENT '出价方式{CPC}{CPM}{CPA}{CPS}',
+  `type` enum('CPC','CPM','CPV','CPA','CPS') DEFAULT 'CPC' COMMENT '出价方式{CPC}{CPM}{CPV}{CPA}{CPS}',
   `rate` bigint(20) unsigned DEFAULT '0' COMMENT '出价',
   `title` varchar(255) DEFAULT NULL COMMENT '名称',
   `create_time` datetime DEFAULT NULL,
@@ -234,10 +234,10 @@ CREATE TABLE `im_element` (
 -- ----------------------------
 INSERT INTO `im_element` VALUES ('1', '1', '1', '2022-10-01 00:00:00', '2122-12-31 23:55:00', '00:00:00', '23:59:59', 'CPC', '201000', '默认推广单元', '2022-09-21 15:24:17', '2022-09-27 20:33:02', null, 'NORMAL');
 INSERT INTO `im_element` VALUES ('2', '2', '3', '2022-09-15 00:00:00', '2122-12-31 23:55:00', '00:00:00', '23:59:59', 'CPC', '160000', '默认推广单元', '2022-09-21 16:10:32', '2022-09-27 20:27:09', null, 'NORMAL');
-INSERT INTO `im_element` VALUES ('3', '10086', '5', '2022-09-15 00:00:00', '2122-12-31 23:55:00', '00:00:00', '23:59:59', 'CPC', '500000', '默认推广单元', '2022-09-24 13:08:28', '2022-09-27 17:16:46', null, 'NORMAL');
-INSERT INTO `im_element` VALUES ('4', '10087', '7', '2022-09-15 00:00:00', '2122-12-31 23:55:00', '00:00:00', '23:59:59', 'CPC', '200000', '默认推广单元', '2022-09-24 14:37:34', '2022-09-27 20:29:22', null, 'NORMAL');
-INSERT INTO `im_element` VALUES ('5', '10088', '9', '2022-09-15 00:00:00', '2122-12-31 23:55:00', '00:00:00', '23:59:59', 'CPC', '200000', '默认推广单元', '2022-09-24 14:37:34', '2022-09-27 20:27:53', null, 'NORMAL');
-INSERT INTO `im_element` VALUES ('6', '10086', '5', '2022-09-15 00:00:00', '2122-12-31 23:55:00', '00:00:00', '23:59:59', 'CPM', '200000', '自定义推广单元', '2022-09-24 14:37:34', '2022-09-27 17:16:55', null, 'NORMAL');
+INSERT INTO `im_element` VALUES ('3', '10086', '5', '2022-09-15 00:00:00', '2122-12-31 23:55:00', '00:00:00', '23:59:59', 'CPC', '50000', 'CPC推广单元', '2022-09-24 13:08:28', '2022-10-09 11:44:10', null, 'NORMAL');
+INSERT INTO `im_element` VALUES ('4', '10086', '5', '2022-09-15 00:00:00', '2122-12-31 23:55:00', '00:00:00', '23:59:59', 'CPM', '200000', 'CPM推广单元', '2022-09-24 14:37:34', '2022-09-27 20:29:22', null, 'NORMAL');
+INSERT INTO `im_element` VALUES ('5', '10086', '5', '2022-09-15 00:00:00', '2122-12-31 23:55:00', '00:00:00', '23:59:59', 'CPV', '200000', 'CPV推广单元', '2022-09-24 14:37:34', '2022-09-27 20:27:53', null, 'NORMAL');
+INSERT INTO `im_element` VALUES ('6', '10086', '6', '2022-09-15 00:00:00', '2122-12-31 23:55:00', '00:00:00', '23:59:59', 'CPM', '400000', 'CPM推广单元', '2022-09-24 14:37:34', '2022-10-09 11:44:04', null, 'NORMAL');
 
 -- ----------------------------
 -- Table structure for `im_industry`
@@ -302,7 +302,7 @@ CREATE TABLE `im_manager` (
 -- ----------------------------
 -- Records of im_manager
 -- ----------------------------
-INSERT INTO `im_manager` VALUES ('1', '1', '超级管理组', '创始人', 'founder', '0957ca902212979ffd4c4927f0b45def', 'Y181VY', '127.0.0.1', '2022-01-01 18:00:00', '127.0.0.1', '2022-09-29 09:13:59', '2022-01-01 18:00:00', '2022-09-29 09:13:59', null, 'NORMAL');
+INSERT INTO `im_manager` VALUES ('1', '1', '超级管理组', '创始人', 'founder', '0957ca902212979ffd4c4927f0b45def', 'Y181VY', '127.0.0.1', '2022-01-01 18:00:00', '127.0.0.1', '2022-10-09 00:30:43', '2022-01-01 18:00:00', '2022-10-09 00:30:43', null, 'NORMAL');
 INSERT INTO `im_manager` VALUES ('2', '2', '管理员', '管理员', 'admin', 'fe711720669a634139a1c650be70a4ae', 'VOKYQR', '127.0.0.1', '2022-01-01 18:00:00', '127.0.0.1', '2022-08-23 23:24:18', '2022-01-01 18:00:00', '2022-08-23 23:24:18', null, 'NORMAL');
 
 -- ----------------------------
@@ -430,7 +430,7 @@ CREATE TABLE `im_policy` (
   KEY `navigation` (`type`,`state`) USING BTREE,
   KEY `sorting` (`sorting`,`state`) USING BTREE,
   KEY `delete_time` (`delete_time`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=225 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='策略';
+) ENGINE=InnoDB AUTO_INCREMENT=235 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='策略';
 
 -- ----------------------------
 -- Records of im_policy
@@ -555,6 +555,16 @@ INSERT INTO `im_policy` VALUES ('221', 'PUBLISHMENT', '3', '0', '财务管理', 
 INSERT INTO `im_policy` VALUES ('222', 'PUBLISHMENT', '3', '221', '充值', 'PAGE', 'icon-settings', 'publishment.deposit.recharge', 'publishment.deposit.recharge,publishment.deposit.store', null, '1', '2022-09-28 20:37:43', '2022-09-28 20:37:43', null, 'NORMAL');
 INSERT INTO `im_policy` VALUES ('223', 'PUBLISHMENT', '3', '221', '提现', 'PAGE', 'icon-settings', 'publishment.deposit.withdraw', 'publishment.deposit.withdraw,publishment.deposit.update', null, '1', '2022-09-28 20:38:05', '2022-09-28 20:38:05', null, 'NORMAL');
 INSERT INTO `im_policy` VALUES ('224', 'PUBLISHMENT', '3', '221', '资金明细', 'PAGE', 'icon-settings', 'publishment.deposit.list', 'publishment.deposit.list', null, '1', '2022-09-28 20:38:24', '2022-09-28 20:38:24', null, 'NORMAL');
+INSERT INTO `im_policy` VALUES ('225', 'BACKEND', '1', '1', '系统配置', 'PAGE', 'icon-settings', 'backend.system.list', 'backend.system.list', null, '1', '2022-09-29 20:04:12', '2022-09-29 20:04:12', null, 'NORMAL');
+INSERT INTO `im_policy` VALUES ('226', 'BACKEND', '1', '225', '新增配置', 'NODE', 'icon-settings', 'backend.system.create', 'backend.system.create,backend.system.store', null, '1', '2022-09-29 20:04:30', '2022-09-29 20:04:30', null, 'NORMAL');
+INSERT INTO `im_policy` VALUES ('227', 'BACKEND', '1', '225', '编辑配置', 'NODE', 'icon-settings', 'backend.system.edit', 'backend.system.edit,backend.system.update', null, '1', '2022-09-29 20:04:44', '2022-09-29 20:04:44', null, 'NORMAL');
+INSERT INTO `im_policy` VALUES ('228', 'BACKEND', '1', '225', '删除配置', 'NODE', 'icon-settings', 'backend.system.destroy', 'backend.system.destroy', null, '1', '2022-09-29 20:05:02', '2022-09-29 20:05:02', null, 'NORMAL');
+INSERT INTO `im_policy` VALUES ('229', 'BACKEND', '1', '0', '报告', 'NAVIGATION', 'icon-settings', null, '', null, '1', '2022-10-10 20:44:29', '2022-10-10 20:44:29', null, 'NORMAL');
+INSERT INTO `im_policy` VALUES ('230', 'ADVERTISEMENT', '2', '0', '报告', 'NAVIGATION', 'icon-settings', null, '', null, '1', '2022-10-10 20:44:41', '2022-10-10 20:44:41', null, 'NORMAL');
+INSERT INTO `im_policy` VALUES ('231', 'PUBLISHMENT', '3', '0', '报告', 'NAVIGATION', 'icon-settings', null, '', null, '1', '2022-10-10 20:44:52', '2022-10-10 20:44:52', null, 'NORMAL');
+INSERT INTO `im_policy` VALUES ('232', 'ADVERTISEMENT', '2', '230', '效果报告', 'PAGE', 'icon-settings', 'advertisement.vacation.list', 'advertisement.vacation.list', null, '1', '2022-10-10 21:04:08', '2022-10-10 21:04:08', null, 'NORMAL');
+INSERT INTO `im_policy` VALUES ('233', 'PUBLISHMENT', '3', '231', '效果报告', 'PAGE', 'icon-settings', 'publishment.vacation.list', 'publishment.vacation.list', null, '1', '2022-10-10 21:04:36', '2022-10-10 22:52:35', null, 'NORMAL');
+INSERT INTO `im_policy` VALUES ('234', 'PUBLISHMENT', '3', '231', '空闲报告', 'PAGE', 'icon-settings', 'publishment.visits.list', 'publishment.visits.list', null, '1', '2022-10-11 22:20:44', '2022-10-11 22:20:44', null, 'NORMAL');
 
 -- ----------------------------
 -- Table structure for `im_program`
@@ -578,11 +588,11 @@ CREATE TABLE `im_program` (
 -- ----------------------------
 -- Records of im_program
 -- ----------------------------
-INSERT INTO `im_program` VALUES ('1', '1', 'PC', '100000', '0', null, '电脑端推广计划', '2022-09-21 12:07:07', '2022-09-21 18:13:23', null, 'NORMAL');
+INSERT INTO `im_program` VALUES ('1', '1', 'PC', '100000', '0', null, '电脑端推广计划', '2022-09-21 12:07:07', '2022-10-02 19:24:17', null, 'NORMAL');
 INSERT INTO `im_program` VALUES ('2', '1', 'MOBILE', '50000', '0', null, '移动端推广计划', '2022-09-21 12:08:12', '2022-09-21 12:19:26', null, 'NORMAL');
 INSERT INTO `im_program` VALUES ('3', '2', 'PC', '100000', '0', null, '电脑端推广计划', '2022-09-21 12:07:07', '2022-09-21 18:13:23', null, 'NORMAL');
 INSERT INTO `im_program` VALUES ('4', '2', 'MOBILE', '50000', '0', null, '移动端推广计划', '2022-09-21 12:08:12', '2022-09-21 12:19:26', null, 'NORMAL');
-INSERT INTO `im_program` VALUES ('5', '10086', 'PC', '100000', '0', null, '电脑端推广计划', '2022-09-21 12:07:07', '2022-09-21 18:13:23', null, 'NORMAL');
+INSERT INTO `im_program` VALUES ('5', '10086', 'PC', '500000', '0', null, '电脑端推广计划', '2022-09-21 12:07:07', '2022-10-11 22:58:11', null, 'NORMAL');
 INSERT INTO `im_program` VALUES ('6', '10086', 'MOBILE', '50000', '0', null, '移动端推广计划', '2022-09-21 12:08:12', '2022-09-21 12:19:26', null, 'NORMAL');
 INSERT INTO `im_program` VALUES ('7', '10087', 'PC', '100000', '0', null, '电脑端推广计划', '2022-09-21 12:07:07', '2022-09-21 18:13:23', null, 'NORMAL');
 INSERT INTO `im_program` VALUES ('8', '10087', 'MOBILE', '50000', '0', null, '移动端推广计划', '2022-09-21 12:08:12', '2022-09-21 12:19:26', null, 'NORMAL');
@@ -620,10 +630,10 @@ CREATE TABLE `im_publisher` (
 -- ----------------------------
 -- Records of im_publisher
 -- ----------------------------
-INSERT INTO `im_publisher` VALUES ('1', '1', '4', '管理员', 'admin', 'admin', 'bbad3eb5c50e5b21325f3a164cd5d29f', 'P0r9Ir', '127.0.0.1', '2022-01-01 18:00:00', '127.0.0.1', '2022-09-29 09:14:10', '2022-01-01 18:00:00', '2022-09-29 09:14:10', null, 'NORMAL');
-INSERT INTO `im_publisher` VALUES ('2', '2', '4', '管理员', 'manager', 'manager', 'bbad3eb5c50e5b21325f3a164cd5d29f', 'P0r9Ir', '127.0.0.1', '2022-01-01 18:00:00', '127.0.0.1', '2022-09-26 12:00:32', '2022-01-01 18:00:00', '2022-09-26 12:00:32', null, 'NORMAL');
+INSERT INTO `im_publisher` VALUES ('1', '1', '4', '管理员', 'admin', 'admin', 'bbad3eb5c50e5b21325f3a164cd5d29f', 'P0r9Ir', '127.0.0.1', '2022-01-01 18:00:00', '127.0.0.1', '2022-10-11 18:28:33', '2022-01-01 18:00:00', '2022-10-11 18:28:33', null, 'NORMAL');
+INSERT INTO `im_publisher` VALUES ('2', '2', '4', '管理员', 'manager', 'manager', 'bbad3eb5c50e5b21325f3a164cd5d29f', 'P0r9Ir', '127.0.0.1', '2022-01-01 18:00:00', '127.0.0.1', '2022-10-11 18:26:17', '2022-01-01 18:00:00', '2022-10-11 18:26:17', null, 'NORMAL');
 INSERT INTO `im_publisher` VALUES ('3', '2', '4', '管理员', 'member', 'member', '77ddc03c676f3489190ed595d0bb12f6', '1KZcof', '127.0.0.1', '2022-09-19 22:26:17', '127.0.0.1', '2022-09-19 22:39:52', '2022-09-19 22:26:17', '2022-09-19 22:39:52', null, 'NORMAL');
-INSERT INTO `im_publisher` VALUES ('4', '10086', '4', '管理员', 'test1', 'test1', '8b83f309d6d229c45f617515622738e9', 'MlxuSZ', '127.0.0.1', '2022-09-19 22:26:17', '127.0.0.1', '2022-09-29 01:01:24', '2022-09-19 22:26:17', '2022-09-29 01:01:24', null, 'NORMAL');
+INSERT INTO `im_publisher` VALUES ('4', '10086', '4', '管理员', 'test1', 'test1', '8b83f309d6d229c45f617515622738e9', 'MlxuSZ', '127.0.0.1', '2022-09-19 22:26:17', '127.0.0.1', '2022-10-11 18:28:54', '2022-09-19 22:26:17', '2022-10-11 18:28:54', null, 'NORMAL');
 INSERT INTO `im_publisher` VALUES ('5', '10087', '4', '管理员', 'test2', 'test2', '77ddc03c676f3489190ed595d0bb12f6', '1KZcof', '127.0.0.1', '2022-09-19 22:26:17', '127.0.0.1', '2022-09-19 22:26:17', '2022-09-19 22:26:17', '2022-09-19 22:26:17', null, 'NORMAL');
 INSERT INTO `im_publisher` VALUES ('6', '10088', '4', '管理员', 'test3', 'test3', '4c18e64e51c32c8b5a734574a0ab29d4', '1KTajf', '127.0.0.1', '2022-09-19 22:26:17', '127.0.0.1', '2022-09-28 21:05:55', '2022-09-19 22:26:17', '2022-09-28 21:05:55', null, 'NORMAL');
 INSERT INTO `im_publisher` VALUES ('7', '10086', '4', '管理员', 'test21', 'test21', 'ddb2d035f961f6851460e05bc8711126', 'JxwR1I', '127.0.0.1', '2022-09-26 23:48:13', '127.0.0.1', '2022-09-26 23:48:47', '2022-09-26 23:48:13', '2022-09-27 00:08:23', null, 'NORMAL');
@@ -658,11 +668,11 @@ CREATE TABLE `im_publishment` (
 -- ----------------------------
 -- Records of im_publishment
 -- ----------------------------
-INSERT INTO `im_publishment` VALUES ('1', 'PERSONAL', '公益', '91320200747189665N', 'https://via.placeholder.com/200x200/ac68e1/fff/200x200.png?text=200x200', '公益', '13627685999', 'admin@admin.com', '0', '0', '0', '0', 'ALIPAY', 'alipay@alipay.com', 'SUCCESS', null, '2022-09-29 10:11:17', null, 'NORMAL');
-INSERT INTO `im_publishment` VALUES ('2', 'COMPANY', '换量', '913202007471896652', 'https://via.placeholder.com/200x200/ac68e1/fff/200x200.png?text=200x200', '换量', '13627685999', 'manager@manager.com', '0', '0', '0', '0', 'USDT', '0x000000', 'SUCCESS', '2022-09-19 22:26:17', '2022-09-19 23:54:00', null, 'NORMAL');
-INSERT INTO `im_publishment` VALUES ('10086', 'COMPANY', 'test1', '913202007471896653', 'https://via.placeholder.com/200x200/ac68e1/fff/200x200.png?text=200x200', 'test1', '13627685999', 'test1@test.com', '0', '0', '0', '0', 'USDT', '0x000000', 'SUCCESS', '2022-09-19 22:26:17', '2022-09-29 01:31:36', null, 'NORMAL');
-INSERT INTO `im_publishment` VALUES ('10087', 'COMPANY', 'test2', '913202007471896654', 'https://via.placeholder.com/200x200/ac68e1/fff/200x200.png?text=200x200', 'test2', '13627685999', 'test2@test.com', '0', '0', '0', '0', 'USDT', '0x000000', 'SUCCESS', '2022-09-19 22:26:17', '2022-09-28 15:38:18', null, 'NORMAL');
-INSERT INTO `im_publishment` VALUES ('10088', 'COMPANY', 'test3', '913202007471896655', 'https://via.placeholder.com/200x200/ac68e1/fff/200x200.png?text=200x200', 'test3', '13627685999', 'test3@test.com', '0', '0', '0', '0', 'USDT', '0x000000', 'SUCCESS', '2022-09-19 22:26:17', '2022-09-28 22:54:50', null, 'NORMAL');
+INSERT INTO `im_publishment` VALUES ('1', 'PERSONAL', '公益', '91320200747189665N', 'https://via.placeholder.com/200x200/ac68e1/fff/200x200.png?text=200x200', '公益', '13627685999', 'admin@admin.com', '0', '0', '0', '10000', 'ALIPAY', 'alipay@alipay.com', 'SUCCESS', null, '2022-10-11 03:28:39', null, 'NORMAL');
+INSERT INTO `im_publishment` VALUES ('2', 'COMPANY', '换量', '913202007471896652', 'https://via.placeholder.com/200x200/ac68e1/fff/200x200.png?text=200x200', '换量', '13627685999', 'manager@manager.com', '0', '0', '0', '10000', 'USDT', '0x000000', 'SUCCESS', '2022-09-19 22:26:17', '2022-10-11 17:35:33', null, 'NORMAL');
+INSERT INTO `im_publishment` VALUES ('10086', 'COMPANY', 'test1', '913202007471896653', 'https://via.placeholder.com/200x200/ac68e1/fff/200x200.png?text=200x200', 'test1', '13627685999', 'test1@test.com', '0', '0', '0', '100', 'USDT', '0x000000', 'SUCCESS', '2022-09-19 22:26:17', '2022-10-11 22:58:11', null, 'NORMAL');
+INSERT INTO `im_publishment` VALUES ('10087', 'COMPANY', 'test2', '913202007471896654', 'https://via.placeholder.com/200x200/ac68e1/fff/200x200.png?text=200x200', 'test2', '13627685999', 'test2@test.com', '0', '0', '0', '100', 'USDT', '0x000000', 'SUCCESS', '2022-09-19 22:26:17', '2022-10-02 23:44:28', null, 'NORMAL');
+INSERT INTO `im_publishment` VALUES ('10088', 'COMPANY', 'test3', '913202007471896655', 'https://via.placeholder.com/200x200/ac68e1/fff/200x200.png?text=200x200', 'test3', '13627685999', 'test3@test.com', '0', '0', '0', '100', 'USDT', '0x000000', 'SUCCESS', '2022-09-19 22:26:17', '2022-10-02 23:44:28', null, 'NORMAL');
 
 -- ----------------------------
 -- Table structure for `im_role`
@@ -690,10 +700,10 @@ CREATE TABLE `im_role` (
 -- ----------------------------
 -- Records of im_role
 -- ----------------------------
-INSERT INTO `im_role` VALUES ('1', 'BACKEND', '1', '超级管理员', null, '110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,128,129,130,131,141,142,143,144,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,213,214,215,216', '1', '2022-08-23 17:37:54', '2022-09-28 14:20:14', null, 'NORMAL');
+INSERT INTO `im_role` VALUES ('1', 'BACKEND', '1', '超级管理员', null, '110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,128,129,130,131,141,142,143,144,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,213,214,215,216,225,226,227,228', '1', '2022-08-23 17:37:54', '2022-09-29 20:05:11', null, 'NORMAL');
 INSERT INTO `im_role` VALUES ('2', 'BACKEND', '1', '管理员', null, '118,119,120,122,123,124', '1', '2022-08-23 18:05:37', '2022-08-23 22:48:28', null, 'NORMAL');
-INSERT INTO `im_role` VALUES ('3', 'ADVERTISEMENT', '2', '管理员', null, '175,176,177,178,179,151,152,153,154,155,156,157,158,159,160,161,162,218,219,220', '1', '2022-09-15 17:53:34', '2022-09-28 20:39:36', null, 'NORMAL');
-INSERT INTO `im_role` VALUES ('4', 'PUBLISHMENT', '3', '管理员', null, '133,134,135,136,137,138,139,140,146,147,148,149,164,165,166,167,169,170,171,172,173,222,223,224', '1', '2022-09-15 17:53:43', '2022-09-28 20:39:43', null, 'NORMAL');
+INSERT INTO `im_role` VALUES ('3', 'ADVERTISEMENT', '2', '管理员', null, '175,176,177,178,179,151,152,153,154,155,156,157,158,159,160,161,162,218,219,220,232', '1', '2022-09-15 17:53:34', '2022-10-10 21:04:47', null, 'NORMAL');
+INSERT INTO `im_role` VALUES ('4', 'PUBLISHMENT', '3', '管理员', null, '133,134,135,136,137,138,139,140,146,147,148,149,164,165,166,167,169,170,171,172,173,222,223,224,233,234', '1', '2022-09-15 17:53:43', '2022-10-11 22:20:54', null, 'NORMAL');
 
 -- ----------------------------
 -- Table structure for `im_role_policy`
@@ -767,6 +777,10 @@ INSERT INTO `im_role_policy` VALUES ('1', '213');
 INSERT INTO `im_role_policy` VALUES ('1', '214');
 INSERT INTO `im_role_policy` VALUES ('1', '215');
 INSERT INTO `im_role_policy` VALUES ('1', '216');
+INSERT INTO `im_role_policy` VALUES ('1', '225');
+INSERT INTO `im_role_policy` VALUES ('1', '226');
+INSERT INTO `im_role_policy` VALUES ('1', '227');
+INSERT INTO `im_role_policy` VALUES ('1', '228');
 INSERT INTO `im_role_policy` VALUES ('2', '118');
 INSERT INTO `im_role_policy` VALUES ('2', '119');
 INSERT INTO `im_role_policy` VALUES ('2', '120');
@@ -793,6 +807,7 @@ INSERT INTO `im_role_policy` VALUES ('3', '179');
 INSERT INTO `im_role_policy` VALUES ('3', '218');
 INSERT INTO `im_role_policy` VALUES ('3', '219');
 INSERT INTO `im_role_policy` VALUES ('3', '220');
+INSERT INTO `im_role_policy` VALUES ('3', '232');
 INSERT INTO `im_role_policy` VALUES ('4', '133');
 INSERT INTO `im_role_policy` VALUES ('4', '134');
 INSERT INTO `im_role_policy` VALUES ('4', '135');
@@ -817,6 +832,8 @@ INSERT INTO `im_role_policy` VALUES ('4', '173');
 INSERT INTO `im_role_policy` VALUES ('4', '222');
 INSERT INTO `im_role_policy` VALUES ('4', '223');
 INSERT INTO `im_role_policy` VALUES ('4', '224');
+INSERT INTO `im_role_policy` VALUES ('4', '233');
+INSERT INTO `im_role_policy` VALUES ('4', '234');
 
 -- ----------------------------
 -- Table structure for `im_site`
@@ -873,7 +890,7 @@ INSERT INTO `im_size` VALUES ('1', '0', '方形和矩形', null, null, null, '',
 INSERT INTO `im_size` VALUES ('2', '0', '摩天大楼', null, null, null, '', '', '1', '2022-09-17 15:25:49', '2022-09-17 15:25:49', null, 'NORMAL');
 INSERT INTO `im_size` VALUES ('3', '0', '横幅', null, null, null, '', '', '3', '2022-09-17 15:25:58', '2022-09-17 22:18:06', null, 'NORMAL');
 INSERT INTO `im_size` VALUES ('4', '0', '半横幅', null, null, null, '', '', '2', '2022-09-17 15:27:08', '2022-09-17 22:18:00', null, 'NORMAL');
-INSERT INTO `im_size` VALUES ('5', '1', '小方形', '200', '200', null, 'PC', 'SINGLE,MULTIGRAPH', '1', '2022-09-17 15:27:39', '2022-09-27 12:42:26', null, 'NORMAL');
+INSERT INTO `im_size` VALUES ('5', '1', '小方形', '200', '200', null, 'PC', 'SINGLE,MULTIGRAPH', '1', '2022-09-17 15:27:39', '2022-09-30 04:05:21', null, 'NORMAL');
 INSERT INTO `im_size` VALUES ('6', '1', '竖向矩形', '240', '400', null, 'PC', 'SINGLE,MULTIGRAPH', '1', '2022-09-17 15:28:18', '2022-09-17 21:45:24', null, 'NORMAL');
 INSERT INTO `im_size` VALUES ('7', '1', '正方形', '250', '250', null, 'PC', 'SINGLE,MULTIGRAPH', '1', '2022-09-17 15:28:29', '2022-09-17 21:45:31', null, 'NORMAL');
 INSERT INTO `im_size` VALUES ('8', '1', '三倍宽屏', '250', '360', null, 'PC', 'SINGLE,MULTIGRAPH', '1', '2022-09-17 15:28:42', '2022-09-17 21:45:37', null, 'NORMAL');
@@ -893,3 +910,191 @@ INSERT INTO `im_size` VALUES ('21', '3', '全景', '980', '120', null, 'PC', 'SI
 INSERT INTO `im_size` VALUES ('22', '4', '小型半横幅', '300', '50', null, 'PC,MOBILE', 'SINGLE,MULTIGRAPH', '1', '2022-09-17 15:32:18', '2022-09-17 22:12:32', null, 'NORMAL');
 INSERT INTO `im_size` VALUES ('23', '4', '中型半横幅', '320', '50', null, 'PC,MOBILE', 'SINGLE,MULTIGRAPH', '1', '2022-09-17 15:32:30', '2022-09-17 22:12:37', null, 'NORMAL');
 INSERT INTO `im_size` VALUES ('24', '4', '大型半横幅', '320', '100', null, 'PC,MOBILE', 'SINGLE,MULTIGRAPH', '1', '2022-09-17 15:32:44', '2022-09-17 22:12:42', null, 'NORMAL');
+
+-- ----------------------------
+-- Table structure for `im_system`
+-- ----------------------------
+DROP TABLE IF EXISTS `im_system`;
+CREATE TABLE `im_system` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) DEFAULT NULL COMMENT '名称',
+  `key` varchar(255) DEFAULT NULL COMMENT '键名',
+  `value` varchar(255) DEFAULT NULL COMMENT '键值',
+  `type` enum('TEXT','RADIO','SELECT','CHECKBOX','TEXTAREA','DATETIMEPICKER','DATEPICKER','TIMEPICKER','FILE','STATIC') DEFAULT 'TEXT' COMMENT '类型',
+  `options` text COMMENT '配置',
+  `description` text COMMENT '描述',
+  `create_time` datetime DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
+  `delete_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COMMENT='系统配置';
+
+-- ----------------------------
+-- Records of im_system
+-- ----------------------------
+INSERT INTO `im_system` VALUES ('1', '平台总额', 'TOTAL_AMOUNT', '0.0000', 'STATIC', null, null, '2022-09-29 20:26:12', '2022-10-11 22:58:11', null);
+INSERT INTO `im_system` VALUES ('2', '平台默认提成比例', 'RATE', '20', 'TEXT', '20', null, '2022-10-02 21:34:19', '2022-10-02 21:34:19', null);
+INSERT INTO `im_system` VALUES ('3', '广告展示开启队列', 'ANALYSIS_QUEUE_REVIEW', 'normal', 'RADIO', '{\"normal\":\"开启\",\"disable\":\"关闭\"}', null, '2022-10-01 12:44:37', '2022-10-11 21:37:07', null);
+INSERT INTO `im_system` VALUES ('4', '广告点击开启队列', 'ANALYSIS_QUEUE_LOCATION', 'normal', 'RADIO', '{\"normal\":\"开启\",\"disable\":\"关闭\"}', null, '2022-10-01 12:45:39', '2022-10-11 21:37:09', null);
+INSERT INTO `im_system` VALUES ('5', '广告展示队列延迟时间(秒)', 'ANALYSIS_QUEUE_REVIEW_TIME', '15', 'TEXT', '300', null, '2022-10-11 12:04:39', '2022-10-11 21:34:58', null);
+INSERT INTO `im_system` VALUES ('6', '广告点击队列延迟时间(秒)', 'ANALYSIS_QUEUE_LOCATION_TIME', '30', 'TEXT', '300', null, '2022-10-11 12:05:18', '2022-10-11 21:36:54', null);
+INSERT INTO `im_system` VALUES ('7', 'CPV有效间隔(秒)', 'CPV_MIN_TIME', '120', 'TEXT', '300', null, '2022-10-02 18:26:09', '2022-10-11 23:08:05', null);
+INSERT INTO `im_system` VALUES ('8', 'CPC有效间隔(秒)', 'CPC_MIN_TIME', '300', 'TEXT', '300', null, '2022-10-10 20:29:11', '2022-10-11 23:08:00', null);
+INSERT INTO `im_system` VALUES ('9', '广告关闭时效(秒)', 'AD_CLOSE_TIME', '1200', 'TEXT', '1800', null, '2022-09-30 01:05:06', '2022-09-30 03:04:53', null);
+INSERT INTO `im_system` VALUES ('10', '换量广告效果评估方式', 'EXCHANGE_CHARGING_TYPE', 'cpc', 'RADIO', '{\"cpc\":\"CPC\",\"cpv\":\"CPV\"}', '换量广告按CPV或者CPC方式计算流量主有效，全局有效', '2022-10-09 13:03:34', '2022-10-11 03:33:30', null);
+INSERT INTO `im_system` VALUES ('11', 'CPA功能开关', 'CPA_STATE', 'disable', 'RADIO', '{\"normal\":\"开启\",\"disable\":\"关闭\"}', null, '2022-10-10 23:24:59', '2022-10-11 16:23:08', null);
+INSERT INTO `im_system` VALUES ('12', 'CPS功能开关', 'CPS_STATE', 'disable', 'RADIO', '{\"normal\":\"开启\",\"disable\":\"关闭\"}', null, '2022-10-10 23:25:25', '2022-10-11 16:23:05', null);
+INSERT INTO `im_system` VALUES ('13', '广告主注册开关', 'ADVERTISEMENT_REGISTRATION', 'normal', 'RADIO', '{\"normal\":\"开启\",\"disable\":\"关闭\"}', null, '2022-09-30 00:00:27', '2022-09-30 00:23:05', null);
+INSERT INTO `im_system` VALUES ('14', '流量主注册开关', 'PUBLISHMENT_REGISTRATION', 'disable', 'RADIO', '{\"normal\":\"开启\",\"disable\":\"关闭\"}', null, '2022-09-30 00:00:27', '2022-09-30 00:24:04', null);
+INSERT INTO `im_system` VALUES ('15', '固定占位符广告主键', 'VACANT_FIXED_PUBLISHMENT_ID', '1', 'TEXT', '1', '多个之间用逗号隔开', '2022-09-30 01:10:24', '2022-09-30 01:12:36', null);
+INSERT INTO `im_system` VALUES ('16', '换量广告主键', 'VACANT_EXCHANGE_PUBLISHMENT_ID', '2', 'TEXT', '2', '多个之间用逗号隔开', '2022-09-30 01:11:00', '2022-09-30 01:12:31', null);
+INSERT INTO `im_system` VALUES ('17', '广告主注册默认角色组', 'ADVERTISEMENT_ROLE_ID', '3', 'TEXT', '3', null, '2022-09-30 01:11:54', '2022-09-30 01:11:54', null);
+INSERT INTO `im_system` VALUES ('18', '流量主注册默认角色组', 'PUBLISHMENT_ROLE_ID', '4', 'TEXT', '4', null, '2022-09-30 01:12:06', '2022-09-30 01:12:06', null);
+INSERT INTO `im_system` VALUES ('19', 'CPC最低限额', 'CPC_MIN_AMOUNT', '5.00', 'TEXT', null, null, '2022-09-29 22:56:49', '2022-10-11 16:29:14', null);
+INSERT INTO `im_system` VALUES ('20', 'CPM最低限额', 'CPM_MIN_AMOUNT', '25.00', 'TEXT', '25', null, '2022-09-29 23:29:58', '2022-09-29 23:29:58', null);
+INSERT INTO `im_system` VALUES ('21', 'CPV最低限额', 'CPV_MIN_AMOUNT', '25.00', 'TEXT', '25.00', null, '2022-10-11 11:53:20', '2022-10-11 11:53:20', null);
+INSERT INTO `im_system` VALUES ('22', 'CPA最低限额', 'CPA_MIN_AMOUNT', '25.00', 'TEXT', '25', null, '2022-09-29 23:30:29', '2022-09-29 23:30:29', null);
+INSERT INTO `im_system` VALUES ('23', 'CPS最低限额', 'CPS_MIN_AMOUNT', '25.00', 'TEXT', '25', null, '2022-09-29 23:30:57', '2022-09-29 23:30:57', null);
+INSERT INTO `im_system` VALUES ('24', '最低提现金额', 'WITHDRAW_MIN_AMOUNT', '50.00', 'TEXT', '50.00', null, '2022-09-29 23:33:33', '2022-09-29 23:33:33', null);
+INSERT INTO `im_system` VALUES ('25', '无效广告物料地址', 'UNAVAILABLE_LOCATION', 'javascript:void(0);', 'TEXT', 'javascript:void(0);', null, '2022-09-30 01:15:11', '2022-09-30 01:15:11', null);
+INSERT INTO `im_system` VALUES ('26', '无效广告物料图片', 'UNAVAILABLE_IMAGE', 'https://via.placeholder.com/400x400?text=unavailable', 'FILE', 'https://via.placeholder.com/400x400?text=unavailable', null, '2022-09-30 01:15:39', '2022-09-30 01:15:39', null);
+INSERT INTO `im_system` VALUES ('27', '无效广告物料展示回调', 'UNAVAILABLE_CALLBACK', 'test', 'TEXT', 'test', null, '2022-09-30 01:16:07', '2022-09-30 01:16:07', null);
+INSERT INTO `im_system` VALUES ('28', '广告联盟网址', 'UNION_LINK', 'https://union.baidu.com/?adnetwork', 'TEXT', null, null, '2022-09-30 01:13:07', '2022-09-30 01:13:07', null);
+
+-- ----------------------------
+-- Table structure for `im_vacation`
+-- ----------------------------
+DROP TABLE IF EXISTS `im_vacation`;
+CREATE TABLE `im_vacation` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `guid` varchar(255) DEFAULT NULL COMMENT '全局标识',
+  `uuid` varchar(255) DEFAULT NULL COMMENT '用户表示',
+  `ruid` varchar(255) DEFAULT NULL COMMENT '请求标识',
+  `size_id` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `advertisement_id` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `program_id` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `element_id` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `creative_id` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `publishment_id` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `site_id` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `channel_id` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `adsense_id` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `request_time` datetime DEFAULT NULL COMMENT '本地时间',
+  `response_time` datetime DEFAULT NULL COMMENT '服务器时间',
+  `type` enum('CPC','CPM','CPV','CPA','CPS') DEFAULT 'CPC' COMMENT '出价方式{CPC}{CPM}{CPV}{CPA}{CPS}',
+  `origin_rate` bigint(20) unsigned DEFAULT '0',
+  `rate` bigint(20) unsigned DEFAULT '0' COMMENT '出价',
+  `ip` varchar(255) DEFAULT NULL,
+  `time` datetime DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
+  `delete_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='付费记录';
+
+-- ----------------------------
+-- Records of im_vacation
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `im_visitant`
+-- ----------------------------
+DROP TABLE IF EXISTS `im_visitant`;
+CREATE TABLE `im_visitant` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `guid` varchar(255) DEFAULT NULL COMMENT '全局标识',
+  `uuid` varchar(255) DEFAULT NULL COMMENT '用户表示',
+  `ruid` varchar(255) DEFAULT NULL COMMENT '请求标识',
+  `vacation_id` bigint(20) unsigned DEFAULT '0',
+  `size_id` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `advertisement_id` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `program_id` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `element_id` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `creative_id` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `publishment_id` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `site_id` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `channel_id` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `adsense_id` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `material_id` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `request_time` datetime DEFAULT NULL COMMENT '本地时间',
+  `response_time` datetime DEFAULT NULL COMMENT '服务器时间',
+  `type` enum('SINGLE','MULTIGRAPH','POPUP','FLOAT','COUPLET','EXCHANGE','DEFAULT','UNION','FIXED','HIDDEN') DEFAULT 'SINGLE' COMMENT '展现类型{SINGLE:单图}{MULTIGRAPH:多图}{POPUP:弹窗}{FLOAT:悬浮}{COUPLET:对联}{EXCHANGE:显示换量广告}{DEFAULT:显示默认广告}{UNION:显示联盟广告}{FIXED:固定占位符}{HIDDEN:隐藏广告位}',
+  `ip` varchar(255) DEFAULT NULL,
+  `time` datetime DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
+  `delete_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='广告物料点击记录';
+
+-- ----------------------------
+-- Records of im_visitant
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `im_visitor`
+-- ----------------------------
+DROP TABLE IF EXISTS `im_visitor`;
+CREATE TABLE `im_visitor` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `guid` varchar(255) DEFAULT NULL COMMENT '用户全局标识',
+  `uuid` varchar(255) DEFAULT NULL COMMENT '用户独立标识',
+  `language` varchar(255) DEFAULT NULL COMMENT '语言',
+  `platform` varchar(255) DEFAULT NULL COMMENT '操作系统',
+  `device` enum('PC','MOBILE') DEFAULT 'PC' COMMENT '设备{PC:电脑}{MOBILE:移动端}',
+  `screen_width` int(10) unsigned DEFAULT '0' COMMENT '设备屏幕宽度',
+  `screen_height` int(10) unsigned DEFAULT '0' COMMENT '设备屏幕高度',
+  `user_agent` varchar(255) DEFAULT NULL COMMENT '设备代理信息',
+  `ip` varchar(255) DEFAULT NULL,
+  `time` datetime DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
+  `delete_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='设备';
+
+-- ----------------------------
+-- Records of im_visitor
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `im_visits`
+-- ----------------------------
+DROP TABLE IF EXISTS `im_visits`;
+CREATE TABLE `im_visits` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `guid` varchar(255) DEFAULT NULL COMMENT '全局标识',
+  `uuid` varchar(255) DEFAULT NULL COMMENT '用户表示',
+  `ruid` varchar(255) DEFAULT NULL COMMENT '请求标识',
+  `visitor_id` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '设备编号',
+  `visitant_id` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '点击记录编号',
+  `vacation_id` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '付费记录编号',
+  `size_id` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `advertisement_id` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `program_id` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `element_id` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `creative_id` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `publishment_id` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `site_id` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `channel_id` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `adsense_id` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `material_id` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `document_title` varchar(255) DEFAULT NULL COMMENT '所在标题',
+  `document_referrer` varchar(255) DEFAULT NULL COMMENT '来源网址',
+  `document_url` varchar(255) DEFAULT NULL COMMENT '所在网址',
+  `width` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '自定义宽度',
+  `height` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '自定义高度',
+  `request_time` datetime DEFAULT NULL COMMENT '本地时间',
+  `response_time` datetime DEFAULT NULL COMMENT '服务器时间',
+  `type` enum('SINGLE','MULTIGRAPH','POPUP','FLOAT','COUPLET','EXCHANGE','DEFAULT','UNION','FIXED','HIDDEN') DEFAULT 'SINGLE' COMMENT '展现类型{SINGLE:单图}{MULTIGRAPH:多图}{POPUP:弹窗}{FLOAT:悬浮}{COUPLET:对联}{EXCHANGE:显示换量广告}{DEFAULT:显示默认广告}{UNION:显示联盟广告}{FIXED:固定占位符}{HIDDEN:隐藏广告位}',
+  `ip` varchar(255) DEFAULT NULL,
+  `time` datetime DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
+  `delete_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='广告物料展示记录';
+
+-- ----------------------------
+-- Records of im_visits
+-- ----------------------------
