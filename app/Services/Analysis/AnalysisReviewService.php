@@ -88,7 +88,7 @@ class AnalysisReviewService
         $visitor = $this->visitor($request);
 
         // 重复刷新已展示过的广告位无效
-        if (is_null($this->getVisitsExists($request))) {
+        if (!is_null($this->getVisitsExists($request))) {
             return $request->get('type');
         }
 
