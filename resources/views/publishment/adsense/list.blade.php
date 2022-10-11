@@ -154,6 +154,8 @@
                                         <th class="text-center">计费方式</th>
                                         <th class="text-center">展现类型</th>
                                         <th class="text-center">空闲设置</th>
+                                        <th class="text-center">浏览量</th>
+                                        <th class="text-center">点击量</th>
                                         <th class="text-center">状态</th>
                                         <th class="text-center text-nowrap" colspan="2">操作</th>
                                     </tr>
@@ -172,6 +174,8 @@
                                             <td class="text-center">{{ $items->charging }}</td>
                                             <td class="text-center">{{ $items->type }}</td>
                                             <td class="text-center">{{ $items->vacant }}</td>
+                                            <td class="text-center">{{ $items->visits_count }}</td>
+                                            <td class="text-center">{{ $items->visitant_count }}</td>
                                             <td class="text-center">{{ $items->state }}</td>
                                             <td class="text-center">
                                                 <a href="{{ $items->code }}" rel-action="dialog" rel-width="860" rel-height="656" title="获取代码">获取代码</a>

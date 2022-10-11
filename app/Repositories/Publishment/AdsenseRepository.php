@@ -32,6 +32,7 @@ class AdsenseRepository extends Repository
                 'channel',
                 'size',
             ])
+            ->withCount('visits', 'visitant')
             ->when($request->get('title'), function ($query) use ($request) {
                 $query->where('title', 'LIKE', "%{$request->get('title')}%");
             })

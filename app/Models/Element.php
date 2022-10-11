@@ -84,4 +84,14 @@ class Element extends Model
     {
         return $this->belongsTo(Advertisement::class, 'advertisement_id')->withDefault();
     }
+
+    public function visits(): HasMany
+    {
+        return $this->hasMany(Visits::class);
+    }
+
+    public function visitant(): HasMany
+    {
+        return $this->hasMany(Visitant::class);
+    }
 }

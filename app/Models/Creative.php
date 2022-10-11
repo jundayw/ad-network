@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Http\Request;
 
@@ -53,5 +54,15 @@ class Creative extends Model
     public function size(): BelongsTo
     {
         return $this->belongsTo(Size::class)->withDefault();
+    }
+
+    public function visits(): HasMany
+    {
+        return $this->hasMany(Visits::class);
+    }
+
+    public function visitant(): HasMany
+    {
+        return $this->hasMany(Visitant::class);
     }
 }

@@ -75,6 +75,8 @@
                                         <th class="text-center">日限额</th>
                                         <th class="text-center">新增时间</th>
                                         <th class="text-center">修改时间</th>
+                                        <th class="text-center">浏览量</th>
+                                        <th class="text-center">点击量</th>
                                         <th class="text-center">状态</th>
                                         <th class="text-center text-nowrap">操作</th>
                                     </tr>
@@ -85,9 +87,11 @@
                                             <td class="text-center">{{ $loop->iteration }}</td>
                                             <td>{{ $items->title }}</td>
                                             <td class="text-center">{{ $items->device }}</td>
-                                            <td class="text-center">{{ $items->limit }}</td>
+                                            <td class="text-right">{{ $items->limit }}</td>
                                             <td class="text-center">{{ $items->create_time }}</td>
                                             <td class="text-center">{{ $items->update_time }}</td>
+                                            <td class="text-center">{{ $items->visits_count }}</td>
+                                            <td class="text-center">{{ $items->visitant_count }}</td>
                                             <td class="text-center">{{ $items->state }}</td>
                                             <td class="text-center text-nowrap">
                                                 @policy('advertisement.program.edit')

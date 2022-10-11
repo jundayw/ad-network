@@ -19,6 +19,7 @@ class ProgramRepository extends Repository
     public function list(Request $request): array
     {
         $data = $this->program
+            ->withCount('visits', 'visitant')
             ->when($request->get('title'), function ($query) use ($request) {
                 $query->where('title', 'LIKE', "%{$request->get('title')}%");
             })

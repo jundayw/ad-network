@@ -30,6 +30,7 @@ class CreativeRepository extends Repository
                 'element',
                 'size',
             ])
+            ->withCount('visits', 'visitant')
             ->when($request->get('title'), function ($query) use ($request) {
                 $query->where('title', 'LIKE', "%{$request->get('title')}%");
             })

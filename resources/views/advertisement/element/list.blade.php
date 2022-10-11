@@ -101,13 +101,14 @@
                                     <thead>
                                     <tr>
                                         <th class="text-center">编号</th>
-                                        <th class="text-center">广告计划</th>
-                                        <th class="text-center">投放设备</th>
                                         <th class="text-center">广告单元</th>
+                                        <th class="text-center" colspan="2">广告计划</th>
                                         <th class="text-center" colspan="2">投放日期</th>
                                         <th class="text-center" colspan="2">投放时段</th>
                                         <th class="text-center">出价方式</th>
                                         <th class="text-center">出价</th>
+                                        <th class="text-center">浏览量</th>
+                                        <th class="text-center">点击量</th>
                                         <th class="text-center">状态</th>
                                         <th class="text-center text-nowrap">操作</th>
                                     </tr>
@@ -116,15 +117,17 @@
                                     @foreach($data as $items)
                                         <tr>
                                             <td class="text-center">{{ $loop->iteration }}</td>
+                                            <td>{{ $items->title }}</td>
                                             <td>{{ $items->program->title }}</td>
                                             <td class="text-center">{{ $items->program->getDevice($items->program->device) }}</td>
-                                            <td>{{ $items->title }}</td>
                                             <td class="text-center">{{ $items->release_begin }}</td>
                                             <td class="text-center">{{ $items->release_finish }}</td>
                                             <td class="text-center">{{ $items->period_begin }}</td>
                                             <td class="text-center">{{ $items->period_finish }}</td>
-                                            <td class="text-center">{{ $items->type }}</td>
-                                            <td class="text-center">{{ $items->rate }}</td>
+                                            <td class="text-left">{{ $items->type }}</td>
+                                            <td class="text-right">{{ $items->rate }}</td>
+                                            <td class="text-center">{{ $items->visits_count }}</td>
+                                            <td class="text-center">{{ $items->visitant_count }}</td>
                                             <td class="text-center">{{ $items->state }}</td>
                                             <td class="text-center text-nowrap">
                                                 @policy('advertisement.element.edit')
