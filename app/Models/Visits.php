@@ -36,8 +36,40 @@ class Visits extends Model
         );
     }
 
+    public function getVacant(?string $value = null, ?string $default = '--'): string|array
+    {
+        return $this->getEnumeration([
+            'EXCHANGE' => '换量广告',
+            'DEFAULT' => '本地广告',
+            'UNION' => '联盟广告',
+            // 'FIXED' => '固定占位符',
+            'FIXED' => '公益广告',
+            'HIDDEN' => '隐藏广告位',
+        ], $value, $default);
+    }
+
     public function visitor(): BelongsTo
     {
         return $this->belongsTo(Visitor::class)->withTrashed();
+    }
+
+    public function size(): BelongsTo
+    {
+        return $this->belongsTo(Size::class)->withTrashed();
+    }
+
+    public function site(): BelongsTo
+    {
+        return $this->belongsTo(Site::class)->withTrashed();
+    }
+
+    public function channel(): BelongsTo
+    {
+        return $this->belongsTo(Channel::class)->withTrashed();
+    }
+
+    public function adsense(): BelongsTo
+    {
+        return $this->belongsTo(Adsense::class)->withTrashed();
     }
 }

@@ -95,4 +95,8 @@ Route::namespace('Publishment')->name('publishment.')->group(function () {
     Route::prefix('vacation')->controller('VacationController')->name('vacation.')->group(function () {
         Route::get('list', 'list')->name('list');
     });
+    // 空闲报告
+    Route::prefix('visits')->controller('VisitsController')->name('visits.')->group(function () {
+        Route::get('list', 'list')->name('list');
+    });
 });
