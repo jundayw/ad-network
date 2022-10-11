@@ -34,7 +34,9 @@ class AnalysisRepository extends Repository
         ]);
         if (config('system.analysis_queue_ad', 'disable') == 'normal') {
             // 调度给队列处理图片展示统计
-            AnalysisReviewJob::dispatch($data)->delay(now()->addSeconds(mt_rand(30, 60) / 15));
+            $review = config('system.analysis_queue_ad_time');
+            $delay  = mt_rand($review, $review += config('system.cpv_min_time') / 2);
+            AnalysisReviewJob::dispatch($data)->delay(now()->addSeconds($delay));
         } else {
             $this->reviewService->run(collect($data));
         }
@@ -48,7 +50,9 @@ class AnalysisRepository extends Repository
         ]);
         if (config('system.analysis_queue_location', 'disable') == 'normal') {
             // 调度给队列处理点击统计
-            AnalysisRedirectJob::dispatch($data)->delay(now()->addSeconds(mt_rand(300, 360) / 500));
+            $location = config('system.analysis_queue_location_time');
+            $delay    = mt_rand($location, $location += config('system.cpc_min_time') / 2);
+            AnalysisRedirectJob::dispatch($data)->delay(now()->addSeconds($delay));
         } else {
             $this->redirectService->run(collect($data));
         }

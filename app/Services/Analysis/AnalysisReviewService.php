@@ -37,11 +37,12 @@ class AnalysisReviewService
      */
     private function visitor(Collection $request): Visitor
     {
+        $time    = Date::createFromTimestamp($request->get('st'))->toDateString();
         $visitor = $this->visitor->where([
             'guid' => $request->get('gu'),
             'uuid' => $request->get('uu'),
             'ip' => $request->get('ip'),
-        ])->whereDate('time', get_time('Y-m-d'))->first();
+        ])->whereDate('time', $time)->first();
 
         if ($visitor) {
             return $visitor;
