@@ -13,18 +13,18 @@
                     <h3 class="box-title m-b-20">{{ $share->get('action') }}</h3>
                     <div class="form-group">
                         <div class="col-xs-12">
-                            <input class="form-control" type="text" name="username" value="admin" placeholder="请输入用户名" autocomplete="off">
+                            <input class="form-control" type="text" name="username" value="" placeholder="请输入用户名" autocomplete="off">
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-xs-12">
-                            <input class="form-control" type="password" name="password" value="123456" placeholder="请输入密码" autocomplete="off">
+                            <input class="form-control" type="password" name="password" value="" placeholder="请输入密码" autocomplete="off">
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-xs-12">
                             <div class="input-group">
-                                <input class="form-control" type="text" name="captcha" value="6868" placeholder="请输入验证码" autocomplete="off">
+                                <input class="form-control" type="text" name="captcha" value="" placeholder="请输入验证码" autocomplete="off">
                                 <img class="model_img" src="{{ route('utils.captcha', ['login', 'height' => 38]) }}" alt="验证码" title="点击刷新" rel-action="captcha">
                             </div>
                         </div>
