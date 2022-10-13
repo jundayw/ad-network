@@ -12,7 +12,7 @@
                 <p class="text-muted m-t-30 m-b-30">
                     Please try after some time
                 </p>
-                <a href="javascript:history.back();" class="btn btn-info btn-rounded waves-effect waves-light m-b-40">
+                <a href="{{ $url ?? 'javascript:history.back();' }}" class="btn btn-info btn-rounded waves-effect waves-light m-b-40">
                     返回
                 </a>
             </div>

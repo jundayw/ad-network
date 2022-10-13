@@ -2,7 +2,7 @@ jQuery(document).ready(function ($) {
     'use strict';
     window.loopcounter = function (idWarp) {
         if (typeof idWarp != 'undefined') {
-            var date = $(idWarp).data('date');
+            var date = $(idWarp).data('date').replace(/-/g, '/');
 
             var start = new Date(date),
                 end = new Date(),
@@ -14,14 +14,14 @@ jQuery(document).ready(function ($) {
             var min = parseInt((diff / 1000 / 60) % 60);
             var sec = parseInt((diff / 1000) % 60);
 
-            console.log([
-                diff,
-                time,
-                day,
-                hour,
-                min,
-                sec,
-            ]);
+            // console.log([
+            //     diff,
+            //     time,
+            //     day,
+            //     hour,
+            //     min,
+            //     sec,
+            // ]);
 
             counterDate(idWarp, day, hour, min, sec);
 
