@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class Gzip
 {
@@ -19,6 +20,10 @@ class Gzip
         $response = $next($request);
 
         if (config('helpers.gzip') === false) {
+            return $response;
+        }
+
+        if (Str::is(config('helpers.excepts', []), $request->route()->getName())) {
             return $response;
         }
 

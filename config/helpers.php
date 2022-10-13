@@ -9,5 +9,6 @@ return [
             env('ASSETS_DOMAIN', '//assets.test'),
         ],
     ],
-    'gzip' => false,
+    'gzip' => env('HELPS_GZIP', false),
+    'excepts' => explode(',', env('HELPS_EXCEPTS', '')),
 ];
