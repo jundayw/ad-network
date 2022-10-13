@@ -60,6 +60,10 @@ class AccountRepository extends Repository
             'type' => $this->publishment->getType(),
         ];
 
+        if (config('system.publishment_registration', 'disable') == 'disable') {
+            throw new RenderErrorResponseException('注册功能暂未开启');
+        }
+
         return compact('filter');
     }
 

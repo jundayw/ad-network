@@ -60,6 +60,10 @@ class AccountRepository extends Repository
             'type' => $this->advertisement->getType(),
         ];
 
+        if (config('system.advertisement_registration', 'disable') == 'disable') {
+            throw new RenderErrorResponseException('注册功能暂未开启');
+        }
+
         return compact('filter');
     }
 
