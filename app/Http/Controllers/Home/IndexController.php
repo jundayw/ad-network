@@ -164,6 +164,7 @@ class IndexController extends Controller
                     ],
                 ],
             ],
+            // 常见问题
             'faq' => [
                 'title' => '常见问题',
                 'desc' => '联盟常见问题及换量广告问题',
@@ -188,21 +189,6 @@ class IndexController extends Controller
             ],
         ];
 
-        if (config('system.coming_soon_state', 'normal') == 'normal') {
-            return redirect()->route('home.soon');
-        }
-
-        $data = config('system.home', []);
-
-        if (!is_array($data)) {
-            $data = json_decode($data, true);
-        }
-
-        return new ViewResponse($data, 'index');
-    }
-
-    public function soon(Request $request)
-    {
         $data = [
             'name' => '广告联盟',
             'title' => '广告联盟',
@@ -216,12 +202,20 @@ class IndexController extends Controller
             'location' => 'home.index',
         ];
 
-        $data = config('system.coming_soon', []);
-
-        if (!is_array($data)) {
+        if (!is_array($data = config('system.coming_soon', []))) {
             $data = json_decode($data, true);
         }
 
-        return new ViewResponse($data, 'soon');
+        if (config('system.coming_soon_state', 'normal') == 'normal' &&
+            array_key_exists('date', $data) &&
+            get_timestamp() < strtotime($data['date'])) {
+            return new ViewResponse($data, 'soon');
+        }
+
+        if (!is_array($data = config('system.home', []))) {
+            $data = json_decode($data, true);
+        }
+
+        return new ViewResponse($data, 'index');
     }
 }

@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,7 +14,6 @@ use Illuminate\Support\Facades\Route;
 Route::namespace('Home')->name('home.')->group(function () {
     Route::controller('IndexController')->group(function () {
         Route::get('/', 'index')->name('index');
-        Route::get('soon', 'soon')->name('soon');
     });
 });
 Route::namespace('Utils')->name('utils.')->group(function () {
