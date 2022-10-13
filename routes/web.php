@@ -13,8 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::namespace('Home')->name('home.')->group(function () {
+    Route::controller('IndexController')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('soon', 'soon')->name('soon');
+    });
 });
 Route::namespace('Utils')->name('utils.')->group(function () {
     // 验证码
