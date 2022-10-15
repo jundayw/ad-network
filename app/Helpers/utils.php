@@ -3,6 +3,38 @@
 use JetBrains\PhpStorm\ArrayShape;
 
 /**
+ * RC4 加密算法
+ *
+ * @param string $password 密钥
+ * @param string $data 加密数据
+ * @return string
+ */
+function rc4(string $password, string $data): string
+{
+    $cipher      = '';
+    $key         = [];
+    $box         = [];
+    $pwd_length  = strlen($password);
+    $data_length = strlen($data);
+    for ($i = 0; $i < 256; $i++) {
+        $key[$i] = ord($password[$i % $pwd_length]);
+        $box[$i] = $i;
+    }
+    for ($m = $n = 0; $n < 256; $n++) {
+        $m = ($m + $box[$n] + $key[$n]) % 256;
+        [$box[$n], $box[$m]] = [$box[$n], $box[$m]];
+    }
+    for ($m = $n = $i = 0; $i < $data_length; $i++) {
+        $m = ($m + 1) % 256;
+        $n = ($n + $box[$m]) % 256;
+        [$box[$n], $box[$m]] = [$box[$m], $box[$n]];
+        $k      = $box[(($box[$m] + $box[$n]) % 256)];
+        $cipher .= chr(ord($data[$i]) ^ $k);
+    }
+    return $cipher;
+}
+
+/**
  * 生成请求字符串
  * @param array $data
  * @param boolean $encode

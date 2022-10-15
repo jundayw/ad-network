@@ -25,9 +25,13 @@ class AnalysisController extends BaseController
     public function redirect(Request $request): RedirectResponse
     {
         $repository = $this->repository->redirect($request);
-        return response()->redirectTo(
-            path: $repository->get('path'),
-            headers: $repository->get('headers')
-        );
+        $url        = base64_encode(rc4(config('app.key'), $repository->get('path')));
+        return response()->redirectToRoute('analysis.analysis.location', compact('url'));
+    }
+
+    public function location(Request $request): RedirectResponse
+    {
+        $path = rc4(config('app.key'), base64_decode($request->get('url')));
+        return response()->redirectTo($path);
     }
 }
