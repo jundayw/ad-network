@@ -4,9 +4,10 @@
  * 获取静态资源
  * @param string $file
  * @param boolean|string $local
+ * @param bool $version
  * @return string
  */
-function H(string $file = '', bool|string $local = false): string
+function H(string $file = '', bool|string $local = false, bool $version = false): string
 {
     $domains = config('helpers.assets.domain', []);
 
@@ -18,7 +19,11 @@ function H(string $file = '', bool|string $local = false): string
         $domain = $local;
     }
 
-    return sprintf('%s/%s?v=%s', rtrim($domain, '/'), ltrim($file, '/'), get_timestamp());
+    if ($version) {
+        return sprintf('%s/%s?v=%s', rtrim($domain, '/'), ltrim($file, '/'), get_timestamp());
+    }
+
+    return sprintf('%s/%s', rtrim($domain, '/'), ltrim($file, '/'));
 }
 
 /**
