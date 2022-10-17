@@ -1,4 +1,4 @@
-@extends('advertisement.layouts.main')
+@extends('backend.layouts.main')
 
 @push('plugins')
     <link href="{{ H('plugins/components/footable/css/footable.core.css') }}" rel="stylesheet">
@@ -18,7 +18,7 @@
                     搜索：{{ $share->get('action') }}
                 </div>
                 <div class="panel-wrapper">
-                    <form action="{{ route('advertisement.vacation.list') }}" class="form-horizontal" method="get">
+                    <form action="{{ route('backend.report.vacation') }}" class="form-horizontal" method="get">
                         <div class="panel-body p-b-0">
                             <div class="form-group row">
                                 <label class="col-md-1 control-label col-form-label">广告计划</label>
@@ -44,17 +44,17 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-md-1 control-label col-form-label">全局用户标识</label>
+                                <label class="col-md-1 control-label col-form-label">站点</label>
                                 <div class="col-md-2">
-                                    <input class="form-control" type="text" name="guid" value="{{ $request->get('guid') }}" placeholder="请输入全局用户标识" autocomplete="off">
+                                    <input class="form-control" type="text" name="site" value="{{ $request->get('site') }}" placeholder="请输入站点" autocomplete="off">
                                 </div>
-                                <label class="col-md-1 control-label col-form-label">独立用户标识</label>
+                                <label class="col-md-1 control-label col-form-label">频道</label>
                                 <div class="col-md-2">
-                                    <input class="form-control" type="text" name="uuid" value="{{ $request->get('uuid') }}" placeholder="请输入独立用户标识" autocomplete="off">
+                                    <input class="form-control" type="text" name="channel" value="{{ $request->get('channel') }}" placeholder="请输入频道" autocomplete="off">
                                 </div>
-                                <label class="col-md-1 control-label col-form-label">请求标识</label>
+                                <label class="col-md-1 control-label col-form-label">广告位</label>
                                 <div class="col-md-2">
-                                    <input class="form-control" type="text" name="ruid" value="{{ $request->get('ruid') }}" placeholder="请输入请求标识" autocomplete="off">
+                                    <input class="form-control" type="text" name="adsense" value="{{ $request->get('adsense') }}" placeholder="请输入广告位" autocomplete="off">
                                 </div>
                                 <label class="col-md-1 control-label col-form-label">时间</label>
                                 <div class="col-md-2">
@@ -67,11 +67,25 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="form-group row">
+                                <label class="col-md-1 control-label col-form-label">全局用户标识</label>
+                                <div class="col-md-2">
+                                    <input class="form-control" type="text" name="guid" value="{{ $request->get('guid') }}" placeholder="请输入全局用户标识" autocomplete="off">
+                                </div>
+                                <label class="col-md-1 control-label col-form-label">独立用户标识</label>
+                                <div class="col-md-2">
+                                    <input class="form-control" type="text" name="uuid" value="{{ $request->get('uuid') }}" placeholder="请输入独立用户标识" autocomplete="off">
+                                </div>
+                                <label class="col-md-1 control-label col-form-label">请求标识</label>
+                                <div class="col-md-2">
+                                    <input class="form-control" type="text" name="ruid" value="{{ $request->get('ruid') }}" placeholder="请输入请求标识" autocomplete="off">
+                                </div>
+                            </div>
                         </div>
                         <div class="panel-footer">
                             <div class="offset-md-1">
                                 <button type="submit" class="btn btn-default btn-outline">查询</button>
-                                <a class="btn btn-default btn-outline" href="{{ route('advertisement.vacation.list') }}">重置</a>
+                                <a class="btn btn-default btn-outline" href="{{ route('backend.report.vacation') }}">重置</a>
                             </div>
                         </div>
                     </form>
@@ -93,12 +107,27 @@
                                     <thead>
                                     <tr>
                                         <th class="text-center" data-toggle="true">编号</th>
+                                        <th class="text-center" colspan="3">广告主</th>
+                                        <th class="text-center" colspan="3">网站主</th>
+                                        <th class="text-center" colspan="3">广告尺寸</th>
+                                        <th class="text-center">类型</th>
+                                        <th class="text-center" colspan="2">费用</th>
+                                        <th class="text-center">时间</th>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-center" data-toggle="true">编号</th>
                                         <th class="text-center">广告计划</th>
                                         <th class="text-center">广告单元</th>
                                         <th class="text-center">广告创意</th>
-                                        <th class="text-center" colspan="3">广告尺寸</th>
+                                        <th class="text-center">站点</th>
+                                        <th class="text-center">频道</th>
+                                        <th class="text-center">广告位</th>
+                                        <th class="text-center">名称</th>
+                                        <th class="text-center">尺寸</th>
+                                        <th class="text-center">物料</th>
                                         <th class="text-center">类型</th>
-                                        <th class="text-center">价格</th>
+                                        <th class="text-center">支出</th>
+                                        <th class="text-center">收入</th>
                                         <th class="text-center">时间</th>
                                         <th data-hide="all">全局用户标识</th>
                                         <th data-hide="all">独立用户标识</th>
@@ -123,6 +152,9 @@
                                             <td>{{ $items->program->title }}</td>
                                             <td>{{ $items->element->title }}</td>
                                             <td>{{ $items->creative->title }}</td>
+                                            <td>{{ $items->site->title }}</td>
+                                            <td>{{ $items->channel->title }}</td>
+                                            <td>{{ $items->adsense->title }}</td>
                                             <td>{{ $items->size->title }}</td>
                                             <td>
                                                 {{ $items->size->width }}x{{ $items->size->height }}
@@ -134,6 +166,7 @@
                                             </td>
                                             <td class="text-center">{{ $items->getRawOriginal('type') }}</td>
                                             <td class="text-center">{{ $items->origin_rate }}</td>
+                                            <td class="text-center">{{ $items->rate }}</td>
                                             <td class="text-center">{{ $items->request_time }}</td>
                                             <td>{{ $items?->visits?->visitor?->guid ?? '--' }}</td>
                                             <td>{{ $items?->visits?->visitor?->uuid ?? '--' }}</td>
@@ -168,7 +201,7 @@
                         </div>
                     </div>
                     <div class="panel-footer clearfix">
-                        {{ $data->appends($request->query())->links('advertisement.layouts.page') }}
+                        {{ $data->appends($request->query())->links('backend.layouts.page') }}
                     </div>
                 </div>
             </div>

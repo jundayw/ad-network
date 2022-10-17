@@ -171,4 +171,10 @@ Route::namespace('Backend')->name('backend.')->group(function () {
         Route::post('update', 'update')->name('update');
         Route::get('destroy', 'destroy')->name('destroy');
     });
+    // 报告
+    Route::prefix('report')->controller('ReportController')->name('report.')->group(function () {
+        Route::get('visits', 'visits')->name('visits');
+        Route::get('visitant', 'visitant')->name('visitant');
+        Route::get('vacation', 'vacation')->name('vacation');
+    });
 });

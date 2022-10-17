@@ -45,6 +45,9 @@ class VisitsRepository extends Repository
             ->when($request->get('uuid'), function ($query) use ($request) {
                 $query->where('uuid', 'LIKE', "%{$request->get('uuid')}%");
             })
+            ->when($request->get('ruid'), function ($query) use ($request) {
+                $query->where('ruid', 'LIKE', "%{$request->get('ruid')}%");
+            })
             ->when($request->get('vacant'), function ($query) use ($request) {
                 $query->where('type', $request->get('vacant'));
             })

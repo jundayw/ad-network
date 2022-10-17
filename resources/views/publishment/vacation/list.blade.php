@@ -52,6 +52,10 @@
                                 <div class="col-md-2">
                                     <input class="form-control" type="text" name="uuid" value="{{ $request->get('uuid') }}" placeholder="请输入独立用户标识" autocomplete="off">
                                 </div>
+                                <label class="col-md-1 control-label col-form-label">请求标识</label>
+                                <div class="col-md-2">
+                                    <input class="form-control" type="text" name="ruid" value="{{ $request->get('ruid') }}" placeholder="请输入请求标识" autocomplete="off">
+                                </div>
                                 <label class="col-md-1 control-label col-form-label">时间</label>
                                 <div class="col-md-2">
                                     <div class="input-group">
@@ -98,6 +102,7 @@
                                         <th class="text-center">时间</th>
                                         <th data-hide="all">全局用户标识</th>
                                         <th data-hide="all">独立用户标识</th>
+                                        <th data-hide="all">请求标识</th>
                                         <th data-hide="all">语言</th>
                                         <th data-hide="all">操作系统</th>
                                         <th data-hide="all">设备</th>
@@ -125,11 +130,12 @@
                                                     <img src="{{ $items->creative->image }}" style="max-height: 18px;">
                                                 </a>
                                             </td>
-                                            <td class="text-center">{{ $items->type }}</td>
+                                            <td class="text-center">{{ $items->getRawOriginal('type') }}</td>
                                             <td class="text-center">{{ $items->rate }}</td>
                                             <td class="text-center">{{ $items->request_time }}</td>
                                             <td>{{ $items?->visits?->visitor?->guid ?? '--' }}</td>
                                             <td>{{ $items?->visits?->visitor?->uuid ?? '--' }}</td>
+                                            <td>{{ $items->ruid ?? '--' }}</td>
                                             <td>{{ $items?->visits?->visitor?->language ?? '--' }}</td>
                                             <td>{{ $items?->visits?->visitor?->platform ?? '--' }}</td>
                                             <td>{{ $items?->visits?->visitor?->getDevice($items?->visits?->visitor?->device) ?? '--' }}</td>

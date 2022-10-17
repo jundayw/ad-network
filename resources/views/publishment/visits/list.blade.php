@@ -52,6 +52,10 @@
                                 <div class="col-md-2">
                                     <input class="form-control" type="text" name="uuid" value="{{ $request->get('uuid') }}" placeholder="请输入独立用户标识" autocomplete="off">
                                 </div>
+                                <label class="col-md-1 control-label col-form-label">请求标识</label>
+                                <div class="col-md-2">
+                                    <input class="form-control" type="text" name="ruid" value="{{ $request->get('ruid') }}" placeholder="请输入请求标识" autocomplete="off">
+                                </div>
                                 <label class="col-md-1 control-label col-form-label">时间</label>
                                 <div class="col-md-2">
                                     <div class="input-group">
@@ -97,6 +101,7 @@
                                         <th class="text-center">时间</th>
                                         <th data-hide="all">全局用户标识</th>
                                         <th data-hide="all">独立用户标识</th>
+                                        <th data-hide="all">请求标识</th>
                                         <th data-hide="all">语言</th>
                                         <th data-hide="all">操作系统</th>
                                         <th data-hide="all">设备</th>
@@ -123,6 +128,7 @@
                                             <td class="text-center">{{ $items->request_time }}</td>
                                             <td>{{ $items?->visitor?->guid ?? '--' }}</td>
                                             <td>{{ $items?->visitor?->uuid ?? '--' }}</td>
+                                            <td>{{ $items->ruid ?? '--' }}</td>
                                             <td>{{ $items?->visitor?->language ?? '--' }}</td>
                                             <td>{{ $items?->visitor?->platform ?? '--' }}</td>
                                             <td>{{ $items?->visitor?->getDevice($items?->visitor?->device) ?? '--' }}</td>

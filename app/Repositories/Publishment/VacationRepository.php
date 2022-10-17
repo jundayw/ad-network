@@ -44,6 +44,9 @@ class VacationRepository extends Repository
             ->when($request->get('uuid'), function ($query) use ($request) {
                 $query->where('uuid', 'LIKE', "%{$request->get('uuid')}%");
             })
+            ->when($request->get('ruid'), function ($query) use ($request) {
+                $query->where('ruid', 'LIKE', "%{$request->get('ruid')}%");
+            })
             ->when($request->get('type'), function ($query) use ($request) {
                 $query->where('type', $request->get('type'));
             })
@@ -56,11 +59,6 @@ class VacationRepository extends Repository
             ->latest($this->vacation->getKeyName());
 
         $data = $data->Paginate($request->get('per', $this->vacation->getPerPage()), ['*'], 'page', $request->get('page', 1));
-
-        $data->transform(function ($items) {
-            $items->type = $items->getType($items->type);
-            return $items;
-        });
 
         $filter = [
             'type' => $this->vacation->getType(),

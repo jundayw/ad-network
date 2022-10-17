@@ -50,26 +50,41 @@ class Visits extends Model
 
     public function visitor(): BelongsTo
     {
-        return $this->belongsTo(Visitor::class)->withTrashed();
+        return $this->belongsTo(Visitor::class)->withTrashed()->withDefault();
     }
 
     public function size(): BelongsTo
     {
-        return $this->belongsTo(Size::class)->withTrashed();
+        return $this->belongsTo(Size::class)->withTrashed()->withDefault();
     }
 
     public function site(): BelongsTo
     {
-        return $this->belongsTo(Site::class)->withTrashed();
+        return $this->belongsTo(Site::class)->withTrashed()->withDefault();
     }
 
     public function channel(): BelongsTo
     {
-        return $this->belongsTo(Channel::class)->withTrashed();
+        return $this->belongsTo(Channel::class)->withTrashed()->withDefault();
     }
 
     public function adsense(): BelongsTo
     {
-        return $this->belongsTo(Adsense::class)->withTrashed();
+        return $this->belongsTo(Adsense::class)->withTrashed()->withDefault();
+    }
+
+    public function program(): BelongsTo
+    {
+        return $this->belongsTo(Program::class)->withTrashed()->withDefault();
+    }
+
+    public function element(): BelongsTo
+    {
+        return $this->belongsTo(Element::class)->withTrashed()->withDefault();
+    }
+
+    public function creative(): BelongsTo
+    {
+        return $this->belongsTo(Creative::class)->withTrashed()->withDefault();
     }
 }

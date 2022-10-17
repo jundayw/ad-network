@@ -76,6 +76,7 @@ class AnalysisRedirectService
             'guid' => $request->get('gu'),
             'uuid' => $request->get('uu'),
             'ruid' => $request->get('ru'),
+            'visits_id' => $visits->getKey(),
             'size_id' => $request->get('sid'),
             'publishment_id' => $request->get('pid'),
             'site_id' => $request->get('wid'),
