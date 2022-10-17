@@ -1,64 +1,143 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+## 耐斯特广告联盟系统
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+### 功能简介
 
-## About Laravel
+#### 自定义广告尺寸
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- 支持设备：电脑端、移动端
+- 展现类型：单图、多图、弹窗、悬浮、对联
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+#### 广告主
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- 广告计划：日限额
+- 广告单元：投放日期、投放时段
+- 出价方式：CPC、CPM、CPV、CPA、CPS
+- 财务管理：充值、提现、交易流水
+- 支持充值：支付宝、微信、线下充值
+- 支持提现：支付宝、微信、钱包
 
-## Learning Laravel
+#### 网站主
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- 站点验证方式：文件验证、HTML标签验证
+- 广告位类型：联盟广告、本地广告
+- 计费方式：智能、CPC、CPM、CPV、CPA、CPS
+- 展现类型：单图、多图、悬浮、弹窗、对联
+- 广告位空闲设置：显示换量广告、显示本地广告、显示联盟广告、固定占位符、隐藏广告位
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 软件架构
 
-## Laravel Sponsors
+* 编程语言：`PHP 8.1+`
+* 后端框架：`Laravel 9.x` + `MySQL 5.7+` + `Redis`
+* 前端框架：`Bootstrap v4.0.0` + `EliteAdmin`
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+### [在线预览](https://www.naisiter.com/)
 
-### Premium Partners
+### 官网
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+![官网](docs/images/index.png)
 
-## Contributing
+### 运营系统
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+![运营系统](docs/images/backend.png)
 
-## Code of Conduct
+### 广告主平台
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+![广告主](docs/images/e.png)
+![广告主](docs/images/advertiser.png)
 
-## Security Vulnerabilities
+### 网站主平台
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+![网站主](docs/images/union.png)
+![网站主](docs/images/publisher.png)
 
-## License
+### 安装教程
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+使用 `git` 克隆本项目，导入数据库文件 `ad-network.sql` 或 `database.sql`
+
+- 命令行：`composer install`
+- 命令行：`cp .env.example .env`
+- 命令行：`php artisan key:generate`
+
+### 修改 `.env` 文件配置
+
+#### 数据库配置
+
+```
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=
+DB_USERNAME=root
+DB_PASSWORD=root
+DB_PREFIX=
+```
+
+#### `Redis` 配置
+
+```
+REDIS_HOST=127.0.0.1
+REDIS_PASSWORD=null
+REDIS_PORT=6379
+```
+
+#### 邮箱配置
+
+```
+MAIL_MAILER=smtp
+MAIL_HOST=
+MAIL_PORT=465
+MAIL_USERNAME=
+MAIL_PASSWORD=
+MAIL_ENCRYPTION=
+MAIL_FROM_ADDRESS=
+MAIL_FROM_NAME="${APP_NAME}"
+```
+
+#### 域名配置
+
+```
+STATIC_DOMAIN=http://adwords.me.yunduanchongqing.com/upload/
+DOMAIN_BACKEND=backend.me.yunduanchongqing.com
+DOMAIN_ADVERTISEMENT=e.me.yunduanchongqing.com
+DOMAIN_PUBLISHMENT=union.me.yunduanchongqing.com
+DOMAIN_RENDER=render.me.yunduanchongqing.com
+DOMAIN_ANALYSIS=ads.me.yunduanchongqing.com
+```
+
+测试环境推荐使用以下域名配置（数据库中已经使用了相关域名，正式环境请清空测试数据库并修改相关域名配置）
+
+### 站点配置
+
+#### 以 `nginx` 配置为例：
+
+```
+server 
+{
+    listen 80;
+    server_name www.me.yunduanchongqing.com backend.me.yunduanchongqing.com e.me.yunduanchongqing.com union.me.yunduanchongqing.com adwords.me.yunduanchongqing.com render.me.yunduanchongqing.com ads.me.yunduanchongqing.com; 
+    index index.php index.html index.htm default.php default.htm default.html;
+    root /www/naisiter/public;
+    ...
+    #Laravel rewrite 规则请参考 laravel 官网
+    include rewrite/naisiter.conf;
+}
+```
+
+#### 站点说明：
+
+- [官网：http://www.me.yunduanchongqing.com](https://www.me.yunduanchongqing.com/)
+- [运营系统：http://backend.me.yunduanchongqing.com](https://backend.me.yunduanchongqing.com/)
+- [广告主平台：http://e.me.yunduanchongqing.com](https://e.me.yunduanchongqing.com/)
+- [网站主平台：http://union.me.yunduanchongqing.com](https://union.me.yunduanchongqing.com/)
+- [静态资源：http://adwords.me.yunduanchongqing.com](https://adwords.me.yunduanchongqing.com/)
+- [广告渲染引擎：http://render.me.yunduanchongqing.com](https://render.me.yunduanchongqing.com/)
+- [广告分析引擎：http://ads.me.yunduanchongqing.com](https://ads.me.yunduanchongqing.com/)
+
+### 队列任务
+
+```shell
+php artisan queue:work
+```
+
+### 广告演示
+
+[广告演示](https://www.me.yunduanchongqing.com/demo/)
