@@ -122,13 +122,7 @@
                                         <div class="input-group">
                                             <input class="form-control" type="text" name="value" value="{{ $data->value }}" rel-action="preview" rel-src="[rel-origin='[name=value]']" placeholder="请上传图片地址" autocomplete="off">
                                             <label for="value" class="input-group-addon">上传</label>
-                                            <input
-                                                    id="value"
-                                                    type="file"
-                                                    rel-action="file"
-                                                    rel-target="[name=value]"
-                                                    rel-url="{{ route('utils.upload.images') }}"
-                                                    class="hidden">
+                                            <input id="value" type="file" rel-action="file" rel-target="[name=value]" rel-url="{{ route('utils.upload.images') }}" class="hidden">
                                         </div>
                                     </div>
                                 </div>

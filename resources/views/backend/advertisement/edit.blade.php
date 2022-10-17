@@ -49,13 +49,7 @@
                                     <div class="input-group">
                                         <input class="form-control" type="text" name="licence_image" value="{{ $data->licence_image }}" rel-action="preview" rel-src="[rel-origin='[name=licence_image]']" placeholder="请上传图片地址" autocomplete="off">
                                         <label for="licence_image" class="input-group-addon">上传</label>
-                                        <input
-                                                id="licence_image"
-                                                type="file"
-                                                rel-action="file"
-                                                rel-target="[name=licence_image]"
-                                                rel-url="{{ route('utils.upload.images') }}"
-                                                class="hidden">
+                                        <input id="licence_image" type="file" rel-action="file" rel-target="[name=licence_image]" rel-url="{{ route('utils.upload.images') }}" class="hidden">
                                     </div>
                                 </div>
                             </div>
