@@ -75,6 +75,11 @@ class ReportRepository extends Repository
 
         $data = $data->Paginate($request->get('per', $this->visits->getPerPage()), ['*'], 'page', $request->get('page', 1));
 
+        $data->transform(function ($items) {
+            $items->type = $items->getType($items->type);
+            return $items;
+        });
+
         $filter = [
             'type' => $this->visits->getType(),
         ];
@@ -138,8 +143,13 @@ class ReportRepository extends Repository
 
         $data = $data->Paginate($request->get('per', $this->visits->getPerPage()), ['*'], 'page', $request->get('page', 1));
 
+        $data->transform(function ($items) {
+            $items->type = $items->getType($items->type);
+            return $items;
+        });
+
         $filter = [
-            'type' => $this->visits->getType(),
+            'type' => $this->visitant->getType(),
         ];
 
         return compact('filter', 'data');
