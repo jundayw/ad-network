@@ -18,7 +18,7 @@
     <link href="{{ H('dist/css/style.css') }}" rel="stylesheet">
     <link href="{{ H('dist/style/style.css', true) }}" rel="stylesheet">
     <!-- color CSS -->
-    <link href="{{ H('dist/css/colors/default.css') }}" id="theme" default="{{ H('dist/css/colors/default.css') }}" rel="stylesheet">
+    <link href="{{ H('dist/css/colors/blue.css') }}" id="theme" default="{{ H('dist/css/colors/blue.css') }}" rel="stylesheet">
 @stack('styles')
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
