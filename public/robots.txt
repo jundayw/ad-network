@@ -1,2 +1,18 @@
+User-agent: DotBot
+Disallow: /
+User-agent: PetalBot
+Disallow: /
+User-agent: MJ12bot
+Disallow: /
+User-agent: AhrefsBot
+Disallow: /
+User-agent: Adsbot
+Disallow: /
+User-agent: barkrowler
+Disallow: /
+
 User-agent: *
 Disallow:
+Crawl-delay: 5
+Disallow: /adsense/
+Disallow: /analysis/
