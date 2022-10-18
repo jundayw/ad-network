@@ -3,6 +3,7 @@
 namespace App\Services\Analysis;
 
 use App\Entities\Analysis\ReviewEntity;
+use App\Entities\Analysis\SecurityEntity;
 use App\Models\Visitor;
 use App\Models\Visits;
 use Illuminate\Support\Collection;
@@ -17,6 +18,7 @@ class AnalysisReviewService
         private readonly Visits $visits,
         private readonly Visitor $visitor,
         private readonly ReviewEntity $entity,
+        private readonly SecurityEntity $security,
     )
     {
         echo PHP_EOL;
@@ -85,6 +87,10 @@ class AnalysisReviewService
 
     public function run(Collection $request): string
     {
+        if ($this->security->filter($request)) {
+            return $request->get('type');
+        }
+
         $visitor = $this->visitor($request);
 
         // 重复刷新已展示过的广告位无效

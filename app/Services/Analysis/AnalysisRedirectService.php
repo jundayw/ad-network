@@ -3,6 +3,7 @@
 namespace App\Services\Analysis;
 
 use App\Entities\Analysis\RedirectEntity;
+use App\Entities\Analysis\SecurityEntity;
 use App\Models\Visitant;
 use App\Models\Visits;
 use Illuminate\Support\Collection;
@@ -17,6 +18,7 @@ class AnalysisRedirectService
         private readonly Visits $visits,
         private readonly Visitant $visitant,
         private readonly RedirectEntity $entity,
+        private readonly SecurityEntity $security,
     )
     {
         echo PHP_EOL;
@@ -45,6 +47,10 @@ class AnalysisRedirectService
 
     public function run(Collection $request): string
     {
+        if ($this->security->filter($request)) {
+            return $request->get('type');
+        }
+
         // 未展示过的广告位点击行为无效
         if (is_null($visits = $this->getVisitsExists($request))) {
             return $request->get('type');
