@@ -37,6 +37,7 @@ class IndexController extends UnAuthController
         Artisan::call('route:clear');
         Artisan::call('config:clear');
         Artisan::call('view:clear');
+        Artisan::call('queue:restart');
         return new RenderResponse('操作成功', route('backend.index'));
     }
 }
