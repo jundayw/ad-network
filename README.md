@@ -30,7 +30,9 @@
 * 后端框架：`Laravel 9.x` + `MySQL 5.7+` + `Redis`
 * 前端框架：`Bootstrap v4.0.0` + `EliteAdmin`
 
-### [在线预览](https://www.naisiter.com/)
+### 在线预览
+
+[https://www.naisiter.com/](https://www.naisiter.com/)
 
 ### 官网
 
@@ -94,6 +96,8 @@ MAIL_FROM_NAME="${APP_NAME}"
 
 #### 域名配置
 
+测试环境推荐使用以下域名配置（数据库中已经使用了相关域名，正式环境请清空测试数据库并修改相关域名配置）
+
 ```
 STATIC_DOMAIN=http://adwords.me.yunduanchongqing.com/upload/
 DOMAIN_BACKEND=backend.me.yunduanchongqing.com
@@ -102,8 +106,6 @@ DOMAIN_PUBLISHMENT=union.me.yunduanchongqing.com
 DOMAIN_RENDER=render.me.yunduanchongqing.com
 DOMAIN_ANALYSIS=ads.me.yunduanchongqing.com
 ```
-
-测试环境推荐使用以下域名配置（数据库中已经使用了相关域名，正式环境请清空测试数据库并修改相关域名配置）
 
 ### 站点配置
 
@@ -124,13 +126,13 @@ server
 
 #### 站点说明：
 
-- [官网：http://www.me.yunduanchongqing.com](https://www.me.yunduanchongqing.com/)
-- [运营系统：http://backend.me.yunduanchongqing.com](https://backend.me.yunduanchongqing.com/)
-- [广告主平台：http://e.me.yunduanchongqing.com](https://e.me.yunduanchongqing.com/)
-- [网站主平台：http://union.me.yunduanchongqing.com](https://union.me.yunduanchongqing.com/)
-- [静态资源：http://adwords.me.yunduanchongqing.com](https://adwords.me.yunduanchongqing.com/)
-- [广告渲染引擎：http://render.me.yunduanchongqing.com](https://render.me.yunduanchongqing.com/)
-- [广告分析引擎：http://ads.me.yunduanchongqing.com](https://ads.me.yunduanchongqing.com/)
+- 官网：[http://www.me.yunduanchongqing.com](https://www.me.yunduanchongqing.com/)
+- 运营系统：[http://backend.me.yunduanchongqing.com](https://backend.me.yunduanchongqing.com/)
+- 广告主平台：[http://e.me.yunduanchongqing.com](https://e.me.yunduanchongqing.com/)
+- 网站主平台：[http://union.me.yunduanchongqing.com](https://union.me.yunduanchongqing.com/)
+- 静态资源：[http://adwords.me.yunduanchongqing.com](https://adwords.me.yunduanchongqing.com/)
+- 广告渲染引擎：[http://render.me.yunduanchongqing.com](https://render.me.yunduanchongqing.com/)
+- 广告分析引擎：[http://ads.me.yunduanchongqing.com](https://ads.me.yunduanchongqing.com/)
 
 ### 队列任务
 
@@ -138,6 +140,6 @@ server
 php artisan queue:work
 ```
 
-### 广告演示
+### 本地演示
 
-[广告演示](https://www.me.yunduanchongqing.com/demo/)
+[https://www.me.yunduanchongqing.com/](https://www.me.yunduanchongqing.com/)
